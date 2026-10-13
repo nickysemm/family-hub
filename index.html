@@ -176,7 +176,13 @@ function request(path,method,payload,token,done){
 
  xhr.onreadystatechange=function(){if(xhr.readyState===4){var data=null;try{data=JSON.parse(xhr.responseText)}catch(e){}done(xhr.status,data)}};
 
- xhr.onerror=function(){done(0,null)};xhr.send(payload?JSON.stringify(payload):null)
+ var finished=false;
+ function finish(code,data){if(finished)return;finished=true;done(code,data)}
+ xhr.onreadystatechange=function(){if(xhr.readyState===4){var data=null;try{data=JSON.parse(xhr.responseText)}catch(e){}finish(xhr.status,data)}};
+ xhr.onerror=function(){finish(0,null)};
+ xhr.ontimeout=function(){finish(0,{message:'Request timed out'})};
+ xhr.timeout=15000;
+ try{xhr.send(payload?JSON.stringify(payload):null)}catch(e){finish(0,{message:String(e)})}
 
 }
 
@@ -271,7 +277,7 @@ window.hubSubmitFamilyEvent=function(e){
 };
 function refresh(done){if(!refreshToken){done(false);return}request('/auth/v1/token?grant_type=refresh_token','POST',{refresh_token:refreshToken},null,function(code,data){if(code===200&&data&&data.access_token){setSession(data);done(true)}else{done(false)}})}
 
-window.hubSignIn=function(){if(HUB_PUBLISHABLE_KEY.indexOf('PASTE_')===0){status('Add your Supabase publishable key to the HTML first.');return}var email=el('hubEmail').value,password=el('hubPassword').value;if(!email||!password){status('Enter email and password.');return}status('Signing in...');request('/auth/v1/token?grant_type=password','POST',{email:email,password:password},null,function(code,data){el('hubPassword').value='';if(code===200&&data&&data.access_token){setSession(data);loadEvents()}else{status('Sign-in failed (HTTP '+code+'). Check account and email confirmation.')}})};
+window.hubSignIn=function(){if(HUB_PUBLISHABLE_KEY.indexOf('PASTE_')===0){status('Add your Supabase publishable key to the HTML first.');return}var email=el('hubEmail').value,password=el('hubPassword').value;if(!email||!password){status('Enter email and password.');return}status('Signing in...');request('/auth/v1/token?grant_type=password','POST',{email:email,password:password},null,function(code,data){el('hubPassword').value='';if(code===200&&data&&data.access_token){setSession(data);loadEvents()}else{status(code===0?'Sign-in could not reach the server. Check internet connection and try again.':'Sign-in failed (HTTP '+code+'). Check account and email confirmation.')}})};
 
 window.hubSignOut=function(){hubCurrentUserId='';accessToken='';refreshToken='';expiry=0;try{localStorage.removeItem('familyHubSession')}catch(e){}window.familyHubRefresh([]);status('Signed out. Local events are still available.')};
 
