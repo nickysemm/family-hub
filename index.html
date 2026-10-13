@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub v2.9.13 · Finishing Touches</title>
 
 <style>
 
@@ -170,26 +170,588 @@ body{background:#f6f7fb} .hub27-hero{background:linear-gradient(112deg,#4d43ac 0
 .hub29-methods{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:17px 0}.hub29-method{border:1px solid #e1e5ee;background:#f8f9fc;color:#4e5872;border-radius:12px;padding:12px 6px;font-weight:700;font-size:12px}.hub29-method.active{background:#e7f2ff;color:#2769ad;border-color:#a9d3fb;box-shadow:0 3px 9px rgba(54,128,198,.12)}
 .hub29-import-modal label{display:block;font-size:13px;font-weight:750;margin-bottom:7px;color:#303850}.hub29-import-modal textarea,.hub29-import-modal input[type=url]{box-sizing:border-box;width:100%;padding:13px;border:1px solid #dce2ed;border-radius:12px;font:inherit;background:#fff;color:#2d3345}.hub29-import-modal textarea{min-height:170px;resize:vertical}.hub29-import-modal input[type=file]{max-width:100%}.hub29-hint{font-size:12px;line-height:1.6;color:#717b8c}.hub29-feedback{font-size:13px;color:#af4d68;min-height:20px}.hub29-footer{display:flex;gap:8px;justify-content:flex-end;flex-wrap:wrap}.hub29-preview img{max-height:180px;max-width:100%;border-radius:13px;margin-top:10px}
 @media(max-width:500px){.hub29-import-modal{padding:15px!important}.hub29-methods{grid-template-columns:repeat(2,1fr)}.hub29-footer button{flex:1}}
-</style></head><body><header><div><h1>Our Family Hub</h1><div class="sub" id="dateTitle"></div></div><div class="right"><div class="pill">&#9728; Family time</div><div id="clock"></div></div></header><main class="wrap"><div id="cloudLogin"><div class="authrow"><input id="hubEmail" type="email" placeholder="Family Hub email" autocomplete="username"><input id="hubPassword" type="password" placeholder="Password" autocomplete="current-password"><button type="button" id="hubSignInButton" onclick="hubSignIn()">Sign in</button></div><div id="hubStatus" class="status" role="status" aria-live="polite"></div><div id="hubCalendarStatus" class="status" role="status" aria-live="polite"></div></div><div class="nav"><button class="active" data-tab="home">Home</button><button data-tab="calendar">Calendar</button><button data-tab="chores">Chores</button><button data-tab="shopping">Shopping</button><button data-tab="meals">Meals</button><button data-tab="recipes">Recipes</button><button data-tab="messages">Messages</button><button data-tab="reminders">Reminders</button><button data-tab="settings">Settings</button></div>
+</style><style>
+/* v2.9.2 Playful Premium: retain the approved welcome hero untouched. */
+:root{--pp-ink:#343044;--pp-muted:#777386;--pp-line:#edeaf1;--pp-coral:#ec796b;--pp-rose:#d65f90;--pp-butter:#f4c96d;--pp-aqua:#7acfc7;--pp-orchid:#ac88d7}
+body{background:#faf9fc!important;color:var(--pp-ink)!important}
+header{background:#fff!important;border-bottom:1px solid #eeebf2!important;box-shadow:0 3px 16px rgba(65,51,91,.035)!important}
+header h1{color:#383248!important}
+.panel,.hub27-home-panel{background:#fff!important;border:1px solid var(--pp-line)!important;border-radius:23px!important;box-shadow:0 14px 35px rgba(75,54,95,.075),0 2px 5px rgba(75,54,95,.03)!important}
+.panel h2{color:#383248!important}
+.nav{background:#fff!important;border:1px solid #efedf3!important;box-shadow:0 9px 27px rgba(78,57,93,.065)!important;border-radius:18px!important}
+.nav button{background:transparent!important;color:#706a7b!important;border-radius:12px!important}
+.nav button.active{background:#ffede6!important;color:#b95245!important;box-shadow:inset 0 0 0 1px #f9d4c8!important}
+.nav button:focus-visible,button:focus-visible{outline:3px solid #efaa93!important;outline-offset:2px}
+/* Action buttons: coral primary, quiet secondary, playful contextual accents */
+.primary,.row button,.add{background:#ed7c70!important;color:#fff!important;border-radius:12px!important;box-shadow:0 5px 12px rgba(221,100,91,.14)!important}
+.secondary{background:#f2f0f6!important;color:#4c445a!important;border-radius:12px!important}
+.hub-settings-signout{background:#f4f0f5!important;color:#8a4261!important;border:1px solid #eadde5!important;box-shadow:none!important}
+#cloudLogin button{background:#ed7c70!important;color:white!important}
+#cloudLogin{background:#fff!important;border-color:#eae5ed!important;box-shadow:none!important}
+.pill{background:#fff0d9!important;color:#926326!important}
+.hub26-profile-strip{background:#f4f0fc!important;color:#68558e!important}
+/* Selected dates are peach/coral; today's date is outlined, not dark teal */
+.day.today,.hub-month-cell.is-today{background:#fff5e7!important;border-color:#efc77e!important;color:#66503b!important;box-shadow:none!important}
+.day.selected,.hub-month-cell.is-selected{background:#ffe8e2!important;color:#9f4d40!important;border-color:#ec8777!important;box-shadow:none!important}
+.day.selected .dow{color:#9f4d40!important}
+.hub-month-details{background:#fff9f5!important;border-color:#f7e6df!important}
+.hub-month-detail,.event,.calitem{background:#fff6f1!important;border-left-color:#ed8b75!important;color:#52434a!important}
+.hub-month-event{border-left-color:#ee907d!important}.hub-month-more{color:#b65b63!important}
+.banner,.detail-note{background:#fff6e9!important;border-color:#f2e2ca!important;color:#66513c!important}
+.meal{background:#fff3e4!important;color:#69503d!important}
+.source{background:#f5f7fb!important;color:#4b5266!important}
+/* Chores and shopping keep independent, soft accents */
+.chore-overview,.chore-who-choice,.chore-person,.assignment-picker,.chore-due-badge{background:#eef9f7!important;color:#426b67!important;border-color:#d9efea!important}
+.chore-due-badge.late{background:#ffe6e5!important;color:#a94743!important}
+.hub25-store{background:#fff!important;color:#454050!important;border-color:#eee8f0!important;box-shadow:0 6px 17px rgba(68,54,86,.05)!important}
+.hub25-store:nth-child(3n+1){border-top:4px solid #f1a59b!important}
+.hub25-store:nth-child(3n+2){border-top:4px solid #f2c46d!important}
+.hub25-store:nth-child(3n){border-top:4px solid #85cfc7!important}
+.hub25-dayhead{background:#fff1e4!important;color:#77513b!important}
+.hub25-day:nth-child(even) .hub25-dayhead{background:#fff1f5!important;color:#85485e!important}
+.hub25-department,.hub25-day,.hub25-mealrow{border-color:#f0e9ed!important}
+.task input,.chore-entry input[type=checkbox],.hub25-shopping-row input,.chore-person input,.assign-modes input,.assign-people input{accent-color:#e97b70!important}
+/* Varied home tiles: no universal purple or blue wash */
+.hub27-feature-card{border-radius:22px!important;box-shadow:0 12px 24px rgba(67,50,86,.09),0 2px 5px rgba(67,50,86,.03)!important}
+.hub27-feature-card.hub27-purple{background:linear-gradient(145deg,#fff,#ffe6e0)!important;color:#a85649!important}
+.hub27-feature-card.hub27-teal{background:linear-gradient(145deg,#fff5d9,#ffe8ad)!important;color:#8b651e!important}
+.hub27-feature-card.hub27-coral{background:linear-gradient(145deg,#f0faf7,#cdeee8)!important;color:#377f76!important}
+.hub27-note{background:linear-gradient(115deg,#fff3f6,#ffe6ee)!important;border-left-color:#e98eac!important}
+.hub27-note p{color:#54434d!important}
+.hub27-round{background:#fff0d8!important;color:#a97830!important}
+.hub27-check{background:#e6f7f4!important;color:#3c948b!important}
+.hub28-message-mark{color:#bc587e!important}
+/* Recipe importer has a distinct coral and butter identity */
+.hub29-method.active{background:#fff0e9!important;color:#ae5545!important;border-color:#f4bcae!important;box-shadow:0 3px 9px rgba(216,115,91,.1)!important}
+.hub29-kicker{color:#c35e84!important}
+.hub29-import-modal{box-shadow:0 28px 75px rgba(62,46,78,.18)!important}
+.hub27-recipe{border:1px solid #eee9ef!important;box-shadow:0 11px 26px rgba(65,50,86,.06)!important}
+/* Keep the approved 'Good to have you home' banner and its original gradient exactly as supplied. */
+@media(max-width:700px){.panel{border-radius:18px!important}.nav{border-radius:14px!important}.hub27-feature-card{border-radius:18px!important}}
 
-<div class="hub26-profile-strip"><span id="hub26ProfileLabel">Profile: Family</span><button class="add" onclick="switchTab('settings')">Change profile</button></div><section class="tabs active" id="home"><div class="hub27-hero"><div class="hub27-hero-orb"></div><div class="hub27-hero-inner"><div class="hub27-kicker">✦ THE FAMILY SPACE</div><h2>Good to have you home.</h2><p>Everything your family needs, beautifully together.</p><div class="hub27-hero-actions"><button onclick="hub27OpenNote()">✎ Leave a note</button><button onclick="hub27OpenReminder()">＋ Reminder</button></div></div><button class="hub27-weather" onclick="hub27WeatherDetails()" title="Weather forecast"><span id="hub27WeatherIcon">☀</span><strong id="hub27WeatherHigh">--°</strong><small id="hub27WeatherDesc">Today's high</small></button></div><div class="hub27-feature-grid"><div class="hub27-feature-card hub27-purple"><div class="hub27-feature-symbol">▦</div><strong>Today's schedule</strong><span>See your calendar below</span><button onclick="switchTab('calendar')">Open calendar ↗</button></div><div class="hub27-feature-card hub27-teal"><div class="hub27-feature-symbol">✓</div><strong>Family chores</strong><span>Stay on top of the day</span><button onclick="switchTab('chores')">See chores ↗</button></div><div class="hub27-feature-card hub27-coral"><div class="hub27-feature-symbol">◉</div><strong>What's for dinner?</strong><span id="hub27DinnerSummary">Check the meal plan</span><button onclick="switchTab('meals')">Meal planner ↗</button></div></div><div class="hub27-home-grid"><div class="hub27-home-panel"><div class="hub27-heading"><div><span class="hub27-eyebrow">STAY CONNECTED</span><h2>Family message board</h2></div><button class="hub27-round" onclick="hub27OpenNote()">＋</button></div><div id="hub27HomeNotes" class="hub27-list">Loading messages…</div><button class="hub27-text-button" onclick="switchTab('messages')">All family messages →</button></div><div class="hub27-home-panel"><div class="hub27-heading"><div><span class="hub27-eyebrow">DON'T FORGET</span><h2>Upcoming reminders</h2></div><button class="hub27-round" onclick="hub27OpenReminder()">＋</button></div><div id="hub27HomeReminders" class="hub27-list">Loading reminders…</div><button class="hub27-text-button" onclick="switchTab('reminders')">All reminders →</button></div></div><div class="hub27-home-panel hub27-celebrations"><div class="hub27-heading"><div><span class="hub27-eyebrow">WORTH CELEBRATING</span><h2>Birthdays & anniversaries</h2></div><span class="hub27-confetti">✦ ✳</span></div><div id="hub27Birthdays" class="hub27-list">Checking connected calendar…</div></div><div class="layout"><div class="stack"><div class="panel"><div class="line"><h2>This Week</h2><button class="add" onclick="showEvent()">+ Add event</button></div><div class="week" id="week"></div><div class="muted" style="margin-bottom:7px">Tap a day to see its events below.</div><div id="events"></div><div id="eventRequestsStatus" class="muted" aria-live="polite"></div></div></div><div class="stack"><div class="panel"><div class="line"><h2>Family Chores</h2><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="add" onclick="hubShowAddChore()">+ Add chore</button><button class="add" onclick="switchTab('chores')">See all</button></div></div><div id="choreHomeSummary" class="chore-home-summary"></div><div id="choresHome"></div></div><div class="panel"><div class="line"><h2>Tonight's Dinner</h2><button class="add" onclick="switchTab('meals')">Edit</button></div><div class="meal" id="dinnerHome" style="display:none"></div><div class="meal" id="sharedDinnerHome">Loading shared meals...</div></div></div></div></section>
+</style>
+<style>
 
-<section class="tabs" id="calendar"><div class="panel"><div class="line"><h2>Family Calendar</h2><button class="add" onclick="showEvent()">+ Add event</button></div><div class="hub-month-toolbar"><button type="button" onclick="hubMonthMove(-1)" aria-label="Previous month">&#8592; Previous</button><strong id="hubMonthTitle"></strong><button type="button" onclick="hubMonthToday()">Today</button><button type="button" onclick="hubMonthMove(1)" aria-label="Next month">Next &#8594;</button></div><div class="hub-month-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calgrid hub-month-grid" id="fullCalendar"></div><div id="hubMonthDetails" class="hub-month-details"><p class="muted">Select a date to view its events.</p></div><p class="muted">Months outside the synced Google Calendar range may not have all events.</p></div></section>
+/* v2.9.3 | Cool Spectrum: distinct feature identities, one cohesive interface.
+   The approved .hub27-hero welcome banner is deliberately not modified. */
+:root{--hub-ink:#303247;--hub-muted:#737a91;--hub-line:#e9eaf3;--hub-cloud:#f7f8fd;--hub-calendar:#7978f2;--hub-chores:#20bdb7;--hub-shopping:#50b6f2;--hub-meals:#f46a9b;--hub-recipes:#b95cdd;--hub-messages:#d954ac;--hub-reminders:#8b8de9}
+body{background:var(--hub-cloud)!important;color:var(--hub-ink)!important}
+header{background:#fff!important;border-color:#ececf5!important}
+.panel,.hub27-home-panel{border-color:var(--hub-line)!important;background:#fff!important;box-shadow:0 12px 34px rgba(45,50,105,.075),0 3px 8px rgba(45,50,105,.035)!important}
+.panel h2{color:#303247!important}
+.nav{background:#fff!important;border-color:#ebedf6!important}
+.nav button{background:transparent!important;color:#697086!important;border:1px solid transparent!important;transition:background .16s,color .16s}
+.nav button.active{background:#f0efff!important;color:#615ac5!important;box-shadow:none!important;border-color:#e5e2ff!important}
+.nav button:nth-child(2).active{background:#eeedff!important;color:#5f5ad0!important;border-color:#dcd9ff!important}
+.nav button:nth-child(3).active{background:#e7faf7!important;color:#0c827e!important;border-color:#c9f1ed!important}
+.nav button:nth-child(4).active{background:#e8f6ff!important;color:#217db5!important;border-color:#cbeaff!important}
+.nav button:nth-child(5).active{background:#fff0f7!important;color:#b43e76!important;border-color:#ffd5e9!important}
+.nav button:nth-child(6).active{background:#f7eaff!important;color:#9144b7!important;border-color:#ebd0fb!important}
+.nav button:nth-child(7).active{background:#ffedf8!important;color:#b03b85!important;border-color:#fbd5ed!important}
+.nav button:nth-child(8).active{background:#f0efff!important;color:#6663b7!important;border-color:#dfddff!important}
+.nav button:nth-child(9).active{background:#eff2f9!important;color:#52617f!important;border-color:#dfe5f1!important}
+/* Base buttons are restrained, with scoped action colors below. */
+.primary,.row button,.add{background:#7978f2!important;color:#fff!important;border-radius:12px!important;box-shadow:0 5px 14px rgba(95,99,174,.12)!important}
+.secondary{background:#f0f2f8!important;color:#4e566e!important}
+#calendar{--section-accent:#7978f2;--section-pale:#efeeff;--section-ink:#5753b7}
+#chores{--section-accent:#20bdb7;--section-pale:#e7f9f6;--section-ink:#087e7a}
+#shopping{--section-accent:#50b6f2;--section-pale:#e9f6ff;--section-ink:#217bb4}
+#meals{--section-accent:#f46a9b;--section-pale:#ffedf4;--section-ink:#b83e73}
+#recipes{--section-accent:#b95cdd;--section-pale:#f7eaff;--section-ink:#8a3eae}
+#messages{--section-accent:#d954ac;--section-pale:#ffebf7;--section-ink:#a73381}
+#reminders{--section-accent:#8b8de9;--section-pale:#efefff;--section-ink:#585ab5}
+#settings{--section-accent:#77839f;--section-pale:#eff2f8;--section-ink:#4c5b77}
+.tabs:not(#home) .primary,.tabs:not(#home) .row button,.tabs:not(#home) .add{background:var(--section-accent,#7978f2)!important;color:#fff!important;box-shadow:0 5px 14px rgba(56,62,120,.12)!important}
+.tabs:not(#home) .panel h2{border-left:4px solid var(--section-accent,#7978f2);padding-left:12px}
+.tabs:not(#home) .secondary{background:var(--section-pale,#f0f2f8)!important;color:var(--section-ink,#505976)!important}
+.tabs:not(#home) input[type=checkbox],.tabs:not(#home) input[type=radio]{accent-color:var(--section-accent,#7978f2)!important}
+/* Calendar: periwinkle, not teal or peach */
+.day.today,.hub-month-cell.is-today{background:#f3f2ff!important;border-color:#b8b4ff!important;color:#5b59ac!important}
+.day.selected,.hub-month-cell.is-selected{background:#7978f2!important;border-color:#7978f2!important;color:#fff!important}
+.day.selected .dow,.hub-month-cell.is-selected *{color:#fff!important}
+.hub-month-details{background:#f9f9ff!important;border-color:#e7e5ff!important}
+.hub-month-detail,.event,.calitem{background:#f5f4ff!important;border-left-color:#8c86ed!important;color:#3e4263!important}
+.hub-month-event{border-left-color:#7978f2!important}.hub-month-more{color:#615ac5!important}
+/* Chores: fresh turquoise, light and energetic */
+.chore-overview,.chore-who-choice,.chore-person,.assignment-picker,.chore-due-badge{background:#e9fbf8!important;color:#126e71!important;border-color:#bdeee9!important}
+.chore-due-badge.late{background:#ffedf4!important;color:#b53e78!important;border-color:#f9c8df!important}
+.chore-progressbar{background:#e2f6f3!important}.chore-progressbar span{background:#20bdb7!important}
+.chore-entry input[type=checkbox],.chore-person input,.assign-modes input,.assign-people input{accent-color:#20bdb7!important}
+/* Shopping: sky blue, no golden-yellow store highlights */
+.hub25-store{background:#fff!important;border-color:#e8edf6!important}
+.hub25-store:nth-child(3n+1){border-top:4px solid #50b6f2!important}
+.hub25-store:nth-child(3n+2){border-top:4px solid #8c8df2!important}
+.hub25-store:nth-child(3n){border-top:4px solid #64d1cf!important}
+.hub25-shopping-row input{accent-color:#50b6f2!important}
+/* Meals: cool watermelon pink, no orange/peach/beige */
+.meal,.hub25-dayhead{background:#fff0f7!important;color:#8d3f67!important}
+.hub25-day:nth-child(even) .hub25-dayhead{background:#f2edff!important;color:#7958a3!important}
+.banner,.detail-note{background:#f4f5ff!important;border-color:#e6e7fa!important;color:#4f5679!important}
+/* Messages, reminders, recipe panels */
+.hub27-note{background:linear-gradient(115deg,#fff0fa,#fce8f5)!important;border-left-color:#d954ac!important}
+.hub27-note p{color:#4e3951!important}
+.hub28-message-mark{color:#af388a!important}
+.hub28-overdue{background:#fff0f7!important;border-color:#ffd5e9!important}
+.hub28-recipe-photo{background:#f6edff!important}
+.hub29-method.active{background:#f7eaff!important;color:#8a3eae!important;border-color:#e9c5fa!important;box-shadow:0 4px 12px rgba(154,77,183,.1)!important}
+.hub29-kicker{color:#a14ac4!important}
+/* Home is an intentional mix of cool pastel feature cards; preserve the hero. */
+.hub27-feature-card.hub27-purple{background:linear-gradient(145deg,#ffffff,#e9e9ff)!important;color:#5557ad!important}
+.hub27-feature-card.hub27-teal{background:linear-gradient(145deg,#ffffff,#dcf9f5)!important;color:#137d79!important}
+.hub27-feature-card.hub27-coral{background:linear-gradient(145deg,#ffffff,#ffe1f0)!important;color:#b34478!important}
+.hub27-round{background:#eaf6ff!important;color:#2b85ba!important}
+.hub27-check{background:#e2f9f6!important;color:#11827d!important}
+.hub26-profile-strip{background:#f0efff!important;color:#6761ac!important}
+.pill{background:#edf0ff!important;color:#5b60a8!important}
+#cloudLogin{background:#fff!important;border-color:#e8eaf5!important}
+#cloudLogin button{background:#7978f2!important}
+.hub-settings-signout{background:#eef1f7!important;color:#57627d!important;border-color:#e0e5ef!important}
+/* Neutral input treatment and focus states */
+input:focus,textarea:focus,select:focus{outline:2px solid #b4b1ff;outline-offset:1px}
+button:focus-visible{outline:3px solid #a9a5f8!important;outline-offset:2px}
+@media(max-width:600px){.tabs:not(#home) .panel h2{border-left-width:3px;padding-left:9px}}
+
+</style><style>
+
+/* v2.9.4 | Airy Pop: editorial white space, dimensional pastels, light texture.
+   Intentionally DO NOT style .hub27-hero or its descendants. */
+:root{--pop-ink:#303846;--pop-muted:#778392;--pop-line:#e7edf1;--pop-pink:#f6a6cc;--pop-mint:#a8e8d5;--pop-sky:#a9ddfc;--pop-yellow:#ffe58a;--pop-lav:#d9cdf4}
+html{background:#f5f7f9!important}
+body{color:var(--pop-ink)!important;background:radial-gradient(ellipse at 94% 3%,rgba(169,221,252,.23),transparent 34%),radial-gradient(ellipse at 4% 68%,rgba(168,232,213,.13),transparent 32%),#f6f8fa!important}
+header{background:rgba(255,255,255,.97)!important;border-color:#e7edf1!important;box-shadow:0 5px 22px rgba(55,74,90,.045)!important}
+header h1,.panel h2{color:#303846!important}
+.sub,.muted,.footer,.tiny{color:#7c8794!important}
+.nav{background:#fff!important;border:1px solid #e6edf1!important;box-shadow:0 10px 25px rgba(55,78,99,.07)!important}
+.nav button{color:#667684!important;background:transparent!important;border:1px solid transparent!important;box-shadow:none!important}
+.nav button.active{background:#eef6fa!important;color:#386a83!important;border-color:#d8e9f1!important;box-shadow:inset 0 1px 0 #fff!important}
+.nav button:nth-child(2).active{background:#e6f5ff!important;color:#287ca6!important;border-color:#cbe8fa!important}
+.nav button:nth-child(3).active{background:#e7faf2!important;color:#247d64!important;border-color:#c6f0e0!important}
+.nav button:nth-child(4).active{background:#eaf7ff!important;color:#277da8!important;border-color:#cceafb!important}
+.nav button:nth-child(5).active{background:#fff0f7!important;color:#b14c81!important;border-color:#fbd6e9!important}
+.nav button:nth-child(6).active{background:#fff0f7!important;color:#b14c81!important;border-color:#fbd6e9!important}
+.nav button:nth-child(7).active{background:#fff9dc!important;color:#876b22!important;border-color:#f5e8b0!important}
+.nav button:nth-child(8).active{background:#f8f0ff!important;color:#8461aa!important;border-color:#e9daf8!important}
+.nav button:nth-child(9).active{background:#eef1f5!important;color:#586879!important;border-color:#dce4eb!important}
+.panel,.hub27-home-panel{background:#fff!important;border:1px solid #e7edf1!important;border-radius:23px!important;box-shadow:0 18px 38px rgba(53,73,90,.075),0 3px 9px rgba(53,73,90,.03),inset 0 1px 0 rgba(255,255,255,.96)!important}
+.panel h2{border-left:0!important;padding-left:0!important;letter-spacing:-.45px}
+.tabs:not(#home) .panel h2{border-left:0!important;padding-left:0!important}
+.panel:before{pointer-events:none}
+/* Page-specific buttons are lively without coloring entire panels. */
+.primary,.row button,.add{background:#dceef8!important;color:#285b77!important;border-radius:12px!important;box-shadow:0 5px 13px rgba(75,112,139,.11),inset 0 1px 0 rgba(255,255,255,.4)!important}
+.secondary{background:#eff3f6!important;color:#5b6d7c!important;border:1px solid #e3eaf0!important}
+#calendar{--section-accent:#79c7f5;--section-pale:#eaf7ff;--section-ink:#286d96}
+#chores{--section-accent:#71d5b4;--section-pale:#e9faf2;--section-ink:#246e59}
+#shopping{--section-accent:#87cdf8;--section-pale:#eaf7ff;--section-ink:#276f98}
+#meals{--section-accent:#f3a3c7;--section-pale:#fff0f7;--section-ink:#a64172}
+#messages{--section-accent:#f3a3c7;--section-pale:#fff0f7;--section-ink:#a64172}
+#reminders{--section-accent:#ffe58a;--section-pale:#fff9e1;--section-ink:#776020}
+#recipes{--section-accent:#c8b6ed;--section-pale:#f7f2ff;--section-ink:#74579a}
+#settings{--section-accent:#d6e0e9;--section-pale:#f0f3f6;--section-ink:#536477}
+.tabs:not(#home) .primary,.tabs:not(#home) .row button,.tabs:not(#home) .add{background:var(--section-accent)!important;color:var(--section-ink)!important;box-shadow:0 6px 15px rgba(60,88,104,.1),inset 0 1px 0 rgba(255,255,255,.45)!important}
+.tabs:not(#home) .secondary{background:var(--section-pale)!important;color:var(--section-ink)!important}
+.tabs:not(#home) input[type=checkbox],.tabs:not(#home) input[type=radio]{accent-color:var(--section-accent)!important}
+/* Calendar becomes airy sky blue instead of violet. */
+.day,.calcell,.hub-month-cell{background:#f8fafc!important;color:#35495b!important;border-color:#e8eff4!important}
+.day.today,.hub-month-cell.is-today{background:#edf8ff!important;border-color:#9bd7fa!important;color:#286b94!important;box-shadow:inset 0 1px 0 white!important}
+.day.selected,.hub-month-cell.is-selected{background:#b7e5ff!important;border-color:#79c7f5!important;color:#215b7d!important;box-shadow:0 5px 14px rgba(74,154,204,.13)!important}
+.day.selected .dow,.hub-month-cell.is-selected *{color:#215b7d!important}
+.hub-month-toolbar button{background:#eaf7ff!important;color:#31749b!important}
+.hub-month-toolbar strong{color:#303846!important}
+.hub-month-details{background:#f5fbff!important;border-color:#e1f0fa!important}
+.hub-month-detail,.event,.calitem{background:#eff8ff!important;border-left-color:#7cc7f3!important;color:#345269!important}
+.hub-month-event{border-left-color:#79c7f5!important}.hub-month-more{color:#397da4!important}
+/* Chores: translucent mint progress and completion. */
+.chore-overview,.chore-who-choice,.chore-person,.assignment-picker,.chore-due-badge{background:#eefbf5!important;color:#28755f!important;border-color:#d3f0e2!important}
+.chore-progressbar{background:#e8f7ef!important}.chore-progressbar span{background:linear-gradient(90deg,#8ee0c4,#58c9aa)!important}
+.chore-entry input[type=checkbox],.chore-person input,.assign-modes input,.assign-people input{accent-color:#6acdab!important}
+.chore-due-badge.late,.hub28-overdue{background:#fff1f7!important;color:#a94e7b!important;border-color:#f8d5e7!important}
+/* Shopping cards are neutral with alternating playful edge colors. */
+.hub25-store{background:linear-gradient(160deg,#fff,#fbfdff)!important;color:#344656!important;border:1px solid #e8edf2!important;box-shadow:0 8px 20px rgba(50,76,91,.065)!important}
+.hub25-store:nth-child(3n+1){border-top:4px solid #9cdbfc!important}.hub25-store:nth-child(3n+2){border-top:4px solid #a8e8d5!important}.hub25-store:nth-child(3n){border-top:4px solid #f6a6cc!important}
+.hub25-shopping-row input{accent-color:#87cdf8!important}
+/* Meals and messages: delicate pink, no coral. */
+.meal,.hub25-dayhead{background:#fff4fa!important;color:#87496a!important}
+.hub25-day:nth-child(even) .hub25-dayhead{background:#f0fbf6!important;color:#39735f!important}
+.hub27-note{background:linear-gradient(120deg,#fff7fb,#ffeef6)!important;border-left-color:#f2a2c6!important;box-shadow:0 8px 22px rgba(153,83,126,.055)!important}
+.hub27-note p{color:#4c4a56!important}.hub28-message-mark{color:#b65b88!important}
+/* Yellow is a sunny accent, never an amber/mustard surface. */
+.hub27-round{background:#fff5c9!important;color:#7b672e!important}
+.pill{background:#fff7d9!important;color:#76652d!important}
+/* Home: white-first cards, varied soft ombre edges, floating accents. */
+.hub27-feature-card{position:relative;overflow:hidden;border:1px solid #e9eef1!important;border-radius:23px!important;box-shadow:0 15px 28px rgba(52,72,87,.085),0 3px 7px rgba(52,72,87,.035),inset 0 1px 0 rgba(255,255,255,.95)!important}
+.hub27-feature-card:after{content:'';pointer-events:none;position:absolute;width:105px;height:105px;border-radius:50%;right:-42px;top:-46px;background:rgba(255,255,255,.5);box-shadow:0 0 35px rgba(255,255,255,.3)}
+.hub27-feature-card.hub27-purple{background:linear-gradient(145deg,#fff 40%,#e8f7ff)!important;color:#337a9e!important}
+.hub27-feature-card.hub27-teal{background:linear-gradient(145deg,#fff 40%,#e4faf1)!important;color:#29785e!important}
+.hub27-feature-card.hub27-coral{background:linear-gradient(145deg,#fff 40%,#ffedf6)!important;color:#ae4b7d!important}
+.hub27-check{background:#e9f9f2!important;color:#2c8066!important}
+.hub26-profile-strip{background:#f1f7fa!important;color:#577082!important}
+.banner,.detail-note{background:#f3faff!important;border-color:#e0eff7!important;color:#526d7f!important}
+.source{background:#f7fafc!important;color:#546473!important}
+.hub29-method.active{background:#f7f1ff!important;color:#7959a0!important;border-color:#e7d9f6!important}
+.hub29-kicker{color:#9b79b9!important}.hub28-recipe-photo{background:#f7f1ff!important}
+#cloudLogin{background:#fff!important;border-color:#e8eef2!important}
+#cloudLogin button{background:#a9ddfc!important;color:#245f7d!important}
+.hub-settings-signout{background:#f0f3f6!important;color:#5d6c7b!important}
+/* Fine print-like grain over the page, not over content. No images or scripts required. */
+.wrap{position:relative;isolation:isolate}
+.wrap:before{content:'';position:absolute;z-index:-1;pointer-events:none;top:0;left:0;right:0;bottom:0;opacity:.16;background-image:repeating-linear-gradient(0deg,transparent 0,transparent 3px,rgba(84,105,121,.045) 3px,rgba(84,105,121,.045) 4px),repeating-linear-gradient(90deg,transparent 0,transparent 5px,rgba(84,105,121,.035) 5px,rgba(84,105,121,.035) 6px)}
+input:focus,textarea:focus,select:focus{outline:2px solid #a9ddfc!important;outline-offset:1px}
+button:focus-visible{outline:3px solid #79c7f5!important;outline-offset:2px}
+@media(max-width:700px){.panel{border-radius:19px!important}.hub27-feature-card{border-radius:19px!important}.wrap:before{opacity:.09}}
+
+
+/* v2.9.5 | Confetti Glass: every page uses the entire palette, never a single accent. */
+:root{--sun:#ffe784;--pink:#f5a1cb;--mint:#a3ead5;--sky:#a6dcff;--lav:#dfd5f5;--ink:#303846}
+html,body{background:#fafbfc!important}
+body{background:radial-gradient(ellipse at 7% 16%,rgba(255,231,132,.17),transparent 24%),radial-gradient(ellipse at 96% 38%,rgba(245,161,203,.13),transparent 29%),radial-gradient(ellipse at 14% 81%,rgba(163,234,213,.14),transparent 28%),#fafbfc!important}
+/* Small glints and translucent surfaces create dimension without color floods. */
+.panel,.hub27-home-panel{position:relative;overflow:hidden;background:linear-gradient(140deg,#fff 65%,#fcfdff)!important;box-shadow:0 17px 38px rgba(58,69,83,.075),0 3px 8px rgba(58,69,83,.035),inset 0 1px 0 #fff!important}
+.panel:after,.hub27-home-panel:after{content:'';position:absolute;right:-28px;top:-33px;width:110px;height:110px;border-radius:50%;background:radial-gradient(circle,rgba(255,255,255,.7),transparent 68%);pointer-events:none}
+.nav button.active{background:linear-gradient(115deg,#fff3c9,#ffe6f2)!important;color:#4e5562!important;border-color:#f3e5d7!important}
+.nav button:nth-child(2).active{background:linear-gradient(110deg,#e3f5ff,#fff0f7)!important;color:#326b8b!important}
+.nav button:nth-child(3).active{background:linear-gradient(110deg,#e5fbf3,#fff4cf)!important;color:#357663!important}
+.nav button:nth-child(4).active{background:linear-gradient(110deg,#e7f6ff,#e9fbf4)!important;color:#316e8b!important}
+.nav button:nth-child(5).active{background:linear-gradient(110deg,#fff0f8,#fff4d3)!important;color:#965378!important}
+.nav button:nth-child(6).active{background:linear-gradient(110deg,#fff0f8,#f3ecff)!important;color:#965378!important}
+.nav button:nth-child(7).active{background:linear-gradient(110deg,#ffeaf5,#e9f8ff)!important;color:#965378!important}
+.nav button:nth-child(8).active{background:linear-gradient(110deg,#fff6d7,#e9fbf4)!important;color:#796733!important}
+.nav button:nth-child(9).active{background:linear-gradient(110deg,#e9f8ff,#fff0f8)!important;color:#4e687c!important}
+/* Multi-color visual rhythm: repeated panels get distinct highlights. */
+.tabs:not(#home)>.panel:nth-of-type(4n+1){border-top:4px solid var(--sky)!important}
+.tabs:not(#home)>.panel:nth-of-type(4n+2){border-top:4px solid var(--pink)!important}
+.tabs:not(#home)>.panel:nth-of-type(4n+3){border-top:4px solid var(--mint)!important}
+.tabs:not(#home)>.panel:nth-of-type(4n){border-top:4px solid var(--sun)!important}
+.tabs:not(#home)>.panel h2{color:#303846!important}
+/* Shared controls alternate across the page; never tint all buttons one color. */
+.tabs:not(#home) .primary,.tabs:not(#home) .add{background:#ffe784!important;color:#64562c!important;border-color:#f8e2a3!important}
+.tabs:not(#home) .secondary{background:#e6f8f1!important;color:#337660!important}
+.tabs:not(#home) .row button{background:#a6dcff!important;color:#315f7a!important}
+.tabs:not(#home) .panel:nth-of-type(even) .primary,.tabs:not(#home) .panel:nth-of-type(even) .add{background:#a3ead5!important;color:#326c5d!important}
+.tabs:not(#home) .panel:nth-of-type(3n) .primary,.tabs:not(#home) .panel:nth-of-type(3n) .add{background:#f5a1cb!important;color:#754365!important}
+/* Calendar: mostly white cells, multicolored controls, pastel weekend and weekday micro-accents. */
+#calendar>.panel{border-top:4px solid #f5a1cb!important;background:linear-gradient(145deg,#fff 74%,#fffaf0)!important}
+#calendar .line>.add{background:#ffe784!important;color:#65532c!important}
+#calendar .hub-month-toolbar button{background:#e5f8f0!important;color:#31715d!important;border-color:#d1eee1!important}
+#calendar .hub-month-toolbar button:first-child{background:#fff0f8!important;color:#9b527a!important}
+#calendar .hub-month-toolbar button:last-child{background:#e6f4ff!important;color:#357295!important}
+#calendar .hub-month-toolbar strong{background:linear-gradient(90deg,#f39cc8,#8ecff8,#83d9c3);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;font-weight:800}
+#calendar .hub-month-weekdays span{color:#60707e!important}
+#calendar .hub-month-weekdays span:nth-child(1),#calendar .hub-month-weekdays span:nth-child(7){color:#c56a99!important}
+#calendar .hub-month-weekdays span:nth-child(3),#calendar .hub-month-weekdays span:nth-child(5){color:#459b88!important}
+#calendar .hub-month-cell{background:#fff!important;border:1px solid #edf0f3!important;box-shadow:0 3px 9px rgba(55,74,86,.025)!important}
+#calendar .hub-month-cell:nth-child(7n+1){background:linear-gradient(155deg,#fff,#fff7fb)!important}
+#calendar .hub-month-cell:nth-child(7n+7){background:linear-gradient(155deg,#fff,#f5fcff)!important}
+#calendar .hub-month-cell:nth-child(7n+3){border-top:2px solid #e4f6ed!important}
+#calendar .hub-month-cell:nth-child(7n+5){border-top:2px solid #fff1bd!important}
+#calendar .hub-month-cell.is-today{background:linear-gradient(140deg,#fff,#fff4d5)!important;border-color:#ffe784!important;color:#64562c!important}
+#calendar .hub-month-cell.is-selected{background:linear-gradient(145deg,#e9f7ff,#e6faf3)!important;border:2px solid #80cde9!important;color:#315f7a!important;box-shadow:0 8px 20px rgba(85,156,183,.13)!important}
+#calendar .hub-month-details{background:linear-gradient(120deg,#fff8fc,#f1fbf7)!important;border-color:#e9edf0!important}
+#calendar .hub-month-detail,#calendar .event,#calendar .calitem{background:#fff!important;border-left-color:#f5a1cb!important}
+/* Home: no lavender repeated labels, more distinct color compositions. */
+#home .hub27-eyebrow{color:#d46b9e!important}
+#home .hub27-home-panel:nth-child(2) .hub27-eyebrow{color:#399d85!important}
+#home .hub27-celebrations .hub27-eyebrow{color:#c49b36!important}
+#home .hub27-text-button{color:#b75589!important}
+#home .hub27-home-panel:nth-child(2) .hub27-text-button{color:#348f7c!important}
+#home .hub27-home-panel:nth-child(1){border-top:4px solid #f5a1cb!important}
+#home .hub27-home-panel:nth-child(2){border-top:4px solid #a3ead5!important}
+#home .hub27-celebrations{border-top:4px solid #ffe784!important;background:linear-gradient(120deg,#fff 70%,#fffdf2)!important}
+#home .hub27-round{background:linear-gradient(135deg,#ffe784,#ffd8ec)!important}
+#home .hub27-home-panel:nth-child(2) .hub27-round{background:linear-gradient(135deg,#a3ead5,#a6dcff)!important}
+#home .hub27-feature-card.hub27-purple{background:linear-gradient(130deg,#fff 40%,#fff1c6)!important;color:#74602c!important}
+#home .hub27-feature-card.hub27-teal{background:linear-gradient(130deg,#fff 40%,#dff9ef)!important;color:#34745f!important}
+#home .hub27-feature-card.hub27-coral{background:linear-gradient(130deg,#fff 40%,#ffe8f3)!important;color:#a44c78!important}
+#home .hub27-feature-card button{color:inherit!important}
+/* Settings: white with individual candy-colored ribbons, no gray-blue blocks. */
+#settings>.panel{background:#fff!important}
+#settings>.panel:nth-of-type(1){border-top:5px solid #f5a1cb!important}
+#settings>.panel:nth-of-type(2){border-top:5px solid #ffe784!important}
+#settings>.panel:nth-of-type(3){border-top:5px solid #a3ead5!important}
+#settings>.panel:nth-of-type(4){border-top:5px solid #a6dcff!important}
+#settings .banner{background:linear-gradient(105deg,#effaf5,#fff9e8)!important;color:#526a65!important;border-color:#dbefe4!important}
+#settings .source{background:linear-gradient(115deg,#fff,#fff4fa)!important;border:1px solid #f1e8ee!important}
+#settings .hub-settings-signout{background:#ffe8f3!important;color:#915778!important}
+#settings .hub26-profile-strip{background:#fff!important}
+.hub26-profile-strip{background:linear-gradient(105deg,#fff,#f6fbff 40%,#fff8ed)!important;border-color:#eaeef0!important}
+#settings .row{flex-wrap:wrap!important}
+#settings .row input{min-width:140px!important;flex:1 1 160px!important}
+#settings .panel{overflow-wrap:break-word}
+#settings .panel p{max-width:100%;overflow-wrap:break-word}
+/* Alternating accents for other feature cards and labels. */
+#shopping .hub25-store:nth-child(4n+1){border-top:5px solid #ffe784!important;background:linear-gradient(155deg,#fff,#fffdf2)!important}
+#shopping .hub25-store:nth-child(4n+2){border-top:5px solid #f5a1cb!important;background:linear-gradient(155deg,#fff,#fff6fb)!important}
+#shopping .hub25-store:nth-child(4n+3){border-top:5px solid #a3ead5!important;background:linear-gradient(155deg,#fff,#f5fffb)!important}
+#shopping .hub25-store:nth-child(4n){border-top:5px solid #a6dcff!important;background:linear-gradient(155deg,#fff,#f4fbff)!important}
+#meals .hub25-day:nth-child(4n+1) .hub25-dayhead{background:#fff5d6!important;color:#7d683a!important}
+#meals .hub25-day:nth-child(4n+2) .hub25-dayhead{background:#e9f9f2!important;color:#39735f!important}
+#meals .hub25-day:nth-child(4n+3) .hub25-dayhead{background:#fff0f8!important;color:#a4547f!important}
+#meals .hub25-day:nth-child(4n) .hub25-dayhead{background:#edf8ff!important;color:#39769a!important}
+#messages .hub27-note:nth-child(3n+2){background:linear-gradient(125deg,#fff,#e9fbf4)!important;border-left-color:#a3ead5!important}
+#messages .hub27-note:nth-child(3n){background:linear-gradient(125deg,#fff,#fff9dd)!important;border-left-color:#ffe784!important}
+#recipes .hub29-method.active{background:linear-gradient(110deg,#fff2fa,#edf9ff)!important;color:#8e5277!important;border-color:#f3dbe9!important}
+#recipes .hub29-kicker{color:#d46b9e!important}
+/* Fine grain, soft fade and specular highlights retained; iOS 12-compatible CSS. */
+@media(max-width:700px){#calendar .hub-month-cell{min-height:58px!important}#settings .panel{padding:18px!important}}
+
+
+/* v2.9.6 | Mixed two-tone ombre controls and featured Home cards. */
+#home .hub27-feature-card.hub27-purple{
+ background:linear-gradient(124deg,#ffffff 0%,#eff9ff 33%,#cceaff 100%)!important;
+ color:#35647f!important;border:1px solid #e1f2fc!important;
+ box-shadow:0 14px 28px rgba(71,155,199,.12),inset 0 1px 0 #fff!important;
+}
+#home .hub27-feature-card.hub27-coral{
+ background:linear-gradient(124deg,#ffffff 0%,#f7f2ff 34%,#ded1f8 100%)!important;
+ color:#66538d!important;border:1px solid #eee5fc!important;
+ box-shadow:0 14px 28px rgba(130,106,177,.12),inset 0 1px 0 #fff!important;
+}
+/* A varied collection of soft, two-color ombre buttons across every section. */
+button.add,button.primary,button.secondary,.row button,.hub27-small,.hub27-round,.hub27-text-button,
+.hub27-feature-card button,.hub27-recipe-actions button,.hub-month-toolbar button,
+.hub29-method,.hub25-store button,.hub25-day button,#hubSignInButton,
+.hub26-profile-strip button{
+ background:linear-gradient(120deg,#ffe7f3 0%,#d9efff 100%)!important;
+ color:#40576d!important;border:1px solid rgba(255,255,255,.78)!important;
+ box-shadow:0 5px 12px rgba(71,81,108,.075),inset 0 1px 0 rgba(255,255,255,.8)!important;
+ transition:transform .16s ease,box-shadow .16s ease;
+}
+button.add:nth-of-type(4n+1),button.primary:nth-of-type(4n+1),.row button:nth-of-type(4n+1),
+.hub27-feature-card button,.hub27-round:nth-of-type(4n+1),.hub29-method:nth-of-type(4n+1){
+ background:linear-gradient(120deg,#fff0b3,#ffd5e9)!important;color:#75556b!important;
+}
+button.add:nth-of-type(4n+2),button.primary:nth-of-type(4n+2),.row button:nth-of-type(4n+2),
+.hub27-round:nth-of-type(4n+2),.hub29-method:nth-of-type(4n+2){
+ background:linear-gradient(120deg,#c8f5e7,#cceaff)!important;color:#356b72!important;
+}
+button.add:nth-of-type(4n+3),button.primary:nth-of-type(4n+3),.row button:nth-of-type(4n+3),
+.hub27-round:nth-of-type(4n+3),.hub29-method:nth-of-type(4n+3){
+ background:linear-gradient(120deg,#d8eaff,#eadbff)!important;color:#5e608d!important;
+}
+button.add:nth-of-type(4n),button.primary:nth-of-type(4n),.row button:nth-of-type(4n),
+.hub27-round:nth-of-type(4n),.hub29-method:nth-of-type(4n){
+ background:linear-gradient(120deg,#ffd9ee,#d4f6e9)!important;color:#6d5674!important;
+}
+/* Give important actions their own intentional combinations. */
+#calendar .line>.add{background:linear-gradient(120deg,#fff0a8,#ffd4eb)!important;color:#75566c!important}
+#calendar .hub-month-toolbar button:first-child{background:linear-gradient(120deg,#ffd9ed,#e6ddff)!important;color:#805c86!important}
+#calendar .hub-month-toolbar button:last-child{background:linear-gradient(120deg,#d2f0ff,#d0f7e7)!important;color:#3c7280!important}
+#calendar .hub-month-toolbar button{background:linear-gradient(120deg,#d6f8e8,#fff1b7)!important;color:#527366!important}
+#home .hub27-feature-card.hub27-purple button{background:linear-gradient(115deg,#fff,#cbe9ff)!important;color:#35647f!important}
+#home .hub27-feature-card.hub27-teal button{background:linear-gradient(115deg,#fff1bb,#c9f6e6)!important;color:#3c7168!important}
+#home .hub27-feature-card.hub27-coral button{background:linear-gradient(115deg,#fff,#ead7ff)!important;color:#66538d!important}
+#home .hub27-home-panel:first-child .hub27-round{background:linear-gradient(125deg,#ffe4f1,#fff0a8)!important}
+#home .hub27-home-panel:nth-child(2) .hub27-round{background:linear-gradient(125deg,#c9f5e7,#cceaff)!important}
+#hubSignInButton{background:linear-gradient(120deg,#c6eaff,#c8f4e6)!important;color:#315e74!important}
+#settings .hub-settings-signout{background:linear-gradient(120deg,#ffe2ed,#e8ddff)!important;color:#825a77!important}
+/* Preserve the much-loved welcome banner and its translucent controls. */
+.hub27-hero-actions button{background:rgba(255,255,255,.2)!important;color:#fff!important;border:1px solid rgba(255,255,255,.35)!important}
+.hub27-weather{background:rgba(255,255,255,.19)!important;color:#fff!important;border:1px solid rgba(255,255,255,.32)!important}
+button:not(:disabled):active{transform:translateY(1px)}
+@media(hover:hover){button:not(:disabled):hover{box-shadow:0 8px 17px rgba(71,81,108,.13),inset 0 1px 0 rgba(255,255,255,.9)}}
+
+
+/* v2.9.7: deliberately varied 2–3 color ombre buttons, including text actions. */
+:root{--pop-pink:#ffd0e9;--pop-yellow:#ffe98d;--pop-mint:#bdf2df;--pop-blue:#bfe7ff;--pop-lav:#e4d7fa}
+/* Rounded button treatment even when legacy styles use rectangular corners. */
+button.add,button.primary,button.secondary,.row button,.hub27-small,.hub27-round,
+.hub27-text-button,.hub27-feature-card button,.hub27-recipe-actions button,
+.hub-month-toolbar button,.hub29-method,.hub25-store button,.hub25-day button,
+#hubSignInButton,.hub26-profile-strip button,.hub27-hero-actions button,
+button[onclick*="hub27Open"],button[onclick*="hub25"],button[onclick*="switchTab"]:not(.active):not(.nav button){
+ border-radius:19px!important;
+ background:linear-gradient(115deg,#ffd0e9 0%,#ffe98d 100%)!important;
+ color:#65536b!important;
+ border:1px solid rgba(255,255,255,.9)!important;
+ box-shadow:0 7px 16px rgba(81,93,119,.11),inset 0 1px 0 rgba(255,255,255,.95)!important;
+ text-decoration:none!important;
+}
+/* Individual controls have intentional combinations, not nth-of-type yellow everywhere. */
+#shopping .line>.add,#shopping button.add{background:linear-gradient(115deg,#bfe7ff,#ffe98d)!important;color:#4d6271!important}
+#meals .line>.add{background:linear-gradient(115deg,#ffd0e9,#ffe98d)!important}
+#meals .hub25-weekbuttons button:nth-child(1){background:linear-gradient(115deg,#bdf2df,#bfe7ff)!important}
+#meals .hub25-weekbuttons button:nth-child(2){background:linear-gradient(115deg,#ffe98d,#ffd0e9)!important}
+#meals .hub25-weekbuttons button:nth-child(3){background:linear-gradient(115deg,#bfe7ff,#e4d7fa)!important}
+#recipes .hub29-recipe-actions button:first-child{background:linear-gradient(115deg,#ffd0e9,#ffe98d,#bdf2df)!important}
+#recipes .hub29-recipe-actions button:last-child{background:linear-gradient(115deg,#bfe7ff,#e4d7fa)!important}
+#chores .line button.add:first-child{background:linear-gradient(115deg,#bdf2df,#ffe98d)!important}
+#reminders .line button.add{background:linear-gradient(115deg,#ffd0e9,#bfe7ff,#bdf2df)!important}
+#messages .line button.add{background:linear-gradient(115deg,#ffd0e9,#ffe98d)!important}
+#hubSignInButton{background:linear-gradient(115deg,#bfe7ff,#ffe98d)!important;color:#425f75!important}
+/* These formerly plain text links need actual pill backgrounds, padding and corners. */
+#home .hub27-text-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;padding:11px 19px!important;min-height:43px!important;width:auto!important;max-width:100%!important;line-height:1.3!important;border-radius:20px!important}
+#home .hub27-home-panel:first-child .hub27-text-button{background:linear-gradient(115deg,#ffd0e9,#ffe98d)!important;color:#82506f!important}
+#home .hub27-home-panel:nth-child(2) .hub27-text-button{background:linear-gradient(115deg,#bdf2df,#bfe7ff)!important;color:#346f70!important}
+#home .hub27-feature-card.hub27-purple button{background:linear-gradient(115deg,#bfe7ff,#ffe98d)!important;color:#426681!important}
+#home .hub27-feature-card.hub27-teal button{background:linear-gradient(115deg,#bdf2df,#ffd0e9)!important;color:#486d70!important}
+#home .hub27-feature-card.hub27-coral button{background:linear-gradient(115deg,#e4d7fa,#ffd0e9)!important;color:#675283!important}
+/* Welcome hero stays intact; only its two actions become colorful translucent ombres. */
+#home .hub27-hero-actions button:first-child{background:linear-gradient(115deg,#ffd0e9,#ffe98d)!important;color:#674f65!important;border-radius:20px!important}
+#home .hub27-hero-actions button:nth-child(2){background:linear-gradient(115deg,#bdf2df,#bfe7ff,#e4d7fa)!important;color:#476378!important;border-radius:20px!important}
+/* Preserve the original glass weather pill. */
+#home .hub27-weather{background:rgba(255,255,255,.19)!important;color:#fff!important;border:1px solid rgba(255,255,255,.32)!important}
+/* Vary smaller modal and form buttons as well. */
+.hub29-method:nth-child(4n+1){background:linear-gradient(115deg,#ffd0e9,#ffe98d)!important}
+.hub29-method:nth-child(4n+2){background:linear-gradient(115deg,#bdf2df,#bfe7ff)!important}
+.hub29-method:nth-child(4n+3){background:linear-gradient(115deg,#bfe7ff,#e4d7fa)!important}
+.hub29-method:nth-child(4n){background:linear-gradient(115deg,#ffd0e9,#bdf2df)!important}
+@media(max-width:600px){#home .hub27-text-button{font-size:14px!important;padding:10px 14px!important}}
+
+
+/* v2.9.8: intentional mixed 2/3-stop ombre system. Specific controls override old yellow defaults. */
+:root{--mix-pink:#ffd0e9;--mix-yellow:#ffe98d;--mix-mint:#bdf2df;--mix-blue:#bfe7ff;--mix-lav:#e4d7fa}
+/* All action controls share a tactile pill treatment, even older dynamically created buttons. */
+button.add,button.primary,button.secondary,.row button,.hub27-small,.hub27-round,.hub27-text-button,
+.hub27-feature-card button,.hub27-recipe-actions button,.hub-month-toolbar button,.hub29-method,
+.hub25-dayhead,.hub25-store,.hub26-profile-strip button,#hubSignInButton,
+.edit-actions button,.chore-controls button,.hub25-mealrow button,.hub25-shopping-row button,
+button[onclick*="hub27"],button[onclick*="hub25"],button[onclick*="hubShow"],button[onclick*="switchTab"]:not(.nav button){
+ border-radius:22px!important;background:linear-gradient(115deg,#bfe7ff 0%,#ffd0e9 52%,#ffe98d 100%)!important;
+ color:#4b5268!important;border:1px solid rgba(255,255,255,.92)!important;
+ box-shadow:0 7px 17px rgba(80,91,119,.12),inset 0 1px 0 rgba(255,255,255,.94)!important;
+ background-clip:padding-box!important;text-decoration:none!important;
+}
+/* Distinct adjacent action buttons and page headings. */
+#chores>.panel>.line>button.add{background:linear-gradient(115deg,#bdf2df,#bfe7ff,#ffd0e9)!important}
+#meals>.panel>.line>button.add{background:linear-gradient(115deg,#bfe7ff,#ffd0e9,#ffe98d)!important}
+#meals button[onclick="hub25CopyWeek()"]{background:linear-gradient(115deg,#e4d7fa,#bdf2df,#bfe7ff)!important}
+#meals button[onclick="hub25ShowFavorites()"]{background:linear-gradient(115deg,#ffd0e9,#bdf2df,#ffe98d)!important}
+#meals .hub25-weekbuttons button:nth-child(1){background:linear-gradient(115deg,#bfe7ff,#e4d7fa)!important}
+#meals .hub25-weekbuttons button:nth-child(2){background:linear-gradient(115deg,#ffe98d,#bdf2df,#bfe7ff)!important}
+#meals .hub25-weekbuttons button:nth-child(3){background:linear-gradient(115deg,#ffd0e9,#e4d7fa,#bfe7ff)!important}
+#messages>.panel>.line>button.add,#messages button[onclick="hub27OpenNote()"]{background:linear-gradient(115deg,#ffd0e9,#bfe7ff,#ffe98d)!important}
+#reminders>.panel>.line>button.add,#reminders button[onclick="hub27OpenReminder()"]{background:linear-gradient(115deg,#bdf2df,#ffd0e9,#e4d7fa)!important}
+#shopping>.panel>.line>button.add{background:linear-gradient(115deg,#bfe7ff,#ffe98d,#ffd0e9)!important}
+#shopping button[onclick="hub25StoreBack()"]{background:linear-gradient(115deg,#bdf2df,#bfe7ff)!important}
+#shopping button[onclick="hub25ItemOpen()"]{background:linear-gradient(115deg,#ffd0e9,#ffe98d,#bfe7ff)!important}
+#shopping button[onclick="hub25ClearStore()"]{background:linear-gradient(115deg,#e4d7fa,#bdf2df)!important}
+#recipes button[onclick*="hub29"]:nth-of-type(odd){background:linear-gradient(115deg,#bfe7ff,#ffd0e9,#ffe98d)!important}
+#recipes button[onclick*="hub29"]:nth-of-type(even){background:linear-gradient(115deg,#bdf2df,#e4d7fa,#ffd0e9)!important}
+#home .hub27-feature-card.hub27-purple button{background:linear-gradient(115deg,#bfe7ff,#bdf2df,#ffe98d)!important}
+#home .hub27-feature-card.hub27-teal button{background:linear-gradient(115deg,#ffd0e9,#ffe98d,#bdf2df)!important}
+#home .hub27-feature-card.hub27-coral button{background:linear-gradient(115deg,#e4d7fa,#ffd0e9,#bfe7ff)!important}
+#home .hub27-home-panel:first-child .hub27-text-button{background:linear-gradient(115deg,#ffd0e9,#ffe98d,#bdf2df)!important}
+#home .hub27-home-panel:nth-child(2) .hub27-text-button{background:linear-gradient(115deg,#bfe7ff,#e4d7fa,#ffd0e9)!important}
+#home .hub27-home-panel:first-child .hub27-round{background:linear-gradient(115deg,#bdf2df,#ffd0e9,#ffe98d)!important}
+#home .hub27-home-panel:nth-child(2) .hub27-round{background:linear-gradient(115deg,#ffe98d,#bfe7ff,#bdf2df)!important}
+#home .hub27-hero-actions button:first-child{background:linear-gradient(115deg,#ffd0e9,#ffe98d)!important}
+#home .hub27-hero-actions button:nth-child(2){background:linear-gradient(115deg,#bdf2df,#bfe7ff,#e4d7fa)!important}
+#calendar .line>button.add{background:linear-gradient(115deg,#ffe98d,#ffd0e9,#bfe7ff)!important}
+#calendar .hub-month-toolbar button:first-child{background:linear-gradient(115deg,#e4d7fa,#ffd0e9)!important}
+#calendar .hub-month-toolbar button:nth-of-type(2){background:linear-gradient(115deg,#bdf2df,#ffe98d,#bfe7ff)!important}
+#calendar .hub-month-toolbar button:last-child{background:linear-gradient(115deg,#bfe7ff,#ffd0e9)!important}
+#hubSignInButton{background:linear-gradient(115deg,#bfe7ff,#ffd0e9,#ffe98d)!important}
+#settings .hub26-profile-strip button,#settings button[onclick*="Profile"]{background:linear-gradient(115deg,#bdf2df,#ffd0e9,#ffe98d)!important}
+/* Variation for generic actions in overlays, without recoloring destructive buttons. */
+.chore-edit-dialog .edit-actions button:first-child{background:linear-gradient(115deg,#e4d7fa,#bfe7ff)!important}
+.chore-edit-dialog .edit-actions button:last-child{background:linear-gradient(115deg,#ffd0e9,#ffe98d,#bdf2df)!important}
+.chore-controls button:first-child,.hub25-shopping-row button.add{background:linear-gradient(115deg,#bfe7ff,#bdf2df)!important}
+.chore-controls button:last-child{background:linear-gradient(115deg,#ffd0e9,#e4d7fa)!important}
+.hub25-mealrow button:first-child{background:linear-gradient(115deg,#ffe98d,#bdf2df,#bfe7ff)!important}
+.hub25-mealrow button:nth-child(2){background:linear-gradient(115deg,#ffd0e9,#e4d7fa)!important}
+/* Retain accessible focus treatment and recognizable danger actions. */
+button:focus-visible{outline:3px solid #7bbde6!important;outline-offset:2px!important}
+button.danger,.danger-text{color:#a83c67!important}
+
+</style><style>
+
+/* v2.9.9: individual gradient recipes; exact action targeting beats generic fallbacks. */
+:root{--g-pink:#ffd0e9;--g-yellow:#ffe98d;--g-mint:#bdf2df;--g-sky:#bfe7ff;--g-lav:#e4d7fa}
+/* Home: the four adjacent controls intentionally do not repeat the same pair. */
+#home button[onclick="showEvent()"]{background:linear-gradient(118deg,#bfe7ff 0%,#bdf2df 50%,#ffe98d 100%)!important;color:#375d68!important}
+#home button[onclick="hubShowAddChore()"]{background:linear-gradient(118deg,#ffd0e9 0%,#e4d7fa 55%,#bfe7ff 100%)!important;color:#624f7b!important}
+#home button[onclick="switchTab('chores')"]{background:linear-gradient(118deg,#ffe98d 0%,#bdf2df 100%)!important;color:#526448!important}
+#home button[onclick="hub25MealOpen()"]{background:linear-gradient(118deg,#bdf2df 0%,#bfe7ff 54%,#ffd0e9 100%)!important;color:#426273!important}
+#home button[onclick="switchTab('meals')"]{background:linear-gradient(118deg,#e4d7fa 0%,#ffd0e9 48%,#ffe98d 100%)!important;color:#695474!important}
+/* Meal planner: favorites was being overridden by legacy selectors. */
+#meals button[onclick="hub25ShowFavorites()"],button[onclick="hub25ShowFavorites()"]{background:linear-gradient(112deg,#bfe7ff 0%,#ffd0e9 52%,#bdf2df 100%)!important;color:#435e6e!important}
+#meals button[onclick="hub25CopyWeek()"],button[onclick="hub25CopyWeek()"]{background:linear-gradient(112deg,#e4d7fa 0%,#bdf2df 54%,#ffe98d 100%)!important;color:#596573!important}
+/* Home mini-actions: independent, recognizable color combinations. */
+#home .hub27-home-panel:nth-child(1) .hub27-round{background:linear-gradient(115deg,#ffe98d,#ffd0e9,#bfe7ff)!important}
+#home .hub27-home-panel:nth-child(2) .hub27-round{background:linear-gradient(115deg,#bdf2df,#bfe7ff,#e4d7fa)!important}
+/* Settings: no more single-color turquoise and pink fills. */
+#settings button[onclick*="hub26SaveProfile"]{background:linear-gradient(115deg,#bdf2df 0%,#bfe7ff 55%,#e4d7fa 100%)!important;color:#385c6b!important}
+#settings button[onclick*="hub27SaveWeatherLocation"]{background:linear-gradient(115deg,#ffd0e9 0%,#ffe98d 48%,#bdf2df 100%)!important;color:#684d62!important}
+#settings button[onclick="exportData()"]{background:linear-gradient(115deg,#e4d7fa 0%,#bfe7ff 53%,#ffe98d 100%)!important;color:#515b75!important}
+/* All action pills retain their raised edges and round shape. */
+#home .line button,#meals button[onclick="hub25ShowFavorites()"],#settings button[onclick*="hub26SaveProfile"],#settings button[onclick*="hub27SaveWeatherLocation"],#settings button[onclick="exportData()"]{border-radius:999px!important;border:1px solid rgba(255,255,255,.9)!important;box-shadow:0 9px 19px rgba(67,78,102,.13),inset 0 1px 0 rgba(255,255,255,.95)!important}
+
+</style>
+<style>/* v2.9.10: action-specific ombre, applied after all prior style sheets */
+#meals button[onclick="hub25MealOpen()"]{background-image:linear-gradient(112deg,#bfe7ff,#e4d7fa,#ffd0e9)!important}
+#meals button[onclick="hub25CopyWeek()"]{background-image:linear-gradient(112deg,#bdf2df,#bfe7ff,#ffe98d)!important}
+#meals button[onclick="hub25ShowFavorites()"]{background-image:linear-gradient(112deg,#ffd0e9,#e4d7fa,#bdf2df)!important}
+#settings button[onclick*="hub26SaveProfile"]{background-image:linear-gradient(112deg,#bfe7ff,#bdf2df,#ffe98d)!important}
+#settings button[onclick*="hub27SaveWeatherLocation"]{background-image:linear-gradient(112deg,#ffd0e9,#ffe98d,#bfe7ff)!important}
+#settings button[onclick="exportData()"]{background-image:linear-gradient(112deg,#e4d7fa,#ffd0e9,#bdf2df)!important}
+#meals button[onclick="hub25MealOpen()"],#meals button[onclick="hub25CopyWeek()"],#meals button[onclick="hub25ShowFavorites()"],#settings button[onclick*="hub26SaveProfile"],#settings button[onclick*="hub27SaveWeatherLocation"],#settings button[onclick="exportData()"]{border-radius:999px!important;border:1px solid rgba(255,255,255,.85)!important;box-shadow:0 9px 20px rgba(64,79,99,.14),inset 0 1px 0 rgba(255,255,255,.9)!important;color:#475267!important}
+/* v2.9.11: sign-in button final targeted ombre override */
+#cloudLogin .authrow #hubSignInButton {
+  background: linear-gradient(115deg, #bdf2df 0%, #bfe7ff 48%, #ffd0e9 100%) !important;
+  background-color: #bfe7ff !important;
+  color: #344d62 !important;
+  border: 2px solid rgba(255,255,255,.92) !important;
+  border-radius: 999px !important;
+  box-shadow: 0 10px 24px rgba(85,117,148,.16), inset 0 1px 0 rgba(255,255,255,.85) !important;
+}
+
+/* Compact rainbow greeting beside the clock */
+#familyTimeGreeting{font-size:12px!important;font-weight:750!important;letter-spacing:.01em!important;white-space:nowrap!important;padding:6px 10px!important;border-radius:999px!important;background:linear-gradient(110deg,#f7a6d0 0%,#ffe38c 26%,#9ce9d2 52%,#a7dfff 76%,#d9c7f5 100%)!important;color:#39465b!important;border:1px solid rgba(255,255,255,.8)!important;box-shadow:0 3px 12px rgba(95,116,145,.10)!important;}
+</style>
+<style>
+/* v2.9.13 finishing touches. Preserve the approved multicolor palette and hero. */
+@media (hover:hover) and (pointer:fine){
+  button:not(:disabled){transition:transform .17s ease,box-shadow .17s ease,filter .17s ease}
+  button:not(:disabled):hover{transform:translateY(-2px);filter:saturate(1.07) brightness(1.015);box-shadow:0 9px 20px rgba(69,80,113,.14)}
+  .nav button:not(:disabled):hover{transform:translateY(-1px)}
+}
+button:active:not(:disabled){transform:translateY(1px) scale(.985);filter:brightness(.985)}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #83cdec;outline-offset:3px}
+button:disabled{cursor:default;opacity:.55}
+/* Color is shared across a page, not repeated monochromatically. */
+#calendar .calitem,#home .calitem{border-radius:8px!important;background:linear-gradient(115deg,#e9f5ff,#f5ecff)!important;border-left:3px solid #87c7f6!important}
+#calendar .calitem:nth-of-type(4n+2),#home .calitem:nth-of-type(4n+2){background:linear-gradient(115deg,#fff1fa,#fff8d9)!important;border-left-color:#f5a1cb!important}
+#calendar .calitem:nth-of-type(4n+3),#home .calitem:nth-of-type(4n+3){background:linear-gradient(115deg,#e1f9ef,#eaf5ff)!important;border-left-color:#86dcc4!important}
+#calendar .calitem:nth-of-type(4n),#home .calitem:nth-of-type(4n){background:linear-gradient(115deg,#fff7d5,#e8f8f1)!important;border-left-color:#ebc85c!important}
+#calendar .event,#home .event{border-left-color:#84c9f3!important;background:linear-gradient(105deg,#edf8ff,#fff)!important}
+#calendar .event:nth-of-type(4n+2),#home .event:nth-of-type(4n+2){border-left-color:#ee9cc6!important;background:linear-gradient(105deg,#fff0f8,#fff)!important}
+#calendar .event:nth-of-type(4n+3),#home .event:nth-of-type(4n+3){border-left-color:#7ed8be!important;background:linear-gradient(105deg,#e9faf3,#fff)!important}
+#calendar .event:nth-of-type(4n),#home .event:nth-of-type(4n){border-left-color:#e9cb68!important;background:linear-gradient(105deg,#fff9df,#fff)!important}
+#calendar .calitem,#calendar .event{box-shadow:0 2px 6px rgba(72,91,117,.055)}
+/* Airier spacing, without introducing tall empty sections. */
+#home .hub27-feature-grid{gap:12px}
+#home .hub27-feature-card{min-width:0}
+#home .panel{margin-bottom:0}
+#settings .panel,#calendar .panel{background-color:#fff}
+input,select,textarea{max-width:100%}
+@media(max-width:800px){
+  button{touch-action:manipulation}
+  .nav{row-gap:7px}
+  #calendar .hub-month-toolbar{gap:6px;flex-wrap:wrap}
+  #calendar .hub-month-toolbar button{min-height:39px}
+  #home .hub27-feature-grid{gap:9px}
+}
+@media(prefers-reduced-motion:reduce){button,.hub27-feature-card{transition:none!important;animation:none!important}}
+</style>
+</head><body><header><div><h1>Our Family Hub</h1><div class="sub" id="dateTitle"></div></div><div class="right"><div class="pill" id="familyTimeGreeting" aria-label="Time of day greeting">☀ Family time</div><div id="clock"></div></div></header><main class="wrap"><div id="cloudLogin"><div class="authrow"><input id="hubEmail" type="email" placeholder="Family Hub email" autocomplete="username"><input id="hubPassword" type="password" placeholder="Password" autocomplete="current-password"><button type="button" id="hubSignInButton" onclick="hubSignIn()">Sign in</button></div><div id="hubStatus" class="status" role="status" aria-live="polite"></div><div id="hubCalendarStatus" class="status" role="status" aria-live="polite"></div></div><div class="nav"><button class="active" data-tab="home">Home</button><button data-tab="calendar">Calendar</button><button data-tab="chores">Chores</button><button data-tab="shopping">Shopping</button><button data-tab="meals">Meals</button><button data-tab="recipes">Recipes</button><button data-tab="messages">Messages</button><button data-tab="reminders">Reminders</button><button data-tab="settings">Settings</button></div>
+
+<div class="hub26-profile-strip"><span id="hub26ProfileLabel">Profile: Family</span><button class="add" onclick="switchTab('settings')">Change profile</button></div><section class="tabs active" id="home"><div class="hub27-hero"><div class="hub27-hero-orb"></div><div class="hub27-hero-inner"><div class="hub27-kicker">✦ THE FAMILY SPACE</div><h2>Good to have you home.</h2><p>Everything your family needs, beautifully together.</p><div class="hub27-hero-actions"><button onclick="hub27OpenNote()">✎ Leave a note</button><button onclick="hub27OpenReminder()">＋ Reminder</button></div></div><button class="hub27-weather" onclick="hub27WeatherDetails()" title="Weather forecast"><span id="hub27WeatherIcon">☀</span><strong id="hub27WeatherHigh">--°</strong><small id="hub27WeatherDesc">Today's high</small></button></div><div class="hub27-feature-grid"><div class="hub27-feature-card hub27-purple"><div class="hub27-feature-symbol">▦</div><strong>Today's schedule</strong><span>See your calendar below</span><button onclick="switchTab('calendar')">Open calendar ↗</button></div><div class="hub27-feature-card hub27-teal"><div class="hub27-feature-symbol">✓</div><strong>Family chores</strong><span>Stay on top of the day</span><button onclick="switchTab('chores')">See chores ↗</button></div><div class="hub27-feature-card hub27-coral"><div class="hub27-feature-symbol">◉</div><strong>What's for dinner?</strong><span id="hub27DinnerSummary">Check the meal plan</span><button onclick="switchTab('meals')">Meal planner ↗</button></div></div><div class="hub27-home-grid"><div class="hub27-home-panel"><div class="hub27-heading"><div><span class="hub27-eyebrow">STAY CONNECTED</span><h2>Family message board</h2></div><button class="hub27-round" onclick="hub27OpenNote()">＋</button></div><div id="hub27HomeNotes" class="hub27-list">Loading messages…</div><button class="hub27-text-button" onclick="switchTab('messages')">All family messages →</button></div><div class="hub27-home-panel"><div class="hub27-heading"><div><span class="hub27-eyebrow">DON'T FORGET</span><h2>Upcoming reminders</h2></div><button class="hub27-round" onclick="hub27OpenReminder()">＋</button></div><div id="hub27HomeReminders" class="hub27-list">Loading reminders…</div><button class="hub27-text-button" onclick="switchTab('reminders')">All reminders →</button></div></div><div class="hub27-home-panel hub27-celebrations"><div class="hub27-heading"><div><span class="hub27-eyebrow">WORTH CELEBRATING</span><h2>Birthdays & anniversaries</h2></div><span class="hub27-confetti">✦ ✳</span></div><div id="hub27Birthdays" class="hub27-list">Checking connected calendar…</div></div><div class="layout"><div class="stack"><div class="panel"><div class="line"><h2>This Week</h2><button class="add" style="background:linear-gradient(112deg,#bfe7ff,#bdf2df,#ffe98d)!important" onclick="showEvent()">+ Add event</button></div><div class="week" id="week"></div><div class="muted" style="margin-bottom:7px">Tap a day to see its events below.</div><div id="events"></div><div id="eventRequestsStatus" class="muted" aria-live="polite"></div></div></div><div class="stack"><div class="panel"><div class="line"><h2>Family Chores</h2><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="add" style="background:linear-gradient(112deg,#ffd0e9,#e4d7fa,#bfe7ff)!important" onclick="hubShowAddChore()">+ Add chore</button><button class="add" style="background:linear-gradient(112deg,#bdf2df,#ffe98d)!important" onclick="switchTab('chores')">See all</button></div></div><div id="choreHomeSummary" class="chore-home-summary"></div><div id="choresHome"></div></div><div class="panel"><div class="line"><h2>Tonight's Dinner</h2><button class="add" style="background:linear-gradient(112deg,#e4d7fa,#ffd0e9,#ffe98d)!important" onclick="switchTab('meals')">Edit</button></div><div class="meal" id="dinnerHome" style="display:none"></div><div class="meal" id="sharedDinnerHome">Loading shared meals...</div></div></div></div></section>
+
+<section class="tabs" id="calendar"><div class="panel"><div class="line"><h2>Family Calendar</h2><button class="add" style="background:linear-gradient(112deg,#bfe7ff,#bdf2df,#ffe98d)!important" onclick="showEvent()">+ Add event</button></div><div class="hub-month-toolbar"><button type="button" onclick="hubMonthMove(-1)" aria-label="Previous month">&#8592; Previous</button><strong id="hubMonthTitle"></strong><button type="button" onclick="hubMonthToday()">Today</button><button type="button" onclick="hubMonthMove(1)" aria-label="Next month">Next &#8594;</button></div><div class="hub-month-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calgrid hub-month-grid" id="fullCalendar"></div><div id="hubMonthDetails" class="hub-month-details"><p class="muted">Select a date to view its events.</p></div><p class="muted">Months outside the synced Google Calendar range may not have all events.</p></div></section>
 
 <section class="tabs" id="chores"><div class="panel"><div class="line"><h2>Chores &amp; To-Dos</h2><button class="add" type="button" onclick="hubShowAddChore()">+ Add chore</button></div><div id="choreMessage" class="muted" role="status">Sign in to load shared chores.</div><div id="choreProgress" class="muted"></div><div class="chore-overview"><h3>Upcoming chores</h3><div id="choreUpcoming" aria-live="polite"></div></div><div class="chore-filters"><label>Status <select id="choreStatusFilter" onchange="hubFilterChores()"><option value="all">All chores</option><option value="today">Today</option><option value="upcoming">Upcoming</option><option value="overdue">Overdue</option><option value="completed">Completed</option></select></label><label>Family member <select id="chorePersonFilter" onchange="hubFilterChores()"><option value="all">Everyone</option></select></label></div><div id="choreFilterCount" class="muted" aria-live="polite"></div><p class="tiny">Use the Completed filter to review completed chores. Family members can check off chores from the shared iPad without changing accounts.</p><div id="choresAll"></div></div></section>
 
 <section class="tabs" id="shopping"><div class="panel"><div class="line"><div><h2>Shopping Lists</h2><p class="muted">Tap a store to shop its list.</p></div><button class="add" onclick="hub25ItemOpen()">+ Add item</button></div><div class="hub27-sort"><label for="hub27ShoppingSort">View list</label><select id="hub27ShoppingSort" onchange="hub27SetSort(this.value)"><option value="department">By department</option><option value="added">Order added</option><option value="alphabetical">Alphabetical</option></select></div><p class="muted" id="hub26ShoppingTotals">Loading stores...</p><div id="hub25StoreCards" class="hub25-stores"></div><div id="hub25StoreDetail" style="display:none"><div class="line"><button class="add" onclick="hub25StoreBack()">&#8592; All stores</button><button class="add" onclick="hub25ItemOpen()">+ Add item</button></div><h3 id="hub25StoreTitle"></h3><button class="add" onclick="hub25ClearStore()">Clear checked items</button><div id="sharedShoppingList"></div></div><div id="sharedShoppingStatus" class="muted" role="status"></div></div></section>
-<section class="tabs" id="meals"><div class="panel"><div class="line"><div><h2>Weekly Meals</h2><p class="muted">Tap a day to expand breakfast, lunch and dinner.</p></div><button class="add" onclick="hub25MealOpen()">+ Add meal</button></div><div class="row hub25-weekbuttons"><button class="add" onclick="sharedWeekMove(-7)">&#8592; Previous</button><button class="add" onclick="sharedWeekMove(0)">This week</button><button class="add" onclick="sharedWeekMove(7)">Next &#8594;</button></div><div class="line"><strong id="sharedWeekTitle"></strong><button class="add" onclick="hub25CopyWeek()">Copy last week</button></div><div id="sharedMeals"></div><button class="add" onclick="hub25ShowFavorites()">Favorite meals (this device)</button><div id="hub25Favorites" style="display:none"></div></div></section>
+<section class="tabs" id="meals"><div class="panel"><div class="line"><div><h2>Weekly Meals</h2><p class="muted">Tap a day to expand breakfast, lunch and dinner.</p></div><button class="add" style="background:linear-gradient(112deg,#bfe7ff 0%,#e4d7fa 48%,#ffd0e9 100%)!important" onclick="hub25MealOpen()">+ Add meal</button></div><div class="row hub25-weekbuttons"><button class="add" onclick="sharedWeekMove(-7)">&#8592; Previous</button><button class="add" onclick="sharedWeekMove(0)">This week</button><button class="add" onclick="sharedWeekMove(7)">Next &#8594;</button></div><div class="line"><strong id="sharedWeekTitle"></strong><button class="add" style="background:linear-gradient(112deg,#bdf2df 0%,#bfe7ff 52%,#ffe98d 100%)!important" onclick="hub25CopyWeek()">Copy last week</button></div><div id="sharedMeals"></div><button class="add" style="background:linear-gradient(112deg,#ffd0e9 0%,#e4d7fa 46%,#bdf2df 100%)!important" onclick="hub25ShowFavorites()">Favorite meals (this device)</button><div id="hub25Favorites" style="display:none"></div></div></section>
 <div id="choreAddOverlay" class="chore-who-overlay" style="display:none" role="presentation"><div class="chore-edit-dialog" role="dialog" aria-label="Add a chore"><div class="line"><h3 id="choreAddHeading" style="font-family:Georgia,serif;font-weight:normal;margin:0">Add a chore</h3><button type="button" onclick="hubCloseAddChore()" aria-label="Close add chore">✕</button></div><form id="choreForm" onsubmit="return hubAddChore(event)"><div class="field"><label>Chore</label><input name="title" required maxlength="150" placeholder="e.g. Take out trash"></div><div class="field"><label>Assign to</label><div id="choreAssignee" class="assignment-picker"><div class="assign-modes"><label><input type="radio" name="addmode" value="person" checked> Specific people</label><label><input type="radio" name="addmode" value="anyone"> Anyone</label><label><input type="radio" name="addmode" value="everyone"> Everyone</label></div><div class="assign-people" id="addpeople">Loading family members...</div></div></div><div class="field"><label>First due date</label><input type="date" name="due_date" id="choreDue" required><div class="weekday-hint" id="choreDueWeekday" aria-live="polite">Choose a date to see the weekday</div></div><div class="field"><label>Repeat</label><select name="recurrence"><option value="none">One time</option><option value="daily">Every day</option><option value="weekly">Every week</option><option value="monthly">Every month</option></select></div><div class="edit-actions"><button type="button" onclick="hubCloseAddChore()">Cancel</button><button class="primary" id="choreAddButton">Add shared chore</button></div></form></div></div>
 <div id="hub25ItemOverlay" class="chore-who-overlay" style="display:none"><div class="chore-edit-dialog" role="dialog" aria-label="Shopping item"><div class="line"><h3 id="hub25ItemHeading">Add shopping item</h3><button onclick="hub25ItemClose()" aria-label="Close">✕</button></div><form onsubmit="return hub25ItemSave(event)"><div class="field"><label>Item name(s)</label><textarea id="sharedItemName" required rows="2" placeholder="Milk, eggs, bread" style="width:100%"></textarea><p class="tiny">Separate items with commas. Each item gets its own checkbox. Family Hub automatically picks a department for each item. You can change it when editing.</p></div><div class="field"><label>Store</label><select id="sharedStore"><option>Groceries</option><option>Trader Joe's</option><option>Walmart</option><option>Costco</option><option>Target</option><option>Household Supplies</option></select></div><div class="field" id="hub27DepartmentField" style="display:none"><label>Department (override)</label><select id="sharedDepartment"><option>Produce</option><option>Dairy</option><option>Meat &amp; Seafood</option><option>Frozen</option><option>Pantry</option><option>Bakery</option><option>Beverages</option><option>Household</option><option>Other</option></select></div><div class="field"><label>Quantity</label><input id="sharedQuantity" placeholder="Optional"></div><div class="edit-actions"><button type="button" onclick="hub25ItemClose()">Cancel</button><button class="primary" type="submit">Save item</button></div></form><div id="hub25ItemDelete" style="display:none"><button class="danger" type="button" onclick="hub25ItemDelete()">Delete item</button></div><p id="hub25ItemError" class="muted"></p></div></div>
 <div id="hub25MealOverlay" class="chore-who-overlay" style="display:none"><div class="chore-edit-dialog" role="dialog" aria-label="Meal"><div class="line"><h3>Plan a meal</h3><button onclick="hub25MealClose()" aria-label="Close">✕</button></div><form onsubmit="return hub25MealSave(event)"><div class="field"><label>Date</label><input type="date" id="hub25MealDate" required><div id="hub25MealWeekday" class="weekday-hint"></div></div><div class="field"><label>Meal</label><select id="hub25MealType"><option value="breakfast">Breakfast</option><option value="lunch">Lunch</option><option value="dinner">Dinner</option></select></div><div class="field"><label>Meal name</label><input id="hub25MealTitle" required maxlength="150"></div><div class="field"><label>Notes / recipe</label><textarea id="hub25MealNotes" rows="3" style="width:100%"></textarea></div><label><input type="checkbox" id="hub25Favorite"> Save as a favorite on this device</label><div class="edit-actions"><button type="button" onclick="hub25MealClose()">Cancel</button><button class="primary" type="submit">Save meal</button></div></form><div id="hub25MealDelete" style="display:none"><button class="danger" onclick="hub25DeleteMeal()">Remove meal</button></div><p id="hub25MealError" class="muted"></p></div></div>
 <div id="hub25IngredientOverlay" class="chore-who-overlay" style="display:none"><div class="chore-edit-dialog" role="dialog" aria-label="Meal ingredients"><div class="line"><h3>Ingredients to shopping</h3><button onclick="hub25IngredientsClose()" aria-label="Close">✕</button></div><p class="muted">Choose a store and department for each ingredient.</p><div id="hub25IngredientRows"></div><button class="add" onclick="hub25IngredientAdd()">+ Another ingredient</button><div class="edit-actions"><button onclick="hub25IngredientsClose()">Cancel</button><button class="primary" onclick="hub25IngredientsSave()">Add to shopping</button></div><p id="hub25IngredientError" class="muted"></p></div></div>
 <section class="tabs" id="messages"><div class="panel hub27-section"><div class="line"><div><h2>Family Message Board</h2><p class="muted">Pinned announcements and notes for everyone.</p></div><button class="add" onclick="hub27OpenNote()">+ New message</button></div><div id="hub27AllNotes" class="hub27-list">Loading…</div><p id="hub27NotesStatus" class="muted"></p></div></section>
 <section class="tabs" id="reminders"><div class="panel hub27-section"><div class="line"><div><h2>Household Reminders</h2><p class="muted">One-time and recurring family reminders.</p></div><button class="add" onclick="hub27OpenReminder()">+ Add reminder</button></div><div id="hub27AllReminders" class="hub27-list">Loading…</div><p id="hub27RemindersStatus" class="muted"></p></div></section>
-<section class="tabs" id="recipes"><div class="panel hub27-section"><div class="line"><div><h2>Family Recipe Box</h2><p class="muted">Import from pasted text, photos, or links; review before saving. Manual entry is always available.</p></div><div class="hub29-recipe-actions"><button class="primary" onclick="hub29ImportOpen()">✦ Import recipe</button><button class="add" onclick="hub27OpenRecipe()">Enter manually</button></div></div><div id="hub27AllRecipes" class="hub27-recipes">Loading…</div><p id="hub27RecipesStatus" class="muted"></p></div></section>
-<div style="display:none"><div id="sharedShoppingHome"></div><div id="shoppingAll"></div><select id="sharedStoreFilter"><option value="All">All stores</option></select><div id="mealEditor"></div><select id="shoppingCategory"><option>Groceries</option></select></div><section class="tabs" id="settings"><div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub v2.7 | iPad Air (iOS 12) | Shared family organizer</div></main>
+<section class="tabs" id="recipes"><div class="panel hub27-section"><div class="line"><div><h2>Family Recipe Box</h2><p class="muted">Paste a recipe or import from supported recipe websites. Review before saving. Photo and video extraction require additional setup.</p></div><div class="hub29-recipe-actions"><button class="primary" onclick="hub29ImportOpen()">✦ Import recipe</button><button class="add" onclick="hub27OpenRecipe()">Enter manually</button></div></div><div id="hub27AllRecipes" class="hub27-recipes">Loading…</div><p id="hub27RecipesStatus" class="muted"></p></div></section>
+<div style="display:none"><div id="sharedShoppingHome"></div><div id="shoppingAll"></div><select id="sharedStoreFilter"><option value="All">All stores</option></select><div id="mealEditor"></div><select id="shoppingCategory"><option>Groceries</option></select></div><section class="tabs" id="settings"><div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub v2.7 | iPad Air (iOS 12) | Shared family organizer</div></main>
 
-<div class="modalcover" id="hub29ImportOverlay" style="display:none"><div class="modal hub29-import-modal" role="dialog" aria-modal="true" aria-labelledby="hub29ImportTitle"><div class="hub29-import-head"><div><span class="hub29-kicker">✦ SMART RECIPE BOX</span><h2 id="hub29ImportTitle">Import a recipe</h2><p class="muted">Choose a source. You'll review everything before saving.</p></div><button type="button" class="hub29-close" onclick="hub29ImportClose()" aria-label="Close">×</button></div><div class="hub29-methods"><button type="button" class="hub29-method active" data-method="text" onclick="hub29Method('text')">▤ Paste text</button><button type="button" class="hub29-method" data-method="link" onclick="hub29Method('link')">↗ Paste link</button><button type="button" class="hub29-method" data-method="photo" onclick="hub29Method('photo')">▧ Photo</button><button type="button" class="hub29-method" data-method="video" onclick="hub29Method('video')">▶ Video</button></div><div id="hub29TextArea"><label for="hub29RawText">Paste the complete recipe</label><textarea id="hub29RawText" rows="10" placeholder="Grandma's Chocolate Chip Cookies&#10;Ingredients&#10;2 cups flour&#10;1 cup sugar&#10;...&#10;Instructions&#10;Preheat oven to 350°F..."></textarea></div><div id="hub29LinkArea" style="display:none"><label for="hub29Link">Recipe website, Instagram, TikTok or ReciMe link</label><input id="hub29Link" type="url" placeholder="https://..."><p class="hub29-hint">Website extraction requires the optional secure importer. Social links work only when the content is publicly accessible; screenshots or pasted captions are reliable alternatives.</p></div><div id="hub29PhotoArea" style="display:none"><label for="hub29Photo">Choose a recipe card or screenshot</label><input id="hub29Photo" type="file" accept="image/*" onchange="hub29FileChosen(this)"><div id="hub29PhotoPreview" class="hub29-preview"></div><p class="hub29-hint">Photo text recognition requires the optional secure importer. You can always paste text or enter manually.</p></div><div id="hub29VideoArea" style="display:none"><label for="hub29VideoLink">Public video URL</label><input id="hub29VideoLink" type="url" placeholder="Instagram, TikTok or video URL"><p class="hub29-hint">Video transcription isn't available without a configured processing service. Try pasting the caption or uploading screenshots.</p></div><p class="hub29-feedback" id="hub29Feedback" role="status" aria-live="polite"></p><div class="hub29-footer"><button type="button" class="secondary" onclick="hub29ImportClose()">Cancel</button><button type="button" class="add" onclick="hub29ImportClose();hub27OpenRecipe()">Enter manually</button><button type="button" class="primary" id="hub29ExtractButton" onclick="hub29Extract()">Extract recipe →</button></div></div></div>
+<div class="modalcover" id="hub29ImportOverlay" style="display:none"><div class="modal hub29-import-modal" role="dialog" aria-modal="true" aria-labelledby="hub29ImportTitle"><div class="hub29-import-head"><div><span class="hub29-kicker">✦ SMART RECIPE BOX</span><h2 id="hub29ImportTitle">Import a recipe</h2><p class="muted">Choose a source. You'll review everything before saving.</p></div><button type="button" class="hub29-close" onclick="hub29ImportClose()" aria-label="Close">×</button></div><div class="hub29-methods"><button type="button" class="hub29-method active" data-method="text" onclick="hub29Method('text')">▤ Paste text</button><button type="button" class="hub29-method" data-method="link" onclick="hub29Method('link')">↗ Paste link</button><button type="button" class="hub29-method" data-method="photo" onclick="hub29Method('photo')">▧ Photo</button><button type="button" class="hub29-method" data-method="video" onclick="hub29Method('video')">▶ Video</button></div><div id="hub29TextArea"><label for="hub29RawText">Paste the complete recipe</label><textarea id="hub29RawText" rows="10" placeholder="Grandma's Chocolate Chip Cookies&#10;Ingredients&#10;2 cups flour&#10;1 cup sugar&#10;...&#10;Instructions&#10;Preheat oven to 350°F..."></textarea></div><div id="hub29LinkArea" style="display:none"><label for="hub29Link">Public recipe website link</label><input id="hub29Link" type="url" placeholder="https://..."><p class="hub29-hint">Website extraction works after deploying the secure Supabase importer. Instagram, TikTok, and video transcription are not supported yet; paste captions or recipe text instead.</p></div><div id="hub29PhotoArea" style="display:none"><label for="hub29Photo">Choose a recipe card or screenshot</label><input id="hub29Photo" type="file" accept="image/*" onchange="hub29FileChosen(this)"><div id="hub29PhotoPreview" class="hub29-preview"></div><p class="hub29-hint">Photo text recognition requires the optional secure importer. You can always paste text or enter manually.</p></div><div id="hub29VideoArea" style="display:none"><label for="hub29VideoLink">Public video URL</label><input id="hub29VideoLink" type="url" placeholder="Instagram, TikTok or video URL"><p class="hub29-hint">Video transcription isn't available without a configured processing service. Try pasting the caption or uploading screenshots.</p></div><p class="hub29-feedback" id="hub29Feedback" role="status" aria-live="polite"></p><div class="hub29-footer"><button type="button" class="secondary" onclick="hub29ImportClose()">Cancel</button><button type="button" class="add" onclick="hub29ImportClose();hub27OpenRecipe()">Enter manually</button><button type="button" class="primary" id="hub29ExtractButton" onclick="hub29Extract()">Extract recipe →</button></div></div></div>
 <div class="chore-who-overlay" id="hub27Overlay" style="display:none"><div class="chore-edit-dialog hub27-dialog" role="dialog" aria-label="Family item"><div class="line"><h3 id="hub27ModalTitle">Add</h3><button onclick="hub27Close()" aria-label="Close">✕</button></div><form id="hub27Form" onsubmit="return hub27Save(event)"><div class="field" id="hub28TitleField"><label id="hub27NameLabel">Title</label><input id="hub27Title" maxlength="180"></div><div class="field" id="hub27BodyField"><label id="hub27BodyLabel">Message</label><textarea id="hub27Body" rows="4" style="width:100%" placeholder="Write a message for the family..."></textarea></div><div class="field" id="hub27DateField" style="display:none"><label>Due date</label><input id="hub27Date" type="date"></div><div class="field" id="hub27RepeatField" style="display:none"><label>Repeat</label><select id="hub27Repeat"><option value="none">One time</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select></div><div class="field" id="hub28PriorityField" style="display:none"><label>Priority</label><select id="hub28Priority"><option value="normal">Normal</option><option value="important">Important</option></select></div><div id="hub28RecipeFields" style="display:none"><div class="hub28-recipe-meta"><div class="field"><label>Category</label><select id="hub28Category"><option>Family favorite</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Dessert</option><option>Snack</option></select></div><div class="field"><label>Servings</label><input id="hub28Servings" type="number" min="1" max="100" placeholder="4"></div><div class="field"><label>Prep minutes</label><input id="hub28Prep" type="number" min="0" max="1440" placeholder="15"></div><div class="field"><label>Cook minutes</label><input id="hub28Cook" type="number" min="0" max="1440" placeholder="30"></div></div><div class="field"><label>Recipe photo URL (optional)</label><input id="hub28Photo" type="url" placeholder="https://..."></div></div><div class="field" id="hub27LinkField" style="display:none"><label>Recipe link (optional, including ReciMe share links)</label><input id="hub27Link" type="url" placeholder="https://..."></div><div class="field" id="hub27IngredientsField" style="display:none"><label>Ingredients (one per line)</label><textarea id="hub27Ingredients" rows="5" style="width:100%" placeholder="Milk&#10;Eggs&#10;Flour"></textarea></div><label id="hub27PinField"><input id="hub27Pinned" type="checkbox"> Pin to top</label><div class="edit-actions"><button type="button" onclick="hub27Close()">Cancel</button><button type="submit" class="primary">Save</button></div><p class="muted" id="hub27ModalStatus"></p></form></div></div>
 <div class="modalcover" id="modal"><div class="modal"><h2>Add to Google Family Calendar</h2><p class="muted">Events are submitted to Google Family Calendar. Allow a few minutes for processing and synchronization.</p><div id="eventSubmitStatus" class="muted" role="status"></div><form onsubmit="hubSubmitFamilyEvent(event)"><div class="field"><label>Event</label><input name="title" required placeholder="Appointment, practice, birthday..."></div><div class="field"><label>Date</label><input type="date" name="date" id="eventDate" required><div class="weekday-hint" id="eventDateWeekday" aria-live="polite">Choose a date to see the weekday</div></div><div class="field"><label>Time (optional)</label><input type="time" name="time"></div><div class="field"><label>Family member</label><select name="person"><option>Family</option><option>Mom</option><option>Dad</option><option>Ava</option><option>Mason</option></select></div><div class="actions"><button type="button" class="secondary" onclick="hideEvent()">Cancel</button><button class="primary" id="eventSaveButton">Submit event</button></div></form></div></div>
 
@@ -203,7 +765,22 @@ window.hubMonthMove=function(step){hubMonthDate=new Date(hubMonthDate.getFullYea
 window.hubMonthToday=function(){hubMonthDate=new Date();hubMonthDate.setDate(1);selectedDay=iso(new Date());renderCalendar()};
 window.hubMonthSelect=function(date){selectedDay=date;renderHubMonth();var d=new Date(date+'T12:00:00'),events=eventsFor(d),html='<h3>'+escape(d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}))+'</h3>';for(var i=0;i<events.length;i++){var e=events[i];html+='<div class="hub-month-detail" style="border-left-color:'+eventColor(e)+'">'+escape(formatTime(e.time))+' '+escape(e.title)+'</div>'}var area=el('hubMonthDetails');if(area)area.innerHTML=html+(events.length?'':'<p class="muted">No events for this date.</p>');renderHubMonth()};
 function listHTML(which){var a=state[which],s='';for(var i=0;i<a.length;i++)s+='<div class="task'+(a[i].done?' done':'')+'"><input aria-label="Complete '+escape(a[i].text)+'" type="checkbox" '+(a[i].done?'checked':'')+' onchange="toggleItem(\''+which+'\','+i+')"><span style="flex:1">'+escape(a[i].text)+(which==='shopping'?' <small style="color:#84918a">('+escape(a[i].category||'Groceries')+')</small>':'')+'</span><button class="remove" onclick="removeItem(\''+which+'\','+i+')" title="Remove">×</button></div>';return s||'<div class="empty">Nothing here yet.</div>'}function render(){renderCalendar();/* Shared chores are rendered by the Supabase chores module. */el('shoppingHome').innerHTML=listHTML('shopping');el('shoppingAll').innerHTML=listHTML('shopping');el('dinnerHome').innerHTML=escape(state.meals[new Date().getDay()]||'No dinner planned yet.');var s='';for(var i=0;i<7;i++)s+='<div class="field"><label>'+mealNames[i]+'</label><input value="'+escape(state.meals[i]||'')+'" onchange="setMeal('+i+',this.value)" placeholder="What\'s for dinner?"></div>';el('mealEditor').innerHTML=s+'<button type="button" class="add" onclick="addMealIngredients()">+ Add meal ingredients to shopping list</button>'}window.selectHubDay=function(day){selectedDay=day;renderCalendar()};window.toggleItem=function(type,i){state[type][i].done=!state[type][i].done;save();render()};window.removeItem=function(type,i){state[type].splice(i,1);save();render()};window.addItem=function(e,type){e.preventDefault();var f=e.target,x=f.elements.item.value.replace(/^\s+|\s+$/g,'');if(!x)return;state[type].push({text:x,done:false,category:type==='shopping'&&el('shoppingCategory')?el('shoppingCategory').value:'Groceries'});f.reset();save();render()};window.addMealIngredients=function(){var text=prompt('Enter ingredients separated by commas (for example: tomatoes, pasta, cheese):');if(!text)return;var parts=text.split(','),added=0;for(var i=0;i<parts.length;i++){var x=parts[i].replace(/^\s+|\s+$/g,'');if(x){state.shopping.push({text:x,done:false,category:'Groceries'});added++}}if(added){save();render();alert(added+' ingredient(s) added to this device\'s shopping list.')}};window.setMeal=function(i,s){state.meals[i]=s;save();el('dinnerHome').textContent=state.meals[new Date().getDay()]||'No dinner planned yet.'};window.removeEvent=function(id){if(!confirm('Delete this event?'))return;state.events=state.events.filter(function(x){return x.id!==id});save();render()};window.showEvent=function(){el('eventDate').value=selectedDay||iso(new Date());el('modal').className='modalcover show';el('modal').scrollTop=0};window.hideEvent=function(){el('modal').className='modalcover'};window.saveEvent=function(e){e.preventDefault();var f=e.target;state.events.push({id:new Date().getTime(),title:f.elements.title.value,date:f.elements.date.value,time:f.elements.time.value,person:f.elements.person.value});save();render();hideEvent();f.reset()};window.switchTab=function(t){var tabs=document.querySelectorAll('.tabs'),buttons=document.querySelectorAll('.nav button');for(var i=0;i<tabs.length;i++)tabs[i].className='tabs'+(tabs[i].id===t?' active':'');for(i=0;i<buttons.length;i++)buttons[i].className=buttons[i].getAttribute('data-tab')===t?'active':''};var buttons=document.querySelectorAll('.nav button');for(var i=0;i<buttons.length;i++)buttons[i].onclick=(function(b){return function(){switchTab(b.getAttribute('data-tab'))}})(buttons[i]);window.exportData=function(){var data=JSON.stringify(state,null,2),blob=new Blob([data],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='family-hub-backup.json';document.body.appendChild(a);a.click();document.body.removeChild(a);setTimeout(function(){URL.revokeObjectURL(url)},1000)};window.familyHubRefresh=function(events){cloudEvents=events||[];render()};window.familyHubFindEvent=function(id){for(var i=0;i<cloudEvents.length;i++)if(String(cloudEvents[i].id)===String(id))return cloudEvents[i];for(i=0;i<state.events.length;i++)if(String(state.events[i].id)===String(id))return state.events[i];return null};function clock(){var d=new Date();el('dateTitle').textContent=d.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric'});el('clock').textContent=(d.getHours()%12||12)+':'+pad(d.getMinutes())}clock();setInterval(clock,30000);render()})();
-
+</script>
+<script>
+(function(){
+  function updateFamilyTimeGreeting(){
+    var label=document.getElementById('familyTimeGreeting');
+    if(!label)return;
+    var hour=new Date().getHours(), greeting;
+    if(hour>=5&&hour<12)greeting='☀ Good morning';
+    else if(hour>=12&&hour<17)greeting='☀ Good afternoon';
+    else if(hour>=17&&hour<21)greeting='☾ Good evening';
+    else greeting='☾ Sweet dreams';
+    label.textContent=greeting;
+  }
+  updateFamilyTimeGreeting();
+  setInterval(updateFamilyTimeGreeting,30000);
+})();
 </script>
 
 <script>
@@ -558,7 +1135,7 @@ if(/^([-*•]\s+|\d+(?:\/\d+)?\s*(?:cups?|tsp|tbsp|teaspoons?|tablespoons?|oz|lb
 return {title:title,ingredients:ingredients.join('\n'),instructions:steps.join('\n'),servings:servings,prep:prep,cook:cook}}
 function review(data,source){if(!data||!trim(data.title)){msg('Could not identify a recipe title. Try including a title on the first line, or enter manually.');return}hub29ImportClose();hub27OpenRecipe();el('hub27Title').value=data.title||'';el('hub27Ingredients').value=data.ingredients||'';el('hub27Body').value=data.instructions||'';el('hub28Servings').value=data.servings||'';el('hub28Prep').value=data.prep||'';el('hub28Cook').value=data.cook||'';if(source)el('hub27Link').value=source;if(data.photo&&/^https:\/\//i.test(data.photo))el('hub28Photo').value=data.photo;el('hub27ModalStatus').textContent='Review the extracted recipe and correct any details before saving.'}
 function remote(kind,value){msg('Extracting recipe securely…');var token='';try{var a=JSON.parse(localStorage.getItem('familyHubSession')||'null');token=a&&a.accessToken||''}catch(ex){}if(!token){msg('Sign in first, or use Paste text / Enter manually.');return}var x=new XMLHttpRequest();x.open('POST',HUB_SUPABASE_URL+'/functions/v1/family-recipe-import',true);x.setRequestHeader('apikey',HUB_PUBLISHABLE_KEY);x.setRequestHeader('Authorization','Bearer '+token);x.setRequestHeader('Content-Type','application/json');x.timeout=25000;x.onreadystatechange=function(){if(x.readyState!==4)return;var data={};try{data=JSON.parse(x.responseText)}catch(e){}if(x.status>=200&&x.status<300&&data.title){review(data,kind==='url'?value:'')}else{msg(data.error||'Automatic import is not configured or this source cannot be read. Paste the recipe text or enter it manually.')}};x.onerror=function(){msg('Importer unavailable. Paste text or enter manually instead.')};x.ontimeout=function(){msg('Importer timed out. Paste text or enter manually instead.')};x.send(JSON.stringify({kind:kind,value:value}))}
-window.hub29Extract=function(){if(method==='text'){var t=trim(el('hub29RawText').value);if(!t){msg('Paste a recipe first.');return}review(parse(t),'');return}if(method==='link'){var u=trim(el('hub29Link').value);if(!/^https?:\/\//i.test(u)){msg('Enter a complete https:// link.');return}remote('url',u);return}if(method==='photo'){if(!photoData){msg('Choose a photo first.');return}remote('image',photoData);return}if(method==='video'){var v=trim(el('hub29VideoLink').value);if(!/^https?:\/\//i.test(v)){msg('Enter a complete video link.');return}remote('url',v)}};
+window.hub29Extract=function(){if(method==='text'){var t=trim(el('hub29RawText').value);if(!t){msg('Paste a recipe first.');return}review(parse(t),'');return}if(method==='link'){var u=trim(el('hub29Link').value);if(!/^https:\/\//i.test(u)){msg('Enter a complete https:// recipe website link.');return}remote('url',u);return}if(method==='photo'){if(!photoData){msg('Choose a photo first.');return}remote('image',photoData);return}if(method==='video'){var v=trim(el('hub29VideoLink').value);if(!/^https?:\/\//i.test(v)){msg('Enter a complete video link.');return}remote('url',v)}};
 })();
 </script>
 </body></html>
