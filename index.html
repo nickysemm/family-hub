@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub v2.9.13 · Finishing Touches</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub v2.12 · Social Recipes</title>
 
 <style>
 
@@ -113,6 +113,10 @@ header>div,.right{min-width:0}
 /* Family Hub 2.5 */
 .hub25-stores{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:14px 0}.hub25-store{display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:8px;background:#f4f7f2;color:#294536;border:1px solid #dce5d9;border-radius:12px;padding:17px;min-height:115px}.hub25-store-icon{font-size:25px}.hub25-store small{color:#61776b}.hub25-department{padding:12px 0;border-bottom:1px solid #e1e7dd}.hub25-shopping-row{display:flex;gap:10px;align-items:center;padding:9px 0}.hub25-shopping-row input{width:22px;height:22px;accent-color:#71957c}.hub25-shopping-row.done .hub25-item-name{text-decoration:line-through;opacity:.55}.hub25-item-name{flex:1}.hub25-day{border:1px solid #e1e7dd;border-radius:11px;margin:10px 0;overflow:hidden}.hub25-dayhead{display:flex;justify-content:space-between;gap:12px;align-items:center;width:100%;padding:15px;text-align:left;background:#f5f8f3;color:#284135}.hub25-dayhead span{font-size:12px;color:#6b7b70;text-align:right}.hub25-mealrow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 14px;border-top:1px solid #e7ebe5}.hub25-mealrow small{font-size:10px;color:#63786a}.hub25-mealrow button{margin:2px}.hub25-ingredient{display:grid;grid-template-columns:1fr 1fr;gap:7px;border-bottom:1px solid #eee;padding:12px 0}.hub25-ingredient input,.hub25-ingredient select{min-width:0;width:100%;padding:10px;border:1px solid #ddd;border-radius:7px}.hub25-ingredient .hub25-ing-name{grid-column:1 / 3}.hub25-weekbuttons{flex-wrap:wrap;margin:12px 0}@media(max-width:700px){.hub25-stores{grid-template-columns:repeat(2,minmax(0,1fr))}.hub25-store{padding:12px;min-height:100px}.hub25-mealrow{flex-wrap:wrap}}
 .hub26-profile-strip{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:9px 14px;margin-bottom:12px;background:#f0f5ef;border-radius:12px;font-size:13px;color:#365d46}.hub26-shortcuts{display:flex;gap:7px;flex-wrap:wrap;margin-top:14px}.hub26-shortcuts button{flex:1;min-width:75px}.hub26-profile-strip .add{font-size:12px}#sharedItemName{min-height:68px;resize:vertical}#hub26DeviceProfile{width:100%}
+
+/* v2.12: reuse the existing pastel ombre palette and rounded controls. */
+.hub212-usage{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;padding:16px 18px;margin:16px 0 22px;border-radius:20px;background:linear-gradient(115deg,#fff0f7,#f1f7ff 52%,#fff8de);border:1px solid #f1deec}.hub212-usage>div{flex:1;min-width:190px}.hub212-usage p{margin:7px 0;font-size:12px;line-height:1.5}.hub212-usage button{background:linear-gradient(115deg,#ffd0e9,#ffe98d,#bfe7ff)!important;border-radius:999px!important;min-height:44px}.hub212-usage progress{width:100%;max-width:430px;height:10px;accent-color:#b576ab}.hub212-review,.hub212-duplicate{padding:13px 15px;border-radius:15px;font-size:13px;line-height:1.6}.hub212-needs-review{background:#fff3dc;color:#79582e}.hub212-ready{background:linear-gradient(110deg,#f5eaff,#eaf8fb);color:#5e4e7d}.hub212-incomplete{font-size:12px;line-height:1.6;margin:10px 0;display:block}.hub212-incomplete input{width:auto!important;margin-right:6px}.hub212-duplicate{margin:10px 0;background:linear-gradient(115deg,#fff0f7,#fff8de);border:1px solid #f1d7db}.hub212-duplicate>div{display:flex;gap:8px;flex-wrap:wrap}.hub212-duplicate button{padding:10px 14px;border-radius:999px;color:#475267;background:linear-gradient(115deg,#bfe7ff,#e4d7fa,#ffd0e9)}.hub212-duplicate button:last-child{background:linear-gradient(115deg,#bdf2df,#ffe98d)}#hub212RawExtract{width:100%;box-sizing:border-box;margin:8px 0;padding:10px;border-radius:10px;border:1px solid #e2dce8;font:inherit}#hub212RawWrap summary{font-size:12px;padding:9px 0;cursor:pointer}.hub29-import-modal input[type=text]{box-sizing:border-box;width:100%;padding:13px;border:1px solid #dce2ed;border-radius:12px;font:inherit;color:#2d3345}.hub29-import-modal label{margin-top:13px}.hub29-import-modal button:disabled,#hub27Form button:disabled{opacity:.55;cursor:wait}.hub29-import-modal{max-height:88vh!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}
+#hub29ImportOverlay{align-items:flex-start;overflow-y:auto;padding-top:12px}#hub29ImportOverlay .hub29-import-modal{max-height:88vh!important;overflow-y:auto!important;-webkit-overflow-scrolling:touch}#hub27Overlay .hub27-dialog{max-height:90vh;overflow-y:auto;-webkit-overflow-scrolling:touch}
 </style><style>
 /* Family Hub 2.7: elevated, colorful design system, compatible with iOS 12 */
 body{background:#f4f4fa;color:#22223e;font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Arial,sans-serif}header{background:rgba(255,255,255,.97);border-bottom:1px solid #e8e8f2;box-shadow:0 3px 20px rgba(55,45,105,.06)}header h1{font-family:inherit;font-weight:800;letter-spacing:-1.2px;color:#292450}.sub,.muted{color:#77768e}.wrap{max-width:1280px}.nav{background:#fff;border:1px solid #e9e8f5;padding:7px;border-radius:17px;box-shadow:0 6px 26px rgba(59,47,100,.08);position:relative}.nav button{background:transparent;color:#66627f;font-weight:650;border-radius:12px;flex:1 0 auto}.nav button.active{background:linear-gradient(130deg,#6d50d7,#9c65e9);color:#fff;box-shadow:0 5px 12px rgba(95,66,188,.26)}.panel{background:#fff;border:1px solid #eeedf5;border-radius:22px;padding:20px;box-shadow:0 12px 36px rgba(44,35,100,.075),0 2px 6px rgba(44,35,100,.03)}.panel h2,.modal h2{font-family:inherit;font-weight:800;letter-spacing:-.6px;color:#282548}.add,.primary,.row button{background:#eee9ff;color:#654ac3;border-radius:11px;font-weight:700}.primary,.row button{background:linear-gradient(130deg,#7355d8,#a071e6);color:white}.pill{background:#eee9ff;color:#654ac3}.day.today{background:#eee9ff;border-color:#9a7ee7}.day.selected{box-shadow:inset 0 0 0 2px #9879e3}.event{background:#f5f2ff;border-left-color:#8a6de0}.hub25-store{background:#fff;border:1px solid #eae8f3;border-radius:18px;box-shadow:0 5px 16px rgba(43,31,91,.06);color:#302d52}.hub25-store small{color:#807b98}.hub25-dayhead{background:#f7f5ff;color:#383059}.hub25-dayhead span{color:#807b98}.hub26-profile-strip{background:#fff;color:#5e55a1;border:1px solid #e8e4f5;border-radius:15px}.hub27-hero{min-height:226px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;background:linear-gradient(112deg,#4d43ac 0%,#8157da 54%,#db75b3 100%);border-radius:28px;padding:28px 34px;margin-bottom:17px;box-shadow:0 17px 32px rgba(101,69,185,.25);color:#fff}.hub27-hero:before{content:'';position:absolute;right:10%;top:-120px;width:340px;height:340px;border:1px solid rgba(255,255,255,.2);border-radius:50%;box-shadow:0 0 0 42px rgba(255,255,255,.045),0 0 0 94px rgba(255,255,255,.035)}.hub27-hero-orb{position:absolute;width:160px;height:160px;right:19%;bottom:-100px;border-radius:50%;background:rgba(255,255,255,.13);filter:blur(2px)}.hub27-hero-inner{position:relative;z-index:1}.hub27-kicker{font-size:11px;letter-spacing:2px;font-weight:800;color:#e8dbff}.hub27-hero h2{font-size:clamp(26px,4vw,42px);letter-spacing:-1.6px;margin:9px 0 4px;font-weight:800}.hub27-hero p{color:#f0e6ff;margin:0 0 17px}.hub27-hero-actions{display:flex;gap:9px;flex-wrap:wrap}.hub27-hero-actions button{background:rgba(255,255,255,.2);color:white;border:1px solid rgba(255,255,255,.35);border-radius:30px;padding:9px 15px;font-weight:700}.hub27-weather{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:128px;padding:18px;background:rgba(255,255,255,.19);border:1px solid rgba(255,255,255,.32);border-radius:23px;box-shadow:0 10px 20px rgba(47,30,91,.15);color:white}.hub27-weather span{font-size:35px}.hub27-weather strong{font-size:32px;line-height:1}.hub27-weather small{font-size:11px}.hub27-feature-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-bottom:16px}.hub27-feature-card{min-height:155px;border-radius:22px;padding:18px;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;box-shadow:0 12px 22px rgba(53,42,91,.08)}.hub27-feature-card:after{content:'';position:absolute;width:120px;height:120px;right:-48px;top:-38px;border-radius:50%;background:rgba(255,255,255,.43)}.hub27-feature-card strong{font-size:17px;z-index:1}.hub27-feature-card span{font-size:12px;opacity:.78;margin-top:4px;z-index:1}.hub27-feature-card button{margin-top:auto;background:rgba(255,255,255,.72);padding:8px 12px;border-radius:10px;color:inherit;font-size:12px;font-weight:750;z-index:1}.hub27-feature-symbol{font-size:28px;margin-bottom:9px;z-index:1}.hub27-purple{background:linear-gradient(140deg,#e4ddff,#c7b9ff);color:#4e3a9e}.hub27-teal{background:linear-gradient(140deg,#d2f8f1,#9ee7d8);color:#176b65}.hub27-coral{background:linear-gradient(140deg,#ffe5d6,#ffbea6);color:#a44e3c}.hub27-home-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}.hub27-home-panel{background:#fff;border:1px solid #eeedf5;border-radius:23px;padding:20px;box-shadow:0 12px 30px rgba(44,35,100,.07)}.hub27-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}.hub27-heading h2{margin:4px 0 0;font-size:21px;letter-spacing:-.7px;color:#2c274f}.hub27-eyebrow{font-size:10px;font-weight:850;letter-spacing:1.4px;color:#9a7cbd}.hub27-round{border-radius:50%;background:#eee9ff;color:#7255cc;font-size:24px;width:39px;height:39px}.hub27-note{background:linear-gradient(120deg,#fff4e7,#ffebdd);border-radius:15px;padding:13px;margin-bottom:9px;border-left:4px solid #f3ae76}.hub27-note-top{display:flex;justify-content:space-between;gap:10px}.hub27-note p{white-space:pre-wrap;margin:7px 0 0;font-size:13px;line-height:1.5;color:#6e5560}.hub27-small{background:#fff;border:1px solid #e7e3f1;color:#7a66a7;border-radius:9px;padding:5px 9px;font-size:11px}.hub27-reminder{display:flex;align-items:center;gap:10px;border-bottom:1px solid #f0edf5;padding:11px 0}.hub27-reminder>div{flex:1;min-width:0}.hub27-reminder strong{display:block;color:#302b4b}.hub27-reminder small{display:block;color:#8c86a1;margin-top:3px}.hub27-check{background:#e4f6f2;color:#159888;border-radius:12px;font-size:21px;width:37px;height:37px}.hub27-done{opacity:.55}.hub27-text-button{background:transparent;color:#7055cc;font-weight:750;padding:8px 0}.hub27-celebrations{margin-bottom:16px;background:linear-gradient(110deg,#fff,#fff4fc)}.hub27-confetti{font-size:27px;color:#c56eb1}.hub27-celebration{display:flex;align-items:center;gap:13px;padding:10px 0;border-bottom:1px solid #f5eaf5}.hub27-celebration>span{font-size:25px}.hub27-celebration>div{flex:1}.hub27-celebration strong,.hub27-celebration small{display:block}.hub27-celebration small{color:#887c96}.hub27-celebration b{color:#b44e92}.hub27-section{min-height:300px}.hub27-recipes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.hub27-recipe{background:#faf8ff;border:1px solid #ece7f7;border-radius:17px;padding:17px;display:flex;gap:12px;flex-wrap:wrap}.hub27-recipe-icon{font-size:30px}.hub27-recipe>div:nth-child(2){flex:1;min-width:120px}.hub27-recipe p{font-size:12px;color:#77718d}.hub27-recipe-actions{display:flex;flex-wrap:wrap;gap:6px;width:100%}.hub27-sort{display:flex;gap:10px;align-items:center;margin:12px 0}.hub27-sort select{border:1px solid #ddd7ee;border-radius:10px;padding:8px}.hub27-dialog{max-height:85vh;overflow-y:auto}.hub27-dialog textarea{padding:10px;border:1px solid #ded9e9;border-radius:10px}.hub27-dialog h3{color:#3a315c}.hub27-dialog .field input{max-width:100%}@media(max-width:750px){.hub27-hero{padding:21px;min-height:200px}.hub27-home-grid{grid-template-columns:1fr}.hub27-feature-grid{gap:8px}.hub27-feature-card{padding:12px;min-height:160px}.hub27-feature-card strong{font-size:14px}.hub27-feature-card span{font-size:11px}.hub27-recipes{grid-template-columns:1fr}}@media(max-width:470px){.hub27-hero{align-items:flex-start;gap:8px}.hub27-weather{min-width:80px;padding:10px}.hub27-weather strong{font-size:23px}.hub27-weather span{font-size:24px}.hub27-hero h2{font-size:24px}.hub27-feature-grid{grid-template-columns:1fr}.hub27-feature-card{min-height:110px}.hub27-feature-symbol{margin-bottom:3px}.hub27-feature-card button{margin-top:7px}.nav button{font-size:11px;padding:8px}}
@@ -784,11 +788,20 @@ input,select,textarea{max-width:100%}
 <div id="hub25IngredientOverlay" class="chore-who-overlay" style="display:none"><div class="chore-edit-dialog" role="dialog" aria-label="Meal ingredients"><div class="line"><h3>Ingredients to shopping</h3><button onclick="hub25IngredientsClose()" aria-label="Close">✕</button></div><p class="muted">Choose a store and department for each ingredient.</p><div id="hub25IngredientRows"></div><button class="add" onclick="hub25IngredientAdd()">+ Another ingredient</button><div class="edit-actions"><button onclick="hub25IngredientsClose()">Cancel</button><button class="primary" onclick="hub25IngredientsSave()">Add to shopping</button></div><p id="hub25IngredientError" class="muted"></p></div></div>
 <section class="tabs" id="messages"><div class="panel hub27-section"><div class="line"><div><h2>Family Message Board</h2><p class="muted">Pinned announcements and notes for everyone.</p></div><button class="add" onclick="hub27OpenNote()">+ New message</button></div><div id="hub27AllNotes" class="hub27-list">Loading…</div><p id="hub27NotesStatus" class="muted"></p></div></section>
 <section class="tabs" id="reminders"><div class="panel hub27-section"><div class="line"><div><h2>Household Reminders</h2><p class="muted">One-time and recurring family reminders.</p></div><button class="add" onclick="hub27OpenReminder()">+ Add reminder</button></div><div id="hub27AllReminders" class="hub27-list">Loading…</div><p id="hub27RemindersStatus" class="muted"></p></div></section>
-<section class="tabs" id="recipes"><div class="panel hub27-section"><div class="line"><div><h2>Family Recipe Box</h2><p class="muted">Paste a recipe or import from supported recipe websites. Review before saving. Photo import requires a secure OCR key; video extraction is not yet available.</p></div><div class="hub29-recipe-actions"><button class="primary" onclick="hub29ImportOpen()">✦ Import recipe</button><button class="add" onclick="hub27OpenRecipe()">Enter manually</button></div></div><div id="hub27AllRecipes" class="hub27-recipes">Loading…</div><p id="hub27RecipesStatus" class="muted"></p></div></section>
-<div style="display:none"><div id="sharedShoppingHome"></div><div id="shoppingAll"></div><select id="sharedStoreFilter"><option value="All">All stores</option></select><div id="mealEditor"></div><select id="shoppingCategory"><option>Groceries</option></select></div><section class="tabs" id="settings"><div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub v2.10.2 | iPad Air (iOS 12) | Shared family organizer</div></main>
+<section class="tabs" id="recipes"><div class="panel hub27-section"><div class="line"><div><h2>Family Recipe Box</h2><p class="muted">Bring in recipe websites, captions and screenshots. Keep the original post link, review the details, and save a family favorite.</p></div><div class="hub29-recipe-actions"><button class="primary" onclick="hub29ImportOpen()">✦ Import recipe</button><button class="add" onclick="hub27OpenRecipe()">Enter manually</button></div></div><div class="hub212-usage" aria-label="Shared photo import usage"><div><strong>Photo imports this month</strong><p id="hub212UsageText" role="status" aria-live="polite">Checking photo usage…</p><progress id="hub212UsageProgress" max="900" value="0" style="display:none" aria-label="Shared monthly photo attempts"></progress><p id="hub212UsageReset" class="muted"></p></div><button class="add" type="button" onclick="hub212RefreshUsage()">↻ Check usage</button></div><div id="hub27AllRecipes" class="hub27-recipes">Loading…</div><p id="hub27RecipesStatus" class="muted"></p></div></section>
+<div style="display:none"><div id="sharedShoppingHome"></div><div id="shoppingAll"></div><select id="sharedStoreFilter"><option value="All">All stores</option></select><div id="mealEditor"></div><select id="shoppingCategory"><option>Groceries</option></select></div><section class="tabs" id="settings"><div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub v2.12 | iPad Air (iOS 12) | Shared family organizer</div></main>
 
-<div class="modalcover" id="hub29ImportOverlay" style="display:none"><div class="modal hub29-import-modal" role="dialog" aria-modal="true" aria-labelledby="hub29ImportTitle"><div class="hub29-import-head"><div><span class="hub29-kicker">✦ SMART RECIPE BOX</span><h2 id="hub29ImportTitle">Import a recipe</h2><p class="muted">Choose a source. You'll review everything before saving.</p></div><button type="button" class="hub29-close" onclick="hub29ImportClose()" aria-label="Close">×</button></div><div class="hub29-methods"><button type="button" class="hub29-method active" data-method="text" onclick="hub29Method('text')">▤ Paste text</button><button type="button" class="hub29-method" data-method="link" onclick="hub29Method('link')">↗ Paste link</button><button type="button" class="hub29-method" data-method="photo" onclick="hub29Method('photo')">▧ Photo</button><button type="button" class="hub29-method" data-method="video" onclick="hub29Method('video')">▶ Video</button></div><div id="hub29TextArea"><label for="hub29RawText">Paste the complete recipe</label><textarea id="hub29RawText" rows="10" placeholder="Grandma's Chocolate Chip Cookies&#10;Ingredients&#10;2 cups flour&#10;1 cup sugar&#10;...&#10;Instructions&#10;Preheat oven to 350°F..."></textarea></div><div id="hub29LinkArea" style="display:none"><label for="hub29Link">Public recipe website link</label><input id="hub29Link" type="url" placeholder="https://..."><p class="hub29-hint">Website extraction works after deploying the secure Supabase importer. Instagram, TikTok, and video transcription are not supported yet; paste captions or recipe text instead.</p></div><div id="hub29PhotoArea" style="display:none"><label for="hub29Photo">Choose a recipe card or screenshot</label><input id="hub29Photo" type="file" accept="image/*" onchange="hub29FileChosen(this)"><div id="hub29PhotoPreview" class="hub29-preview"></div><p class="hub29-hint">Photo recognition requires the private Google Cloud Vision API key configured in Supabase. Review all extracted details before saving.</p></div><div id="hub29VideoArea" style="display:none"><label for="hub29VideoLink">Public video URL</label><input id="hub29VideoLink" type="url" placeholder="Instagram, TikTok or video URL"><p class="hub29-hint">Video transcription isn't available without a configured processing service. Try pasting the caption or uploading screenshots.</p></div><p class="hub29-feedback" id="hub29Feedback" role="status" aria-live="polite"></p><div class="hub29-footer"><button type="button" class="secondary" onclick="hub29ImportClose()">Cancel</button><button type="button" class="add" onclick="hub29ImportClose();hub27OpenRecipe()">Enter manually</button><button type="button" class="primary" id="hub29ExtractButton" onclick="hub29Extract()">Extract recipe →</button></div></div></div>
-<div class="chore-who-overlay" id="hub27Overlay" style="display:none"><div class="chore-edit-dialog hub27-dialog" role="dialog" aria-label="Family item"><div class="line"><h3 id="hub27ModalTitle">Add</h3><button onclick="hub27Close()" aria-label="Close">✕</button></div><form id="hub27Form" onsubmit="return hub27Save(event)"><div class="field" id="hub28TitleField"><label id="hub27NameLabel">Title</label><input id="hub27Title" maxlength="180"></div><div class="field" id="hub27BodyField"><label id="hub27BodyLabel">Message</label><textarea id="hub27Body" rows="4" style="width:100%" placeholder="Write a message for the family..."></textarea></div><div class="field" id="hub27DateField" style="display:none"><label>Due date</label><input id="hub27Date" type="date"></div><div class="field" id="hub27RepeatField" style="display:none"><label>Repeat</label><select id="hub27Repeat"><option value="none">One time</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select></div><div class="field" id="hub28PriorityField" style="display:none"><label>Priority</label><select id="hub28Priority"><option value="normal">Normal</option><option value="important">Important</option></select></div><div id="hub28RecipeFields" style="display:none"><div class="hub28-recipe-meta"><div class="field"><label>Category</label><select id="hub28Category"><option>Family favorite</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Dessert</option><option>Snack</option></select></div><div class="field"><label>Servings</label><input id="hub28Servings" type="number" min="1" max="100" placeholder="4"></div><div class="field"><label>Prep minutes</label><input id="hub28Prep" type="number" min="0" max="1440" placeholder="15"></div><div class="field"><label>Cook minutes</label><input id="hub28Cook" type="number" min="0" max="1440" placeholder="30"></div></div><div class="field"><label>Recipe photo URL (optional)</label><input id="hub28Photo" type="url" placeholder="https://..."></div></div><div class="field" id="hub27LinkField" style="display:none"><label>Recipe link (optional, including ReciMe share links)</label><input id="hub27Link" type="url" placeholder="https://..."></div><div class="field" id="hub27IngredientsField" style="display:none"><label>Ingredients (one per line)</label><textarea id="hub27Ingredients" rows="5" style="width:100%" placeholder="Milk&#10;Eggs&#10;Flour"></textarea></div><label id="hub27PinField"><input id="hub27Pinned" type="checkbox"> Pin to top</label><div class="edit-actions"><button type="button" id="hub210DeleteRecipe" class="hub210-delete" style="display:none" onclick="window.hub210DeleteRecipe()">Delete recipe</button><button type="button" onclick="hub27Close()">Cancel</button><button type="submit" class="primary">Save</button></div><p class="muted" id="hub27ModalStatus"></p></form></div></div>
+<div class="modalcover" id="hub29ImportOverlay" style="display:none"><div class="modal hub29-import-modal" role="dialog" aria-modal="true" aria-labelledby="hub29ImportTitle">
+<div class="hub29-import-head"><div><span class="hub29-kicker">✦ SOCIAL RECIPE BOX</span><h2 id="hub29ImportTitle">Bring a recipe home</h2><p class="muted">Choose a source, then check the details before saving.</p></div><button type="button" class="hub29-close" onclick="hub29ImportClose()" aria-label="Close">×</button></div>
+<div class="hub29-methods"><button type="button" class="hub29-method active" data-method="text" aria-pressed="true" onclick="hub29Method('text')">▤ Paste text</button><button type="button" class="hub29-method" data-method="link" aria-pressed="false" onclick="hub29Method('link')">↗ Recipe website</button><button type="button" class="hub29-method" data-method="photo" aria-pressed="false" onclick="hub29Method('photo')">▧ Photo</button><button type="button" class="hub29-method" data-method="social" aria-pressed="false" onclick="hub29Method('social')">♡ Social post</button></div>
+<label for="hub212ImportName">Recipe name (optional — helps with captions)</label><input id="hub212ImportName" type="text" maxlength="180" placeholder="e.g. Creamy lemon chicken">
+<div id="hub212GeneralSource"><label for="hub212Source">Original recipe or post link (optional)</label><input id="hub212Source" type="url" placeholder="https://..."><p class="hub29-hint">We’ll keep this link with your saved recipe.</p></div>
+<div id="hub29TextArea"><label for="hub29RawText">Paste the complete recipe</label><textarea id="hub29RawText" rows="9" placeholder="Recipe name&#10;Ingredients&#10;2 cups flour&#10;Instructions&#10;Mix and cook..."></textarea></div>
+<div id="hub29LinkArea" style="display:none"><label for="hub29Link">Public recipe website link</label><input id="hub29Link" type="url" placeholder="https://..."><p class="hub29-hint">Recipe websites can fill in structured recipe details. Instagram and TikTok links open the Social post flow.</p></div>
+<div id="hub29PhotoArea" style="display:none"><label for="hub29Photo">Recipe card or screenshot</label><input id="hub29Photo" type="file" accept="image/jpeg,image/png,image/webp" onchange="hub29FileChosen(this)"><div id="hub29PhotoPreview" class="hub29-preview"></div><p class="hub29-hint">JPG, PNG or WebP under 6 MB. Each extraction uses one shared photo attempt.</p></div>
+<div id="hub29VideoArea" style="display:none"><label for="hub29VideoLink">Original social post link</label><input id="hub29VideoLink" type="url" placeholder="https://www.instagram.com/reel/... or TikTok link"><label for="hub212Caption">Paste the recipe caption</label><textarea id="hub212Caption" rows="8" placeholder="Copy the ingredients and instructions from the post’s caption…"></textarea><p class="hub29-hint">Captions are processed on this device and use no photo attempts. If a caption is entered, we use it first.</p><label for="hub212SocialPhoto">Or choose a screenshot of the recipe</label><input id="hub212SocialPhoto" type="file" accept="image/jpeg,image/png,image/webp" onchange="hub29FileChosen(this)"><div id="hub212SocialPreview" class="hub29-preview"></div><p class="hub29-hint">Screenshot extraction uses one photo attempt. We keep the post link; spoken video audio is not transcribed.</p></div>
+<p class="hub29-feedback" id="hub29Feedback" role="status" aria-live="polite"></p><div class="hub29-footer"><button type="button" class="secondary" onclick="hub29ImportClose()">Cancel</button><button type="button" class="add" onclick="hub29ImportClose();hub27OpenRecipe()">Enter manually</button><button type="button" class="primary" id="hub29ExtractButton" onclick="hub29Extract()">Review recipe →</button></div></div></div>
+<div class="chore-who-overlay" id="hub27Overlay" style="display:none"><div class="chore-edit-dialog hub27-dialog" role="dialog" aria-label="Family item"><div class="line"><h3 id="hub27ModalTitle">Add</h3><button onclick="hub27Close()" aria-label="Close">✕</button></div><form id="hub27Form" onsubmit="return hub27Save(event)"><div id="hub212ReviewWrap" style="display:none"><p id="hub212ReviewNotice" class="hub212-review" role="status"></p><label id="hub212IncompleteWrap" class="hub212-incomplete" style="display:none"><input id="hub212SaveIncomplete" type="checkbox"> Save as an incomplete recipe — I’ll fill in the missing details later</label><details id="hub212RawWrap" style="display:none"><summary>Original extracted text</summary><textarea id="hub212RawExtract" rows="7" readonly aria-label="Original extracted recipe text"></textarea></details></div><div id="hub212DuplicateBox" class="hub212-duplicate" style="display:none" role="status"><p id="hub212DuplicateText"></p><div><button type="button" onclick="hub212OpenDuplicate()">Open existing recipe</button><button type="button" id="hub212SaveCopy" onclick="hub212SaveCopy()">Save another copy</button></div></div><div class="field" id="hub28TitleField"><label id="hub27NameLabel">Title</label><input id="hub27Title" maxlength="180"></div><div class="field" id="hub27BodyField"><label id="hub27BodyLabel">Message</label><textarea id="hub27Body" rows="4" style="width:100%" placeholder="Write a message for the family..."></textarea></div><div class="field" id="hub27DateField" style="display:none"><label>Due date</label><input id="hub27Date" type="date"></div><div class="field" id="hub27RepeatField" style="display:none"><label>Repeat</label><select id="hub27Repeat"><option value="none">One time</option><option value="weekly">Weekly</option><option value="monthly">Monthly</option><option value="yearly">Yearly</option></select></div><div class="field" id="hub28PriorityField" style="display:none"><label>Priority</label><select id="hub28Priority"><option value="normal">Normal</option><option value="important">Important</option></select></div><div id="hub28RecipeFields" style="display:none"><div class="hub28-recipe-meta"><div class="field"><label>Category</label><select id="hub28Category"><option>Family favorite</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Dessert</option><option>Snack</option></select></div><div class="field"><label>Servings</label><input id="hub28Servings" type="number" min="1" max="100" placeholder="4"></div><div class="field"><label>Prep minutes</label><input id="hub28Prep" type="number" min="0" max="1440" placeholder="15"></div><div class="field"><label>Cook minutes</label><input id="hub28Cook" type="number" min="0" max="1440" placeholder="30"></div></div><div class="field"><label>Recipe photo URL (optional)</label><input id="hub28Photo" type="url" placeholder="https://..."></div></div><div class="field" id="hub27LinkField" style="display:none"><label>Original recipe or social post link (optional)</label><input id="hub27Link" type="url" placeholder="https://..."></div><div class="field" id="hub27IngredientsField" style="display:none"><label>Ingredients (one per line)</label><textarea id="hub27Ingredients" rows="5" style="width:100%" placeholder="Milk&#10;Eggs&#10;Flour"></textarea></div><label id="hub27PinField"><input id="hub27Pinned" type="checkbox"> Pin to top</label><div class="edit-actions"><button type="button" id="hub210DeleteRecipe" class="hub210-delete" style="display:none" onclick="window.hub210DeleteRecipe()">Delete recipe</button><button type="button" onclick="hub27Close()">Cancel</button><button type="submit" class="primary">Save</button></div><p class="muted" id="hub27ModalStatus"></p></form></div></div>
 <div class="modalcover" id="modal"><div class="modal"><h2>Add to Google Family Calendar</h2><p class="muted">Events are submitted to Google Family Calendar. Allow a few minutes for processing and synchronization.</p><div id="eventSubmitStatus" class="muted" role="status"></div><form onsubmit="hubSubmitFamilyEvent(event)"><div class="field"><label>Event</label><input name="title" required placeholder="Appointment, practice, birthday..."></div><div class="field"><label>Date</label><input type="date" name="date" id="eventDate" required><div class="weekday-hint" id="eventDateWeekday" aria-live="polite">Choose a date to see the weekday</div></div><div class="field"><label>Time (optional)</label><input type="time" name="time"></div><div class="field"><label>Family member</label><select name="person"><option>Family</option><option>Mom</option><option>Dad</option><option>Ava</option><option>Mason</option></select></div><div class="actions"><button type="button" class="secondary" onclick="hideEvent()">Cancel</button><button class="primary" id="eventSaveButton">Submit event</button></div></form></div></div>
 
 <div class="modalcover" id="detailModal"><div class="modal"><h2>Event details</h2><div id="detailContent"></div><div id="changeStatus" class="muted" role="status"></div><div class="detail-actions" id="detailActions"></div><div class="actions"><button class="secondary" type="button" onclick="closeHubDetails()">Close</button></div></div></div>
@@ -1121,11 +1134,70 @@ renderShopping();renderMeals();refresh();setInterval(function(){refresh()},60000
 (function(){'use strict';function e(id){return document.getElementById(id)}function apply(v){if(!v)v='Family';var label=e('hub26ProfileLabel'),sel=e('hub26DeviceProfile');if(label)label.textContent='Profile: '+v;if(sel)sel.value=v}window.hub26SaveProfile=function(v){try{localStorage.setItem('familyHubDeviceProfile26',v)}catch(ex){}apply(v)};var v='Family';try{v=localStorage.getItem('familyHubDeviceProfile26')||'Family'}catch(ex){}apply(v)})();
 </script>
 <script>
+/* Family Hub v2.12 shared recipe helpers. ES5 for the existing iOS 12 dashboard. */
+(function () {
+  'use strict';
+  function trim(v) { return String(v || '').replace(/^\s+|\s+$/g, ''); }
+  function normalizedTitle(v) {
+    return trim(trim(v).toLowerCase().replace(/[.,!?\u2018\u2019\u201c\u201d'":;()\-\u2013\u2014]/g, ' ').replace(/\s+/g, ' '));
+  }
+  function sourceUrl(v) {
+    v = trim(v);
+    if (!v) return '';
+    if (!/^https:\/\//i.test(v) || v.length > 2048 || /[\u0000-\u0020]/.test(v)) return null;
+    var a = document.createElement('a'); a.href = v;
+    if (a.protocol !== 'https:' || !a.hostname || a.username || a.password || a.port || a.hostname.indexOf('.') < 0) return null;
+    return a.href;
+  }
+  function canonicalUrl(v) {
+    var clean = sourceUrl(v); if (!clean) return '';
+    var a = document.createElement('a'); a.href = clean;
+    var host = a.hostname.toLowerCase().replace(/^(www|m)\./, ''), path = a.pathname.replace(/\/+$/, ''), parts = (a.search || '').slice(1).split('&'), kept = [], i, name;
+    if (host === 'instagram.com') path = path.replace(/^\/reels\//, '/reel/');
+    for (i = 0; i < parts.length; i++) {
+      if (!parts[i]) continue;
+      try { name = decodeURIComponent(parts[i].split('=')[0]).toLowerCase(); } catch (e) { name = parts[i]; }
+      if (!/^(utm_.*|fbclid|gclid|igsh|igshid|si|tt_from|is_from_webapp|sender_device|web_id)$/.test(name)) kept.push(parts[i]);
+    }
+    kept.sort();
+    return host + path + (kept.length ? '?' + kept.join('&') : '');
+  }
+  function sourceLabel(v) {
+    var clean = sourceUrl(v); if (!clean) return 'Source';
+    var a = document.createElement('a'); a.href = clean;
+    var host = a.hostname.toLowerCase();
+    if (/(^|\.)instagram\.com$/.test(host)) return 'Instagram';
+    if (/(^|\.)tiktok\.com$/.test(host)) return 'TikTok';
+    if (/(^|\.)(youtube\.com|youtu\.be)$/.test(host)) return 'YouTube';
+    if (/(^|\.)facebook\.com$/.test(host)) return 'Facebook';
+    return 'Recipe source';
+  }
+  function fingerprint() {
+    var ids = ['hub27Title', 'hub27Body', 'hub27Ingredients', 'hub27Link', 'hub28Photo', 'hub28Category', 'hub28Servings', 'hub28Prep', 'hub28Cook'], values = [], i;
+    for (i = 0; i < ids.length; i++) values.push(document.getElementById(ids[i]).value);
+    return JSON.stringify(values);
+  }
+  function reviewFields() {
+    var notice = document.getElementById('hub212ReviewNotice'), incomplete = document.getElementById('hub212IncompleteWrap');
+    if (!notice) return;
+    var title = trim(document.getElementById('hub27Title').value), ingredients = trim(document.getElementById('hub27Ingredients').value), steps = trim(document.getElementById('hub27Body').value), missing = [];
+    if (!title) missing.push('recipe name');
+    if (!ingredients) missing.push('ingredients');
+    if (!steps) missing.push('instructions');
+    notice.textContent = missing.length ? 'Needs review: add ' + missing.join(', ') + '.' : 'Name, ingredients and instructions are filled in. Check amounts and cooking steps before saving.';
+    notice.className = 'hub212-review ' + (missing.length ? 'hub212-needs-review' : 'hub212-ready');
+    incomplete.style.display = (!ingredients || !steps) ? 'block' : 'none';
+  }
+  window.hub212 = { trim: trim, normalizedTitle: normalizedTitle, sourceUrl: sourceUrl, canonicalUrl: canonicalUrl, sourceLabel: sourceLabel, fingerprint: fingerprint, reviewFields: reviewFields };
+})();
+
+</script>
+<script>
 (function(){'use strict';
 var root=document,notes=[],reminders=[],recipes=[],editing='',kind='note';
 function E(id){return root.getElementById(id)}
 function safe(s){return String(s===null||s===undefined?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;')}
-function api(path,method,data,cb){var t='';try{var ss=JSON.parse(localStorage.getItem('familyHubSession')||'null');t=ss&&ss.accessToken||''}catch(ex){}if(!t){cb(401);return}var x=new XMLHttpRequest();x.open(method,HUB_SUPABASE_URL+'/rest/v1/'+path,true);x.setRequestHeader('apikey',HUB_PUBLISHABLE_KEY);x.setRequestHeader('Authorization','Bearer '+t);if(data!==null)x.setRequestHeader('Content-Type','application/json');x.onreadystatechange=function(){if(x.readyState===4){var r=null;try{r=JSON.parse(x.responseText)}catch(ex){}cb(x.status,r)}};x.onerror=function(){cb(0)};x.send(data===null?null:JSON.stringify(data))}
+function api(path,method,data,cb){var t='';try{var ss=JSON.parse(localStorage.getItem('familyHubSession')||'null');t=ss&&ss.accessToken||''}catch(ex){}if(!t){cb(401);return}var x=new XMLHttpRequest(),finished=false;function done(c,r){if(finished)return;finished=true;cb(c,r)}x.open(method,HUB_SUPABASE_URL+'/rest/v1/'+path,true);x.timeout=15000;x.setRequestHeader('apikey',HUB_PUBLISHABLE_KEY);x.setRequestHeader('Authorization','Bearer '+t);if(data!==null)x.setRequestHeader('Content-Type','application/json');x.onreadystatechange=function(){if(x.readyState===4&&x.status!==0){var r=null;try{r=JSON.parse(x.responseText)}catch(ex){}done(x.status,r)}};x.onerror=function(){done(0)};x.ontimeout=function(){done(0)};x.send(data===null?null:JSON.stringify(data))}
 function success(c){return c>=200&&c<300}
 function dateISO(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function byId(a,id){for(var i=0;i<a.length;i++)if(a[i].id===id)return a[i];return null}
@@ -1135,10 +1207,118 @@ window.hub27Refresh=function(){load('family_hub_notes',function(r,err){notes=r;r
 function renderNotes(err){var h='',all='';var sorted=notes.slice().sort(function(a,b){return Number(!!b.is_pinned)-Number(!!a.is_pinned)});for(var i=0;i<sorted.length;i++){var n=sorted[i],message=n.body||n.title||'',item='<div class="hub27-note"><div class="hub27-note-top"><span class="hub28-message-mark">'+(n.is_pinned?'📌 Pinned':'💬 Family message')+'</span><button class="hub27-small" onclick="hub27OpenNote(\''+safe(n.id)+'\')">Edit</button></div><p>'+safe(message)+'</p></div>';all+=item;if(i<3)h+=item}E('hub27HomeNotes').innerHTML=h||'<p class="muted">'+safe(err||'No messages yet. Leave the first note!')+'</p>';E('hub27AllNotes').innerHTML=all||'<p class="muted">'+safe(err||'No messages yet.')+'</p>';E('hub27NotesStatus').textContent=err||''}
 function nextDue(r){var d=new Date(r.due_date+'T12:00:00'),today=new Date();today.setHours(12,0,0,0);if(isNaN(d.getTime()))return '';if(r.is_done)return r.due_date;var loops=0;while(d<today&&r.repeat_rule!=='none'&&loops++<200){if(r.repeat_rule==='weekly')d.setDate(d.getDate()+7);else if(r.repeat_rule==='monthly')d.setMonth(d.getMonth()+1);else if(r.repeat_rule==='yearly')d.setFullYear(d.getFullYear()+1);else break}return dateISO(d)}
 function renderReminders(err){var a=reminders.slice().sort(function(x,y){return nextDue(x).localeCompare(nextDue(y))}),all='',home='',shown=0,today=dateISO(new Date());for(var i=0;i<a.length;i++){var r=a[i],due=nextDue(r),late=!r.is_done&&r.repeat_rule==='none'&&due<today,important=r.priority==='important',row='<div class="hub27-reminder '+(r.is_done?'hub27-done':'')+(late?' hub28-overdue':'')+'"><button class="hub27-check" onclick="hub27ToggleReminder(\''+safe(r.id)+'\','+(!r.is_done)+')">'+(r.is_done?'✓':'○')+'</button><div><strong>'+(important?'⭐ ':'')+safe(r.title)+'</strong><small>'+(late?'Overdue · ':'')+safe(due)+(r.repeat_rule!=='none'?' · '+safe(r.repeat_rule):'')+'</small></div><button class="hub27-small" onclick="hub27OpenReminder(\''+safe(r.id)+'\')">Edit</button></div>';all+=row;if(!r.is_done&&shown++<4)home+=row}E('hub27HomeReminders').innerHTML=home||'<p class="muted">'+safe(err||'Nothing coming up. Add a reminder!')+'</p>';E('hub27AllReminders').innerHTML=all||'<p class="muted">'+safe(err||'No reminders yet.')+'</p>';E('hub27RemindersStatus').textContent=err||''}
-function renderRecipes(err){var h='';for(var i=0;i<recipes.length;i++){var r=recipes[i],photo=r.photo_url&&/^https:\/\//i.test(r.photo_url)?'<img class="hub28-recipe-photo" src="'+safe(r.photo_url)+'" alt="Recipe photo" loading="lazy">':'<div class="hub27-recipe-icon">🍽</div>',meta=[r.category,r.servings?r.servings+' servings':'',r.prep_minutes?r.prep_minutes+'m prep':'',r.cook_minutes?r.cook_minutes+'m cook':''].filter(function(x){return !!x}).join(' · ');h+='<div class="hub27-recipe">'+photo+'<div><strong>'+safe(r.title)+'</strong><p>'+safe(meta)+'</p><p>'+safe((r.instructions||'').slice(0,110))+'</p></div><div class="hub27-recipe-actions"><button class="add" onclick="hub27RecipeToShopping(\''+safe(r.id)+'\')">Ingredients → Shopping</button><button class="add" onclick="hub27RecipeToMeal(\''+safe(r.id)+'\')">Plan meal</button>'+(r.source_url?'<button class="add" onclick="hub27VisitRecipe(\''+safe(r.id)+'\')">Open link ↗</button>':'')+'<button class="hub27-small" onclick="hub27OpenRecipe(\''+safe(r.id)+'\')">Edit</button></div></div>'}E('hub27AllRecipes').innerHTML=h||'<p class="muted">'+safe(err||'No recipes yet. Save your first family favorite.')+'</p>';E('hub27RecipesStatus').textContent=err||''}
-function open(k,id){kind=k;editing=id||'';var row=byId(k==='note'?notes:k==='reminder'?reminders:recipes,editing)||{};E('hub27ModalTitle').textContent=(editing?'Edit ':'Add ')+(k==='note'?'family message':k==='reminder'?'reminder':'recipe');E('hub27NameLabel').textContent=k==='recipe'?'Recipe name':k==='note'?'Message heading':'Reminder';E('hub27BodyLabel').textContent=k==='recipe'?'Preparation instructions / notes':'Message';E('hub27Title').value=row.title||'';E('hub28TitleField').style.display=k==='note'?'none':'block';E('hub27Body').required=k==='note';E('hub27Title').required=k!=='note';E('hub28PriorityField').style.display=k==='reminder'?'block':'none';E('hub28Priority').value=row.priority||'normal';E('hub28RecipeFields').style.display=k==='recipe'?'block':'none';E('hub28Category').value=row.category||'Family favorite';E('hub28Servings').value=row.servings||'';E('hub28Prep').value=row.prep_minutes||'';E('hub28Cook').value=row.cook_minutes||'';E('hub28Photo').value=row.photo_url||'';E('hub27Body').value=k==='recipe'?(row.instructions||''):(row.body||'');E('hub27Date').value=row.due_date||dateISO(new Date());E('hub27Repeat').value=row.repeat_rule||'none';E('hub27Link').value=row.source_url||'';E('hub27Ingredients').value=row.ingredients||'';E('hub27Pinned').checked=!!row.is_pinned;E('hub27DateField').style.display=k==='reminder'?'block':'none';E('hub27RepeatField').style.display=k==='reminder'?'block':'none';E('hub27BodyField').style.display=k==='reminder'?'none':'block';E('hub27LinkField').style.display=k==='recipe'?'block':'none';E('hub27IngredientsField').style.display=k==='recipe'?'block':'none';E('hub27PinField').style.display=k==='note'?'block':'none';E('hub27ModalStatus').textContent='';E('hub210DeleteRecipe').style.display=(k==='recipe'&&editing)?'inline-flex':'none';E('hub27Overlay').style.display='flex';}
-window.hub27OpenNote=function(id){open('note',id)};window.hub27OpenReminder=function(id){open('reminder',id)};window.hub27OpenRecipe=function(id){open('recipe',id)};window.hub27Close=function(){E('hub27Overlay').style.display='none'};
-window.hub27Save=function(e){e.preventDefault();var table=kind==='note'?'family_hub_notes':kind==='reminder'?'family_hub_reminders':'family_hub_recipes',title=E('hub27Title').value.replace(/^\s+|\s+$/g,''),row={};if(kind==='note'){var message=E('hub27Body').value.replace(/^\s+|\s+$/g,'');if(!message){E('hub27ModalStatus').textContent='Write a message first.';return false}row.title=message.slice(0,180);row.body=message;row.is_pinned=E('hub27Pinned').checked}else if(kind==='reminder'){if(!title)return false;row.title=title;row.due_date=E('hub27Date').value;row.repeat_rule=E('hub27Repeat').value;row.priority=E('hub28Priority').value;if(!row.due_date){E('hub27ModalStatus').textContent='Choose a due date.';return false}}else{if(!title)return false;row.title=title;row.instructions=E('hub27Body').value;row.source_url=E('hub27Link').value||null;row.ingredients=E('hub27Ingredients').value;row.category=E('hub28Category').value;row.servings=E('hub28Servings').value?Number(E('hub28Servings').value):null;row.prep_minutes=E('hub28Prep').value?Number(E('hub28Prep').value):null;row.cook_minutes=E('hub28Cook').value?Number(E('hub28Cook').value):null;row.photo_url=E('hub28Photo').value||null}E('hub27ModalStatus').textContent='Saving…';api(table+(editing?'?id=eq.'+encodeURIComponent(editing):''),editing?'PATCH':'POST',row,function(c){if(success(c)){hub27Close();hub27Refresh()}else E('hub27ModalStatus').textContent='Save failed. '+status(c)});return false};
+function renderRecipes(err){var h='';for(var i=0;i<recipes.length;i++){var r=recipes[i],photo=r.photo_url&&/^https:\/\//i.test(r.photo_url)?'<img class="hub28-recipe-photo" src="'+safe(r.photo_url)+'" alt="Recipe photo" loading="lazy">':'<div class="hub27-recipe-icon">🍽</div>',meta=[r.category,r.servings?r.servings+' servings':'',r.prep_minutes?r.prep_minutes+'m prep':'',r.cook_minutes?r.cook_minutes+'m cook':''].filter(function(x){return !!x}).join(' · ');h+='<div class="hub27-recipe">'+photo+'<div><strong>'+safe(r.title)+'</strong><p>'+safe(meta)+'</p><p>'+safe((r.instructions||'').slice(0,110))+'</p></div><div class="hub27-recipe-actions"><button class="add" onclick="hub27RecipeToShopping(\''+safe(r.id)+'\')">Ingredients → Shopping</button><button class="add" onclick="hub27RecipeToMeal(\''+safe(r.id)+'\')">Plan meal</button>'+(r.source_url?'<button class="add" onclick="hub27VisitRecipe(\''+safe(r.id)+'\')">'+safe(window.hub212.sourceLabel(r.source_url))+' ↗</button>':'')+'<button class="hub27-small" onclick="hub27OpenRecipe(\''+safe(r.id)+'\')">Edit</button></div></div>'}E('hub27AllRecipes').innerHTML=h||'<p class="muted">'+safe(err||'No recipes yet. Save your first family favorite.')+'</p>';E('hub27RecipesStatus').textContent=err||''}
+function open(k,id){kind=k;editing=id||'';var row=byId(k==='note'?notes:k==='reminder'?reminders:recipes,editing)||{};E('hub27ModalTitle').textContent=(editing?'Edit ':'Add ')+(k==='note'?'family message':k==='reminder'?'reminder':'recipe');E('hub27NameLabel').textContent=k==='recipe'?'Recipe name':k==='note'?'Message heading':'Reminder';E('hub27BodyLabel').textContent=k==='recipe'?'Preparation instructions / notes':'Message';E('hub27Title').value=row.title||'';E('hub28TitleField').style.display=k==='note'?'none':'block';E('hub27Body').required=k==='note';E('hub27Title').required=k!=='note';E('hub28PriorityField').style.display=k==='reminder'?'block':'none';E('hub28Priority').value=row.priority||'normal';E('hub28RecipeFields').style.display=k==='recipe'?'block':'none';E('hub28Category').value=row.category||'Family favorite';E('hub28Servings').value=row.servings||'';E('hub28Prep').value=row.prep_minutes||'';E('hub28Cook').value=row.cook_minutes||'';E('hub28Photo').value=row.photo_url||'';E('hub27Body').value=k==='recipe'?(row.instructions||''):(row.body||'');E('hub27Date').value=row.due_date||dateISO(new Date());E('hub27Repeat').value=row.repeat_rule||'none';E('hub27Link').value=row.source_url||'';E('hub27Ingredients').value=row.ingredients||'';E('hub27Pinned').checked=!!row.is_pinned;E('hub27DateField').style.display=k==='reminder'?'block':'none';E('hub27RepeatField').style.display=k==='reminder'?'block':'none';E('hub27BodyField').style.display=k==='reminder'?'none':'block';E('hub27LinkField').style.display=k==='recipe'?'block':'none';E('hub27IngredientsField').style.display=k==='recipe'?'block':'none';E('hub27PinField').style.display=k==='note'?'block':'none';E('hub27ModalStatus').textContent='';E('hub210DeleteRecipe').style.display=(k==='recipe'&&editing)?'inline-flex':'none';E('hub27Overlay').style.display='flex';hub212ResetReview();}
+window.hub27OpenNote=function(id){open('note',id)};window.hub27OpenReminder=function(id){open('reminder',id)};window.hub27OpenRecipe=function(id){open('recipe',id)};window.hub27Close=function(){hub212Generation++;hub212Busy(false);E('hub27Overlay').style.display='none'};
+/* This code replaces the existing hub27Save inside its recipe-data closure. */
+var hub212Saving = false, hub212Generation = 0, hub212Approved = '', hub212DuplicateId = '', hub212DuplicateFingerprint = '';
+function hub212Busy(busy) {
+  hub212Saving = busy;
+  var button = E('hub27Form').querySelector('button[type="submit"]');
+  if (button) button.disabled = busy;
+  E('hub212SaveCopy').disabled = busy;
+}
+function hub212ResetReview() {
+  hub212Generation++; hub212Busy(false); hub212Approved = ''; hub212DuplicateId = ''; hub212DuplicateFingerprint = '';
+  E('hub212DuplicateBox').style.display = 'none';
+  E('hub212SaveIncomplete').checked = false;
+  E('hub212RawExtract').value = ''; E('hub212RawWrap').style.display = 'none';
+  E('hub212ReviewWrap').style.display = kind === 'recipe' ? 'block' : 'none';
+  if (kind === 'recipe') window.hub212.reviewFields();
+}
+function hub212FindDuplicate(row, id, cb) {
+  // Page through readable recipes: do not limit warnings to the 250 displayed cards.
+  var offset = 0, canonical = window.hub212.canonicalUrl(row.source_url), title = window.hub212.normalizedTitle(row.title);
+  function page() {
+    api('family_hub_recipes?select=id,title,source_url&order=id.asc&limit=500&offset=' + offset, 'GET', null, function (c, rows) {
+      if (!success(c) || !(rows instanceof Array)) { cb(null, 'Could not check existing recipes. Please try saving again.'); return; }
+      for (var i = 0; i < rows.length; i++) {
+        var r = rows[i];
+        if (r.id !== id && ((title && window.hub212.normalizedTitle(r.title) === title) || (canonical && window.hub212.canonicalUrl(r.source_url) === canonical))) { cb(r, ''); return; }
+      }
+      if (rows.length < 500) { cb(null, ''); return; }
+      offset += rows.length;
+      if (offset >= 10000) { cb(null, 'The recipe box is too large to finish checking. No recipe was saved.'); return; }
+      page();
+    });
+  }
+  page();
+}
+window.hub212OpenDuplicate = function () {
+  if (!hub212DuplicateId || hub212Saving) return;
+  var id = hub212DuplicateId, generation = hub212Generation;
+  if (byId(recipes, id)) { window.hub27OpenRecipe(id); return; }
+  hub212Busy(true);
+  api('family_hub_recipes?select=*&id=eq.' + encodeURIComponent(id), 'GET', null, function (c, rows) {
+    if (generation !== hub212Generation) return;
+    hub212Busy(false);
+    if (success(c) && rows instanceof Array && rows[0]) { recipes.push(rows[0]); window.hub27OpenRecipe(id); }
+    else E('hub27ModalStatus').textContent = 'Could not open that recipe. It may have been removed. Please try again.';
+  });
+};
+window.hub212SaveCopy = function () {
+  if (hub212Saving || !hub212DuplicateId) return;
+  if (hub212DuplicateFingerprint === window.hub212.fingerprint()) hub212Approved = hub212DuplicateFingerprint;
+  window.hub27Save({ preventDefault: function () {} });
+};
+window.hub27Save = function (e) {
+  e.preventDefault();
+  if (hub212Saving) return false;
+  var table = kind === 'note' ? 'family_hub_notes' : kind === 'reminder' ? 'family_hub_reminders' : 'family_hub_recipes', title = window.hub212.trim(E('hub27Title').value), row = {};
+  if (kind === 'note') {
+    var message = window.hub212.trim(E('hub27Body').value);
+    if (!message) { E('hub27ModalStatus').textContent = 'Write a message first.'; return false; }
+    row.title = message.slice(0, 180); row.body = message; row.is_pinned = E('hub27Pinned').checked;
+  } else if (kind === 'reminder') {
+    if (!title) return false;
+    row.title = title; row.due_date = E('hub27Date').value; row.repeat_rule = E('hub27Repeat').value; row.priority = E('hub28Priority').value;
+    if (!row.due_date) { E('hub27ModalStatus').textContent = 'Choose a due date.'; return false; }
+  } else {
+    window.hub212.reviewFields();
+    if (!title) { E('hub27ModalStatus').textContent = 'Add a recipe name before saving.'; E('hub27Title').focus(); return false; }
+    var link = window.hub212.sourceUrl(E('hub27Link').value), photoLink = window.hub212.sourceUrl(E('hub28Photo').value);
+    if (link === null || photoLink === null) { E('hub27ModalStatus').textContent = 'Use complete https:// links for the source and photo, or leave them empty.'; return false; }
+    row.title = title; row.instructions = window.hub212.trim(E('hub27Body').value); row.source_url = link || null; row.ingredients = window.hub212.trim(E('hub27Ingredients').value);
+    if ((!row.ingredients || !row.instructions) && !E('hub212SaveIncomplete').checked) { E('hub27ModalStatus').textContent = 'Add the missing recipe details, or check Save as an incomplete recipe.'; return false; }
+    row.category = E('hub28Category').value; row.photo_url = photoLink || null;
+    var numbers = [['hub28Servings', 'servings', 1, 100], ['hub28Prep', 'prep_minutes', 0, 1440], ['hub28Cook', 'cook_minutes', 0, 1440]];
+    for (var n = 0; n < numbers.length; n++) {
+      var value = E(numbers[n][0]).value, number = Number(value);
+      if (value !== '' && (!isFinite(number) || number < numbers[n][2] || number > numbers[n][3])) { E('hub27ModalStatus').textContent = 'Check the servings and cooking times.'; return false; }
+      row[numbers[n][1]] = value === '' ? null : number;
+    }
+  }
+  var generation = hub212Generation, id = editing, snapshot = window.hub212.fingerprint();
+  hub212Busy(true);
+  function current() { return generation === hub212Generation; }
+  function saveRow() {
+    if (!current()) return;
+    if (kind === 'recipe' && snapshot !== window.hub212.fingerprint()) { hub212Busy(false); E('hub27ModalStatus').textContent = 'You changed the recipe while it was being checked. Review it and click Save again.'; return; }
+    E('hub212DuplicateBox').style.display = 'none'; E('hub27ModalStatus').textContent = 'Saving…';
+    api(table + (id ? '?id=eq.' + encodeURIComponent(id) : ''), id ? 'PATCH' : 'POST', row, function (c) {
+      if (!current()) return;
+      hub212Busy(false);
+      if (success(c)) { hub27Close(); hub27Refresh(); }
+      else E('hub27ModalStatus').textContent = 'Save failed. ' + status(c);
+    });
+  }
+  if (kind !== 'recipe' || hub212Approved === snapshot) { hub212Approved = ''; saveRow(); return false; }
+  E('hub27ModalStatus').textContent = 'Checking your Recipe Box for duplicates…';
+  hub212FindDuplicate(row, id, function (match, error) {
+    if (!current()) return;
+    if (snapshot !== window.hub212.fingerprint()) { hub212Busy(false); E('hub27ModalStatus').textContent = 'You changed the recipe while it was being checked. Review it and click Save again.'; return; }
+    if (error) { hub212Busy(false); E('hub27ModalStatus').textContent = error; return; }
+    if (match) {
+      hub212Busy(false); hub212DuplicateId = match.id; hub212DuplicateFingerprint = snapshot;
+      E('hub212DuplicateText').textContent = 'You already have “' + match.title + '” with the same name or source link. Open it, or save another copy intentionally.';
+      E('hub212DuplicateBox').style.display = 'block'; E('hub27ModalStatus').textContent = 'Possible duplicate found. Nothing has been saved yet.';
+      return;
+    }
+    saveRow();
+  });
+  return false;
+};
+
 window.hub210DeleteRecipe=function(){
  var btn=E('hub210DeleteRecipe'), message=E('hub27ModalStatus');
  if(kind!=='recipe'||!editing){message.textContent='Please open a saved recipe using Edit before deleting.';return false;}
@@ -1169,24 +1349,159 @@ var origMeal=window.hub25MealOpen;if(origMeal)window.hub25MealOpen=function(){or
 setTimeout(function(){hub27Refresh();loadWeather()},500);setInterval(function(){hub27Refresh()},120000);setInterval(loadWeather,1800000);
 })();
 </script><script>
-/* v2.9: on-device text parsing and review, optional server importer. ES5 for iOS 12. */
-(function(){'use strict';
-var method='text',photoData='';
-function el(id){return document.getElementById(id)}
-function trim(t){return String(t||'').replace(/^\s+|\s+$/g,'')}
-function msg(t){el('hub29Feedback').textContent=t||''}
-window.hub29ImportOpen=function(){el('hub29ImportOverlay').style.display='flex';hub29Method('text');msg('')};
-window.hub29ImportClose=function(){el('hub29ImportOverlay').style.display='none'};
-window.hub29Method=function(m){method=m;var areas={text:'hub29TextArea',link:'hub29LinkArea',photo:'hub29PhotoArea',video:'hub29VideoArea'};for(var k in areas)if(areas.hasOwnProperty(k))el(areas[k]).style.display=k===m?'block':'none';var buttons=document.querySelectorAll('.hub29-method');for(var i=0;i<buttons.length;i++)buttons[i].className='hub29-method'+(buttons[i].getAttribute('data-method')===m?' active':'');msg('')};
-window.hub29FileChosen=function(input){photoData='';el('hub29PhotoPreview').innerHTML='';if(!input.files||!input.files[0])return;var f=input.files[0];if(!/^image\/(jpeg|png|webp)$/.test(f.type)){msg('Please choose a JPG, PNG or WebP image. iPhone HEIC photos may need conversion to JPG first.');return}if(f.size>6000000){msg('Please choose an image smaller than 6 MB.');return}var r=new FileReader();r.onload=function(){photoData=String(r.result||'');var img=document.createElement('img');img.src=photoData;img.alt='Selected recipe photo';el('hub29PhotoPreview').appendChild(img)};r.readAsDataURL(f)};
-function parse(raw){var lines=String(raw||'').replace(/\r/g,'').split('\n'),clean=[],i,line,section='',title='',ingredients=[],steps=[],servings='',prep='',cook='';for(i=0;i<lines.length;i++){line=trim(lines[i]);if(line)clean.push(line)}if(!clean.length)return null;
-for(i=0;i<clean.length;i++){line=clean[i];if(/^serv(?:es|ings)?\s*[:\-]?\s*\d+/i.test(line)){servings=(line.match(/\d+/)||[])[0]||'';continue}if(/prep(?:aration)?\s*time\s*[:\-]?\s*\d+/i.test(line)){prep=(line.match(/\d+/)||[])[0]||'';continue}if(/cook(?:ing)?\s*time\s*[:\-]?\s*\d+/i.test(line)){cook=(line.match(/\d+/)||[])[0]||'';continue}if(/^(ingredients|what you.need|you.will.need)\s*:?$/i.test(line)){section='ingredients';continue}if(/^(instructions|directions|method|preparation|steps|how to make it)\s*:?$/i.test(line)){section='steps';continue}if(!title&&!/^(ingredients|directions|instructions|recipe)\s*:?$/i.test(line)){title=line.replace(/^#+\s*/,'');continue}
-if(section==='ingredients'){ingredients.push(line.replace(/^[-*•]\s*/,''));continue}if(section==='steps'){steps.push(line.replace(/^[-*•]\s*/,''));continue}
-if(/^([-*•]\s+|\d+(?:\/\d+)?\s*(?:cups?|tsp|tbsp|teaspoons?|tablespoons?|oz|lbs?|g|kg|ml|cloves?|pieces?|cans?)\b)/i.test(line))ingredients.push(line.replace(/^[-*•]\s*/,''));else if(/^(?:step\s*\d+|\d+[.)]\s+|preheat|combine|mix|stir|bake|cook|heat|add |serve|chop|whisk|place|pour|bring )/i.test(line))steps.push(line);else if(steps.length)steps.push(line);else if(ingredients.length)ingredients.push(line)}
-return {title:title,ingredients:ingredients.join('\n'),instructions:steps.join('\n'),servings:servings,prep:prep,cook:cook}}
-function review(data,source){if(!data||!trim(data.title)){msg('Could not identify a recipe title. Try including a title on the first line, or enter manually.');return}hub29ImportClose();hub27OpenRecipe();el('hub27Title').value=data.title||'';el('hub27Ingredients').value=data.ingredients||'';el('hub27Body').value=data.instructions||'';el('hub28Servings').value=data.servings||'';el('hub28Prep').value=data.prep||'';el('hub28Cook').value=data.cook||'';if(source)el('hub27Link').value=source;if(data.photo&&/^https:\/\//i.test(data.photo))el('hub28Photo').value=data.photo;el('hub27ModalStatus').textContent='Review the extracted recipe and correct any details before saving.'}
-function remote(kind,value){msg('Extracting recipe securely…');var token='';try{var a=JSON.parse(localStorage.getItem('familyHubSession')||'null');token=a&&a.accessToken||''}catch(ex){}if(!token){msg('Sign in first, or use Paste text / Enter manually.');return}var x=new XMLHttpRequest();x.open('POST',HUB_SUPABASE_URL+'/functions/v1/recipe-import',true);x.setRequestHeader('apikey',HUB_PUBLISHABLE_KEY);x.setRequestHeader('Authorization','Bearer '+token);x.setRequestHeader('Content-Type','application/json');x.timeout=25000;x.onreadystatechange=function(){if(x.readyState!==4)return;var data={};try{data=JSON.parse(x.responseText)}catch(e){}if(x.status>=200&&x.status<300&&kind==='image'&&data.rawText){var parsed=parse(data.rawText);if(!parsed.title){msg('Text was recognized but the recipe needs editing. Try Paste text with the recognized text.');return}review(parsed,'')}else if(x.status>=200&&x.status<300&&data.title){review(data,kind==='url'?value:'')}else{msg(data.error||'Automatic import is not configured or this source cannot be read. Paste the recipe text or enter it manually.')}};x.onerror=function(){msg('Importer unavailable. Paste text or enter manually instead.')};x.ontimeout=function(){msg('Importer timed out. Paste text or enter manually instead.')};x.send(JSON.stringify({kind:kind,value:value}))}
-window.hub29Extract=function(){if(method==='text'){var t=trim(el('hub29RawText').value);if(!t){msg('Paste a recipe first.');return}review(parse(t),'');return}if(method==='link'){var u=trim(el('hub29Link').value);if(!/^https:\/\//i.test(u)){msg('Enter a complete https:// recipe website link.');return}remote('url',u);return}if(method==='photo'){if(!photoData){msg('Choose a JPG, PNG or WebP photo first.');return}remote('image',photoData);return}if(method==='video'){msg('Instagram and TikTok video transcription is not available yet. Paste the caption or recipe text instead.')}};
+/* Family Hub v2.12: social captions, screenshots, source links and read-only usage. ES5. */
+(function () {
+  'use strict';
+  var method = 'text', photos = { photo: '', social: '' }, fileVersions = { photo: 0, social: 0 }, busy = false, activeRequest = null, sequence = 0, usageSequence = 0;
+  function el(id) { return document.getElementById(id); }
+  function trim(v) { return window.hub212.trim(v); }
+  function msg(v) { el('hub29Feedback').textContent = v || ''; }
+  function token() { try { var s = JSON.parse(localStorage.getItem('familyHubSession') || 'null'); return s && s.accessToken || ''; } catch (e) { return ''; } }
+  function setBusy(value) {
+    busy = value; el('hub29ExtractButton').disabled = value;
+    el('hub29ExtractButton').textContent = value ? 'Extracting…' : 'Review recipe →';
+    var controls = document.querySelectorAll('#hub29ImportOverlay input, #hub29ImportOverlay textarea, .hub29-method');
+    for (var i = 0; i < controls.length; i++) controls[i].disabled = value;
+  }
+  function usageError(message) {
+    el('hub212UsageText').textContent = message;
+    el('hub212UsageProgress').style.display = 'none'; el('hub212UsageReset').textContent = '';
+  }
+  function showUsage(value) {
+    if (!value || typeof value.used !== 'number' || typeof value.limit !== 'number' || value.used % 1 || value.limit % 1 || value.used < 0 || value.limit < 0 || value.limit > 900 || value.used > value.limit || !isFinite(Date.parse(value.resetsAt))) return false;
+    el('hub212UsageText').textContent = value.used + ' of ' + value.limit + ' shared photo attempts used this month' + (value.used >= value.limit ? ' · Limit reached' : '');
+    var progress = el('hub212UsageProgress'); progress.style.display = value.limit > 0 ? 'block' : 'none'; progress.max = value.limit || 1; progress.value = value.used;
+    el('hub212UsageReset').textContent = 'Resets ' + new Date(value.resetsAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', timeZone: 'America/Los_Angeles' }) + ' (Pacific time). Failed attempts and retries count. Captions use no photo attempts.';
+    return true;
+  }
+  function request(kind, value, callback) {
+    var t = token(); if (!t) { callback(401, { error: 'Sign in to use photo importing and view shared usage.' }); return null; }
+    var x = new XMLHttpRequest(), finished = false;
+    function done(status, data) { if (finished) return; finished = true; callback(status, data || {}); }
+    x.open('POST', HUB_SUPABASE_URL + '/functions/v1/recipe-import', true);
+    x.setRequestHeader('apikey', HUB_PUBLISHABLE_KEY); x.setRequestHeader('Authorization', 'Bearer ' + t); x.setRequestHeader('Content-Type', 'application/json'); x.timeout = kind === 'usage' ? 10000 : 25000;
+    x.onreadystatechange = function () { if (x.readyState !== 4 || x.status === 0) return; var data = {}; try { data = JSON.parse(x.responseText); } catch (e) {} done(x.status, data); };
+    x.onerror = function () { done(0, { error: 'Connection unavailable. Your recipe text and selected photo are still here.' }); };
+    x.ontimeout = function () { done(0, { error: 'The request timed out. A photo attempt may still have been counted; check usage before retrying.' }); };
+    x.onabort = function () { done(0, { error: 'Import canceled. A photo attempt may already have been counted.' }); };
+    x.send(JSON.stringify({ kind: kind, value: value })); return x;
+  }
+  window.hub212RefreshUsage = function () {
+    var id = ++usageSequence, requestedToken = token();
+    if (!requestedToken) { usageError('Sign in to view your family’s photo usage.'); return; }
+    usageError('Checking photo usage…');
+    request('usage', '', function (status, data) {
+      if (id !== usageSequence || requestedToken !== token()) return;
+      if (status >= 200 && status < 300 && showUsage(data.usage)) return;
+      usageError(status === 401 ? 'Sign in to view shared photo usage.' : 'Usage unavailable. The server still enforces your photo limit.');
+    });
+  };
+  window.hub29ImportOpen = function () { el('hub29ImportOverlay').style.display = 'flex'; window.hub29Method('text'); msg(''); window.hub212RefreshUsage(); };
+  window.hub29ImportClose = function () {
+    sequence++; if (activeRequest) activeRequest.abort(); activeRequest = null; setBusy(false);
+    el('hub29ImportOverlay').style.display = 'none';
+  };
+  window.hub29Method = function (next) {
+    if (busy) return;
+    if (next === 'video') next = 'social';
+    method = next;
+    var areas = { text: 'hub29TextArea', link: 'hub29LinkArea', photo: 'hub29PhotoArea', social: 'hub29VideoArea' }, buttons = document.querySelectorAll('.hub29-method'), k, i;
+    for (k in areas) if (areas.hasOwnProperty(k)) el(areas[k]).style.display = k === method ? 'block' : 'none';
+    for (i = 0; i < buttons.length; i++) { buttons[i].className = 'hub29-method' + (buttons[i].getAttribute('data-method') === method ? ' active' : ''); buttons[i].setAttribute('aria-pressed', buttons[i].getAttribute('data-method') === method ? 'true' : 'false'); }
+    el('hub212GeneralSource').style.display = method === 'text' || method === 'photo' ? 'block' : 'none'; msg('');
+  };
+  window.hub29FileChosen = function (input) {
+    var target = input.id === 'hub212SocialPhoto' ? 'social' : 'photo', preview = el(target === 'social' ? 'hub212SocialPreview' : 'hub29PhotoPreview'), version = ++fileVersions[target];
+    photos[target] = ''; preview.innerHTML = '';
+    if (!input.files || !input.files[0]) return;
+    var f = input.files[0];
+    if (!/^image\/(jpeg|png|webp)$/.test(f.type) || f.size > 6000000) { input.value = ''; msg('Choose a JPG, PNG or WebP smaller than 6 MB. Convert HEIC photos to JPG first.'); return; }
+    var reader = new FileReader();
+    reader.onload = function () { if (fileVersions[target] !== version) return; photos[target] = String(reader.result || ''); var img = document.createElement('img'); img.src = photos[target]; img.alt = 'Selected recipe screenshot'; preview.appendChild(img); msg('Photo ready.'); };
+    reader.onerror = function () { if (fileVersions[target] === version) msg('Could not read that photo. Choose it again.'); };
+    reader.readAsDataURL(f);
+  };
+  function parse(raw) {
+    var clean = [], lines = String(raw || '').replace(/\r/g, '').replace(/(^|\n)\s*(ingredients|instructions|directions|method|steps)\s*[:\uff1a]\s*/gi, '$1$2\n').split('\n'), title = '', ingredients = [], steps = [], section = '', servings = '', prep = '', cook = '', i, line;
+    for (i = 0; i < lines.length; i++) { line = trim(lines[i]); if (line && !/^https?:\/\//i.test(line) && !/^#[\w#\s]+$/.test(line)) clean.push(line); }
+    for (i = 0; i < clean.length; i++) {
+      line = clean[i];
+      if (/^(ingredients|what you.need|you.will.need)\s*:?$/i.test(line)) { section = 'ingredients'; continue; }
+      if (/^(instructions|directions|method|preparation|steps|how to make it)\s*:?$/i.test(line)) { section = 'steps'; continue; }
+      var servingMatch = line.match(/^serv(?:es|ings)?\s*[:\-]?\s*(\d+)/i), timeMatch = line.match(/^(prep(?:aration)?|cook(?:ing)?)\s*time\s*[:\-]?\s*(\d+)\s*(hours?|hrs?|h|minutes?|mins?|m)?/i);
+      if (servingMatch) { servings = servingMatch[1]; continue; }
+      if (timeMatch) { var minutes = Number(timeMatch[2]) * (/^(h|hr|hrs|hour|hours)$/i.test(timeMatch[3] || '') ? 60 : 1); if (/^prep/i.test(timeMatch[1])) prep = String(minutes); else cook = String(minutes); continue; }
+      if (section === 'ingredients') { ingredients.push(line.replace(/^[-*\u2022]\s*/, '')); continue; }
+      if (section === 'steps') { steps.push(line.replace(/^[-*\u2022]\s*/, '')); continue; }
+      if (/^(?:[-*\u2022]\s+|[\d\u00bc\u00bd\u00be]+(?:[\s./\d\u00bc\u00bd\u00be]*)\s*(?:cups?|tsp|tbsp|teaspoons?|tablespoons?|oz|lbs?|g|kg|ml|cloves?|pieces?|cans?|eggs?)\b)/i.test(line)) ingredients.push(line.replace(/^[-*\u2022]\s*/, ''));
+      else if (/^(?:step\s*\d+|\d+[.)]\s+|(?:preheat|combine|mix|stir|bake|cook|heat|serve|chop|whisk|place|pour|bring)\b|add\s)/i.test(line)) steps.push(line);
+      else if (!title && !ingredients.length && !steps.length) title = line.replace(/^#+\s*/, '');
+      else if (steps.length) steps.push(line);
+      else if (ingredients.length) ingredients.push(line);
+    }
+    return { title: title, ingredients: ingredients.join('\n'), instructions: steps.join('\n'), servings: servings, prep: prep, cook: cook };
+  }
+  function review(data, source, raw, name) {
+    if (!data) { msg('No recipe text found. Paste a caption or choose a clearer screenshot.'); return; }
+    window.hub29ImportClose(); window.hub27OpenRecipe();
+    el('hub27Title').value = trim(name) || data.title || ''; el('hub27Ingredients').value = data.ingredients || ''; el('hub27Body').value = data.instructions || '';
+    el('hub28Servings').value = data.servings || ''; el('hub28Prep').value = data.prep || ''; el('hub28Cook').value = data.cook || '';
+    el('hub27Link').value = source || '';
+    if (data.photo && window.hub212.sourceUrl(data.photo)) el('hub28Photo').value = data.photo;
+    el('hub212RawExtract').value = raw || ''; el('hub212RawWrap').style.display = raw ? 'block' : 'none';
+    window.hub212.reviewFields(); el('hub27ModalStatus').textContent = 'Review the extracted details before saving. The original source link will be kept.';
+    // Keep canceled/failed imports intact, but don't reuse an old title or source
+    // when the user starts a different import after a successful extraction.
+    var draftIds = ['hub212ImportName', 'hub212Source', 'hub29RawText', 'hub29Link', 'hub29VideoLink', 'hub212Caption', 'hub29Photo', 'hub212SocialPhoto'];
+    for (var i = 0; i < draftIds.length; i++) el(draftIds[i]).value = '';
+    photos.photo = ''; photos.social = ''; fileVersions.photo++; fileVersions.social++;
+    el('hub29PhotoPreview').innerHTML = ''; el('hub212SocialPreview').innerHTML = '';
+  }
+  function remote(kind, value, source, name) {
+    var id = ++sequence, requestedToken = token(); setBusy(true); msg('Extracting recipe…');
+    activeRequest = request(kind, value, function (status, data) {
+      if (id !== sequence) return;
+      activeRequest = null; setBusy(false);
+      if (requestedToken !== token()) { msg('Your sign-in changed. Sign in again before importing.'); return; }
+      if (data.usage) showUsage(data.usage);
+      if (kind === 'image') window.hub212RefreshUsage();
+      if (status >= 200 && status < 300 && kind === 'image' && trim(data.rawText)) { review(parse(data.rawText), source, data.rawText, name); return; }
+      if (status >= 200 && status < 300 && data.title) { review(data, source, '', name); return; }
+      msg(data.error || 'Could not read this source. Paste the caption or enter the recipe manually.');
+    });
+  }
+  window.hub29Extract = function () {
+    if (busy) return;
+    var source = '', raw = '', name = trim(el('hub212ImportName').value), url;
+    if (method === 'link') {
+      url = window.hub212.sourceUrl(el('hub29Link').value);
+      if (!url) { msg('Enter a complete https:// recipe website link.'); return; }
+      if (window.hub212.sourceLabel(url) !== 'Recipe source') { el('hub29VideoLink').value = url; window.hub29Method('social'); msg('Post link saved. Paste the recipe caption or choose a screenshot below.'); return; }
+      remote('url', url, url, name); return;
+    }
+    source = window.hub212.sourceUrl(el(method === 'social' ? 'hub29VideoLink' : 'hub212Source').value);
+    if (source === null || (method === 'social' && !source)) { msg('Enter a complete https:// source link' + (method === 'social' ? ' for the social post.' : ', or leave it empty.')); return; }
+    if (method === 'social' || method === 'text') {
+      raw = trim(el(method === 'social' ? 'hub212Caption' : 'hub29RawText').value);
+      if (raw) { review(parse(raw), source, raw, name); return; }
+      if (method === 'text') { msg('Paste a recipe first.'); return; }
+    }
+    var target = method === 'social' ? 'social' : 'photo';
+    if (!photos[target]) { msg(method === 'social' ? 'Paste the post’s recipe caption or upload a screenshot. The link alone cannot read spoken video audio.' : 'Choose a JPG, PNG or WebP photo first.'); return; }
+    remote('image', photos[target], source, name);
+  };
+  var reviewIds = ['hub27Title', 'hub27Ingredients', 'hub27Body'];
+  for (var i = 0; i < reviewIds.length; i++) el(reviewIds[i]).addEventListener('input', window.hub212.reviewFields);
+  // Refresh only while visible and signed in; status reads never reserve OCR attempts.
+  var previousToken = token(), previousVisible = false;
+  setInterval(function () {
+    var currentToken = token(), visible = el('recipes').className.indexOf('active') >= 0;
+    if (currentToken !== previousToken || (visible && !previousVisible)) window.hub212RefreshUsage();
+    previousToken = currentToken; previousVisible = visible;
+  }, 2000);
+  setInterval(function () { if (el('recipes').className.indexOf('active') >= 0 && token()) window.hub212RefreshUsage(); }, 60000);
+  window.hub212RefreshUsage();
 })();
+
 </script>
 </body></html>
