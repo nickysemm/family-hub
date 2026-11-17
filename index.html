@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub v2.22 · Quick Actions</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub v2.23 · Pickup Defaults</title>
 
 <style>
 
@@ -1069,6 +1069,13 @@ body.hub220-display .wrap { padding: 16px 24px 10px; }
 }
 #hub222Pickup [data-pickup-id] small { display: block; color: #514662; margin-bottom: 2px; }
 
+</style><style>
+.hub223-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+.hub223-actions button { margin: 0 6px 6px 0; }
+.hub223-series { margin-top: 12px; padding-top: 8px; border-top: 1px solid #ddd2ed; }
+.hub223-series summary { min-height: 36px; padding: 7px 0; color: #473762; cursor: pointer; font-weight: 700; }
+.hub223-series p { margin: 4px 0 12px; color: #524163; font-size: 0.92rem; }
+.hub223-default-label { display: inline-block; margin: 0 6px 0 0; color: inherit; font-size: 0.86rem; }
 </style></head><body><header><div><h1>Our Family Hub</h1><div class="sub" id="dateTitle"></div></div><div class="right"><div class="pill" id="familyTimeGreeting" aria-label="Time of day greeting">☀ Family time</div><div id="clock"></div></div></header><main class="wrap"><div id="cloudLogin"><div class="authrow"><input id="hubEmail" type="email" placeholder="Family Hub email" autocomplete="username"><input id="hubPassword" type="password" placeholder="Password" autocomplete="current-password"><button type="button" id="hubSignInButton" onclick="hubSignIn()">Sign in</button></div><div id="hubStatus" class="status" role="status" aria-live="polite"></div><div id="hubCalendarStatus" class="status" role="status" aria-live="polite"></div></div><div class="nav"><button class="active" data-tab="home">Home</button><button data-tab="todayDisplay">Today</button><button data-tab="weekAhead">Week Ahead</button><button data-tab="calendar">Calendar</button><button data-tab="chores">Chores</button><button data-tab="routines">Routines</button><button data-tab="rewards">Rewards ⭐</button><button data-tab="shopping">Shopping</button><button data-tab="meals">Meals</button><button data-tab="recipes">Recipes</button><button data-tab="messages">Messages</button><button data-tab="reminders">Reminders</button><button data-tab="settings">Settings</button></div>
 
 <div class="hub26-profile-strip"><span id="hub26ProfileLabel">Profile: Family</span><button class="add" onclick="switchTab('settings')">Change profile</button></div><section class="tabs active" id="home"><div class="hub222-quick" aria-label="Quick actions" role="group" hidden>
@@ -1207,7 +1214,7 @@ body.hub220-display .wrap { padding: 16px 24px 10px; }
 <section class="tabs" id="messages"><div class="panel hub27-section"><div class="line"><div><h2>Family Message Board</h2><p class="muted">Pinned announcements and notes for everyone.</p></div><button class="add" onclick="hub27OpenNote()">+ New message</button></div><div id="hub27AllNotes" class="hub27-list">Loading…</div><p id="hub27NotesStatus" class="muted"></p></div></section>
 <section class="tabs" id="reminders"><div class="panel hub27-section"><div class="line"><div><h2>Household Reminders</h2><p class="muted">One-time and recurring family reminders.</p></div><button class="add" onclick="hub27OpenReminder()">+ Add reminder</button></div><div id="hub27AllReminders" class="hub27-list">Loading…</div><p id="hub27RemindersStatus" class="muted"></p></div></section>
 <section class="tabs" id="recipes"><div class="panel hub27-section"><div class="line"><div><h2>Family Recipe Box</h2><p class="muted">Bring in recipe websites, captions and screenshots. Keep the original post link, review the details, and save a family favorite.</p></div><div class="hub29-recipe-actions"><button class="primary" onclick="hub29ImportOpen()">✦ Import recipe</button><button class="add" onclick="hub27OpenRecipe()">Enter manually</button></div></div><div class="hub212-usage" aria-label="Shared photo import usage"><div><strong>Photo imports this month</strong><p id="hub212UsageText" role="status" aria-live="polite">Checking photo usage…</p><progress id="hub212UsageProgress" max="900" value="0" style="display:none" aria-label="Shared monthly photo attempts"></progress><p id="hub212UsageReset" class="muted"></p></div><button class="add" type="button" onclick="hub212RefreshUsage()">↻ Check usage</button></div><div class="hub213-toolbar"><div class="hub213-search"><label for="hub213Search">Find a recipe</label><input type="search" id="hub213Search" placeholder="Search names, ingredients or steps" oninput="hub213Filter(false)" onkeydown="if(event.keyCode===13){event.preventDefault();hub213Filter(true)}"></div><div class="hub213-category"><label for="hub213Category">Category</label><select id="hub213Category" onchange="hub213Filter(true)"><option value="">All categories</option><option>Family favorite</option><option>Breakfast</option><option>Lunch</option><option>Dinner</option><option>Dessert</option><option>Snack</option></select></div><button class="add" type="button" id="hub213Clear" onclick="hub213Clear()" disabled>Clear filters</button></div><div id="hub27AllRecipes" class="hub27-recipes">Loading…</div><p id="hub27RecipesStatus" class="muted" role="status" aria-live="polite"></p><div class="hub213-pages"><button class="add" id="hub213LoadMore" type="button" style="display:none" onclick="hub213More()">Load more recipes</button><button class="add" id="hub213Retry" type="button" style="display:none" onclick="hub213Load(true)">Try again</button></div></div></section>
-<div id="hub213Reader" class="hub213-reader-overlay" onclick="if(event.target===this)hub213CloseReader()"><section class="hub213-reader" role="dialog" aria-modal="true" aria-labelledby="hub213ReaderTitle"><div class="hub213-reader-head"><div class="hub213-reader-top"><p class="hub213-eyebrow">From our recipe box</p><button id="hub213ReaderClose" class="add" type="button" onclick="hub213CloseReader()">Close ✕</button></div><h2 id="hub213ReaderTitle"></h2><p id="hub213ReaderMeta"></p><div id="hub213ReaderSource"></div></div><div class="hub213-reader-content"><div id="hub216ReaderPortions" class="hub216-portions"><h3>Cook for your family</h3><div class="hub216-counts"><label for="hub216ReaderBase">Original servings<input type="number" inputmode="numeric" min="1" max="100" step="1" id="hub216ReaderBase" placeholder="Not recorded" oninput="hub216ReaderChange()"></label><label for="hub216ReaderTarget">Make servings<input type="number" inputmode="numeric" min="1" max="100" step="1" id="hub216ReaderTarget" placeholder="Enter servings" oninput="hub216ReaderChange()"></label></div><p id="hub216ReaderStatus" role="status" aria-live="polite"></p><p class="muted">Clear amounts scale automatically. Ranges, package sizes and vague amounts stay as written. Cooking times and temperatures stay the same.</p></div><div id="hub213ReaderPhoto" class="hub213-reader-photo"></div><div class="hub213-reader-columns"><div class="hub213-ingredients"><h3>Ingredients</h3><p class="muted">Tick items as you cook. Checks reset when you close.</p><ul id="hub213ReaderIngredients"></ul></div><div class="hub213-method"><h3>Method</h3><ol id="hub213ReaderSteps"></ol></div></div><div class="hub213-reader-actions"><button class="primary" id="hub216ReaderShopping" type="button" onclick="hub213ReaderAction('shopping')">Ingredients → Shopping</button><button class="add" id="hub214ReaderPlan" type="button" onclick="hub213ReaderAction('meal')">Plan meal</button><button class="add" id="hub214ReaderEdit" type="button" onclick="hub213ReaderAction('edit')">Edit recipe</button></div></div></section></div><div style="display:none"><div id="sharedShoppingHome"></div><div id="shoppingAll"></div><select id="sharedStoreFilter"><option value="All">All stores</option></select><div id="mealEditor"></div><select id="shoppingCategory"><option>Groceries</option></select></div><section class="tabs" id="settings"><div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub v2.22 | iPad Air (iOS 12) | Shared family organizer</div></main>
+<div id="hub213Reader" class="hub213-reader-overlay" onclick="if(event.target===this)hub213CloseReader()"><section class="hub213-reader" role="dialog" aria-modal="true" aria-labelledby="hub213ReaderTitle"><div class="hub213-reader-head"><div class="hub213-reader-top"><p class="hub213-eyebrow">From our recipe box</p><button id="hub213ReaderClose" class="add" type="button" onclick="hub213CloseReader()">Close ✕</button></div><h2 id="hub213ReaderTitle"></h2><p id="hub213ReaderMeta"></p><div id="hub213ReaderSource"></div></div><div class="hub213-reader-content"><div id="hub216ReaderPortions" class="hub216-portions"><h3>Cook for your family</h3><div class="hub216-counts"><label for="hub216ReaderBase">Original servings<input type="number" inputmode="numeric" min="1" max="100" step="1" id="hub216ReaderBase" placeholder="Not recorded" oninput="hub216ReaderChange()"></label><label for="hub216ReaderTarget">Make servings<input type="number" inputmode="numeric" min="1" max="100" step="1" id="hub216ReaderTarget" placeholder="Enter servings" oninput="hub216ReaderChange()"></label></div><p id="hub216ReaderStatus" role="status" aria-live="polite"></p><p class="muted">Clear amounts scale automatically. Ranges, package sizes and vague amounts stay as written. Cooking times and temperatures stay the same.</p></div><div id="hub213ReaderPhoto" class="hub213-reader-photo"></div><div class="hub213-reader-columns"><div class="hub213-ingredients"><h3>Ingredients</h3><p class="muted">Tick items as you cook. Checks reset when you close.</p><ul id="hub213ReaderIngredients"></ul></div><div class="hub213-method"><h3>Method</h3><ol id="hub213ReaderSteps"></ol></div></div><div class="hub213-reader-actions"><button class="primary" id="hub216ReaderShopping" type="button" onclick="hub213ReaderAction('shopping')">Ingredients → Shopping</button><button class="add" id="hub214ReaderPlan" type="button" onclick="hub213ReaderAction('meal')">Plan meal</button><button class="add" id="hub214ReaderEdit" type="button" onclick="hub213ReaderAction('edit')">Edit recipe</button></div></div></section></div><div style="display:none"><div id="sharedShoppingHome"></div><div id="shoppingAll"></div><select id="sharedStoreFilter"><option value="All">All stores</option></select><div id="mealEditor"></div><select id="shoppingCategory"><option>Groceries</option></select></div><section class="tabs" id="settings"><div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub v2.23 | iPad Air (iOS 12) | Shared family organizer</div></main>
 
 <div class="modalcover" id="hub29ImportOverlay" style="display:none"><div class="modal hub29-import-modal" role="dialog" aria-modal="true" aria-labelledby="hub29ImportTitle">
 <div class="hub29-import-head"><div><span class="hub29-kicker">✦ SOCIAL RECIPE BOX</span><h2 id="hub29ImportTitle">Bring a recipe home</h2><p class="muted">Choose a source, then check the details before saving.</p></div><button type="button" class="hub29-close" onclick="hub29ImportClose()" aria-label="Close">×</button></div>
@@ -2946,6 +2953,7 @@ render();window.hub217Refresh(true);
   var owner = '';
   var roster = [];
   var assignments = {};
+  var pickups = {};
   var state = 'loading';
   var lastRead = 0;
   var requestKey = '';
@@ -2995,6 +3003,11 @@ render();window.hub217Refresh(true);
     return p ? '<span class="hub221-badge hub221-tone-' + p.tone + '">' + esc(prefix + p.name) + '</span>' : '';
   }
   function atHome() { return readPreference('view') === 'home' && state === 'ready'; }
+  function effectiveAssignment(id) {
+    var day = assignments[id];
+    if (day && !day.use_pickup_default) return day;
+    return pickups[id] && pickups[id].applies ? pickups[id] : null;
+  }
 
   function rpc(action, payload, token, callback) {
     var xhr = new XMLHttpRequest();
@@ -3022,6 +3035,7 @@ render();window.hub217Refresh(true);
     owner = next;
     roster = [];
     assignments = {};
+    pickups = {};
     state = 'loading';
     requestKey = '';
     lastRead = 0;
@@ -3073,11 +3087,13 @@ render();window.hub217Refresh(true);
       lastRead = Date.now();
       rpc('state', { p_event_ids: ids }, token, function (result) {
         if (request !== readId || auth() !== token) return;
-        if (!valid(result)) { state = 'unavailable'; assignments = {}; renderFilters(); return; }
+        if (!valid(result)) { state = 'unavailable'; assignments = {}; pickups = {}; renderFilters(); return; }
         state = 'ready';
         updateRoster(result);
         assignments = {};
+        pickups = {};
         result.assignments.forEach(function (item) { assignments[item.event_id] = item; });
+        (result.pickups || []).forEach(function (item) { pickups[item.event_id] = item; });
         renderFilters();
       });
     }
@@ -3086,7 +3102,7 @@ render();window.hub217Refresh(true);
     var byDate = {};
     Object.keys(calendar.byDate).forEach(function (day) {
       byDate[day] = calendar.byDate[day].filter(function (event) {
-        var item = assignments[event.id];
+        var item = effectiveAssignment(event.id);
         return !atHome() || !item || !profile(item.subject_id) ||
           home.indexOf(item.subject_id) >= 0 || home.indexOf(item.handler_id) >= 0;
       });
@@ -3101,8 +3117,9 @@ render();window.hub217Refresh(true);
     return children.filter(function (person) { return ids.indexOf(person.id) >= 0; });
   };
   window.hub221Badges = function (id) {
-    var item = auth() === owner && state === 'ready' ? assignments[id] : null;
-    return item ? badge(item.subject_id, 'For ') + badge(item.handler_id, 'Handling it: ') : '';
+    var item = auth() === owner && state === 'ready' ? effectiveAssignment(id) : null;
+    return item ? badge(item.subject_id, 'For ') + badge(item.handler_id, 'Handling it: ') +
+      (item === pickups[id] ? '<small class="hub223-default-label">Usual pickup</small>' : '') : '';
   };
   window.hub221Reset = function () { syncOwner(''); };
 
@@ -3115,7 +3132,7 @@ render();window.hub217Refresh(true);
     }
     return result;
   }
-  function editorLoad(eventId) {
+  function editorLoad(eventId, message, focusPicker) {
     var token = auth();
     syncOwner(token);
     if (!token || !uuid(eventId)) return;
@@ -3131,20 +3148,41 @@ render();window.hub217Refresh(true);
         return;
       }
       updateRoster(result);
-      var saved = result.assignments[0] || {};
-      editor = { eventId: eventId, revision: saved.revision || null, busy: false };
-      root.innerHTML = '<h3>Family assignment</h3><label>For<select name="subject">' +
-        options(saved.subject_id, 'Everyone') + '</select></label><label>Who’s handling it?<select name="handler">' +
-        options(saved.handler_id, 'Unassigned') + '</select></label><p role="status"></p>' +
-        '<button type="submit" class="primary">Save assignment</button>' +
-        '<button type="button" class="add" data-reload hidden>Reload assignment</button>';
+      var saved = result.assignments[0];
+      var pickup = result.pickups && result.pickups[0];
+      var override = saved && !saved.use_pickup_default;
+      var effective = override ? saved : pickup && pickup.applies ? pickup : {};
+      editor = { eventId: eventId, revision: saved && saved.revision || null, pickup: pickup, busy: false };
+      root.innerHTML = '<h3 tabindex="-1">' + (pickup ? 'This pickup' : 'Family assignment') + '</h3>' +
+        '<label>For<select name="subject">' + options(effective.subject_id, 'Everyone') +
+        '</select></label><label>Who’s handling it?<select name="handler">' +
+        options(effective.handler_id, 'Unassigned') + '</select></label><div class="hub223-actions">' +
+        '<button type="submit" class="primary">' + (pickup ? 'Save this day' : 'Save assignment') + '</button>' +
+        (pickup && override ? '<button type="button" class="add" data-pickup-edit="reset">' +
+          (pickup.applies ? 'Use usual pickup' : 'Clear this day’s assignment') + '</button>' : '') +
+        '</div>' + (pickup ? pickupEditor(pickup, effective, focusPicker) : '') +
+        '<p role="status"></p><button type="button" class="add" data-reload hidden>Reload assignment</button>';
+      root.querySelector('[role="status"]').textContent = message || '';
+      if (message) root.querySelector(focusPicker ? 'summary' : 'h3').focus();
     });
   }
 
-  el('hub221Editor').addEventListener('submit', function (event) {
-    event.preventDefault();
+  function pickupEditor(pickup, effective, opened) {
+    var label = profile(pickup.handler_id);
+    return '<details class="hub223-series"' + (opened ? ' open' : '') + '><summary>Usual pickup' +
+      (label ? ' · ' + esc(label.name) : '') + '</summary>' +
+      '<p>Matching pickups in this calendar series share the default. An assignment for one day takes priority.</p>' +
+      '<label>Usual pickup for<select name="usualSubject">' + options(pickup.subject_id || effective.subject_id, 'Choose a person') +
+      '</select></label><label>Usual pickup handled by<select name="usualHandler">' +
+      options(pickup.handler_id || effective.handler_id, 'Choose a person') + '</select></label><div class="hub223-actions">' +
+      '<button type="button" class="add" data-pickup-edit="set">Save usual pickup</button>' +
+      (pickup.subject_id || pickup.handler_id ? '<button type="button" class="add" data-pickup-edit="off">Turn off usual pickup</button>' : '') +
+      '</div></details>';
+  }
+
+  function editorSave(action) {
     if (!editor || editor.busy || auth() !== owner) return;
-    var root = this;
+    var root = el('hub221Editor');
     var generation = editorId;
     var token = owner;
     var row = editor;
@@ -3152,16 +3190,35 @@ render();window.hub217Refresh(true);
     var status = root.querySelector('[role="status"]');
     var subject = root.elements.subject.value || null;
     var handler = root.elements.handler.value || null;
+    var editingDefault = action === 'set' || action === 'off';
+    var endpoint = 'save';
+    var payload = { p_event_id: row.eventId, p_revision: row.revision };
+    if (editingDefault) {
+      endpoint = 'pickup_default_save';
+      payload.p_revision = row.pickup.revision || null;
+      subject = action === 'set' ? root.elements.usualSubject.value || null : null;
+      handler = action === 'set' ? root.elements.usualHandler.value || null : null;
+      if (action === 'set' && (!subject || !handler)) {
+        status.textContent = 'Choose who the usual pickup is for and who handles it.';
+        return;
+      }
+    } else if (action === 'reset') {
+      endpoint = 'use_pickup_default';
+    }
+    if (action !== 'reset') {
+      payload.p_subject_id = subject;
+      payload.p_handler_id = handler;
+    }
     row.busy = true;
     for (var i = 0; i < fields.length; i++) fields[i].disabled = true;
     status.textContent = 'Saving…';
-    rpc('save', { p_event_id: row.eventId, p_subject_id: subject, p_handler_id: handler,
-      p_revision: row.revision }, token, function (result) {
+    rpc(endpoint, payload, token, function (result) {
       if (auth() !== token) return;
       if (result && result.ok) {
         readId++;
         lastRead = 0;
-        if (result.revision) assignments[row.eventId] = {
+        if (action === 'reset') delete assignments[row.eventId];
+        if (action === 'day' && result.revision) assignments[row.eventId] = {
           subject_id: subject, handler_id: handler, revision: result.revision
         };
       }
@@ -3169,18 +3226,27 @@ render();window.hub217Refresh(true);
       row.busy = false;
       for (var j = 0; j < fields.length; j++) fields[j].disabled = false;
       if (result && result.ok) {
-        row.revision = result.revision;
-        status.textContent = 'Assignment saved.';
-        if (window.hub222Notice) window.hub222Notice('Assignment saved.');
-      } else {
-        status.textContent = result && result.message || 'Could not confirm the save. Reload the assignment before retrying.';
-        root.querySelector('[data-reload]').hidden = false;
-        root.querySelector('[type="submit"]').disabled = true;
+        var message = { day: 'Assignment saved.', reset: row.pickup && row.pickup.applies ?
+          'This day now uses the usual pickup.' : 'Assignment cleared.',
+          set: 'Usual pickup saved.', off: 'Usual pickup turned off.' }[action];
+        if (window.hub222Notice) window.hub222Notice(message);
+        if (row.pickup) editorLoad(row.eventId, message, editingDefault);
+        else { row.revision = result.revision; status.textContent = message; }
+        return;
       }
+      status.textContent = result && result.message || 'Could not confirm the save. Reload the assignment before retrying.';
+      root.querySelector('[data-reload]').hidden = false;
+      root.querySelectorAll('[type="submit"], [data-pickup-edit]').forEach(function (button) { button.disabled = true; });
     });
+  }
+  el('hub221Editor').addEventListener('submit', function (event) {
+    event.preventDefault();
+    editorSave('day');
   });
   el('hub221Editor').addEventListener('click', function (event) {
     if (editor && event.target.hasAttribute('data-reload')) editorLoad(editor.eventId);
+    var action = event.target.getAttribute('data-pickup-edit');
+    if (editor && editor.pickup && action) editorSave(action);
   });
   el('hub221Filters').addEventListener('click', function (event) {
     var mode = event.target.getAttribute('data-view');
