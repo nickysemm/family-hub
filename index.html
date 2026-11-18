@@ -1205,6 +1205,9 @@ body.hub300-app.hub300-kitchen #todayDisplay p.hub220-large { font-size: 30px; }
   body.hub300-app > header.hub300-header { min-height: 64px; padding: 10px 16px; }
   body.hub300-app .wrap { padding: 18px 14px 100px; }
   body.hub300-app #todayDisplay .hub220-header h2 { font-size: 30px; }
+  body.hub300-app .hub220-header > div:first-child { flex: 1 1 100%; }
+  body.hub300-app .hub220-header-tools { width: 100%; justify-content: space-between; margin-top: 12px; }
+  body.hub300-app .hub220-header-tools > * { margin-left: 0; }
   body.hub300-app #hub220Date { font-size: 15px; }
   body.hub300-app #hub220Clock { font-size: 26px; }
   body.hub300-app #todayDisplay .hub220-card { padding: 16px; }
@@ -1546,6 +1549,49 @@ var HUB_PUBLISHABLE_KEY = 'sb_publishable_hf4kM81xPrujlhug1b9Bvw_8jPiD6Pd';
 
 var accessToken='', refreshToken='', expiry=0;
 var authGeneration=0, calendarLoading=false, calendarTimer=null;
+// Keep the calendar's in-memory session aligned with the shared browser session.
+function invalidateCalendarReads() {
+  authGeneration++;
+  calendarLoading = false;
+  if (calendarTimer) clearTimeout(calendarTimer);
+  calendarTimer = null;
+  hubCurrentUserId = '';
+}
+function syncStoredSession() {
+  var saved;
+  try { saved = JSON.parse(localStorage.getItem('familyHubSession') || 'null'); }
+  catch (error) { return false; }
+  var nextAccess = saved && typeof saved.accessToken === 'string' ? saved.accessToken : '';
+  var nextRefresh = saved && typeof saved.refreshToken === 'string' ? saved.refreshToken : '';
+  if (nextAccess === accessToken && nextRefresh === refreshToken) {
+    if (saved && saved.expiry) expiry = saved.expiry;
+    return false;
+  }
+  invalidateCalendarReads();
+  accessToken = nextAccess;
+  refreshToken = nextRefresh;
+  expiry = saved && saved.expiry || 0;
+  window.familyHubRefresh([]);
+  status(accessToken ? 'Signed in' : 'Signed out');
+  calendarStatus(accessToken ? 'Calendar connecting...' : 'Calendar not loaded');
+  if (accessToken) loadEvents();
+  return true;
+}
+function refresh(done) {
+  if (!refreshToken) { done(false); return; }
+  var generation = authGeneration, requestedRefresh = refreshToken;
+  request('/auth/v1/token?grant_type=refresh_token', 'POST', { refresh_token: requestedRefresh }, null, function (code, data) {
+    if (generation !== authGeneration || requestedRefresh !== refreshToken) return;
+    if (syncStoredSession()) return;
+    if (code === 200 && data && data.access_token) { setSession(data); done(true); }
+    else done(false);
+  });
+}
+window.addEventListener('storage', function (event) {
+  if (event.key === 'familyHubSession' || event.key === null) syncStoredSession();
+});
+document.addEventListener('visibilitychange', function () { if (!document.hidden) tick(); });
+
 
 function el(id){return document.getElementById(id)}
 
@@ -1553,6 +1599,7 @@ function status(t){var si=el('hubSignInButton'),so=el('hubSignOutButton');if(si)
 var hub219CalendarOwner='', hub219CalendarStatus='loading';
 var hub220CalendarCheckedAt=0;
 window.hub219CalendarWeek=function(dates,auth){
+  if(auth!==accessToken)syncStoredSession();
   var state=auth&&auth===accessToken&&auth===hub219CalendarOwner?hub219CalendarStatus:'loading';
   return {status:state,checkedAt:state==='ready'?hub220CalendarCheckedAt:0,byDate:state==='ready'?window.hub219EventsForDates(dates):{}};
 };
@@ -1592,7 +1639,7 @@ function request(path,method,payload,token,done){
 
 }
 
-function setSession(data){hubCurrentUserId='';accessToken=data.access_token;refreshToken=data.refresh_token;expiry=Date.now()+(data.expires_in||3600)*1000;try{localStorage.setItem('familyHubSession',JSON.stringify({accessToken:accessToken,refreshToken:refreshToken,expiry:expiry}))}catch(e){}}
+function setSession(data){invalidateCalendarReads();accessToken=data.access_token;refreshToken=data.refresh_token;expiry=Date.now()+(data.expires_in||3600)*1000;try{localStorage.setItem('familyHubSession',JSON.stringify({accessToken:accessToken,refreshToken:refreshToken,expiry:expiry}))}catch(e){}}
 
 function loadEvents(){
  if(!accessToken||calendarLoading)return;
@@ -1618,14 +1665,21 @@ function loadEvents(){
   }
  });
 }
-window.hubRetryCalendar=function(){calendarLoading=false;if(calendarTimer)clearTimeout(calendarTimer);loadEvents()};
+window.hubRetryCalendar=function(){if(syncStoredSession())return;calendarLoading=false;if(calendarTimer)clearTimeout(calendarTimer);loadEvents()};
 
 var hubCurrentUserId='', hubSelectedEventId='', changeInFlight=false;
 function safeText(s){return String(s===null||s===undefined?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
 function localDateValue(d){return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)}
 function localTimeValue(d){return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2)}
 function setDetailStatus(msg){el('changeStatus').textContent=msg}
-function requestCurrentUser(done){if(hubCurrentUserId){done(hubCurrentUserId);return}request('/auth/v1/user','GET',null,accessToken,function(code,user){if(code===200&&user&&user.id){hubCurrentUserId=user.id;done(user.id)}else done(null)})}
+function requestCurrentUser(done){
+  if(hubCurrentUserId){done(hubCurrentUserId);return}
+  var generation=authGeneration;
+  request('/auth/v1/user','GET',null,accessToken,function(code,user){
+    if(generation!==authGeneration){done(null);return}
+    if(code===200&&user&&user.id){hubCurrentUserId=user.id;done(user.id)}else done(null)
+  });
+}
 window.closeHubDetails=function(){el('detailModal').className='modalcover'};
 window.closeHubEdit=function(){el('editModal').className='modalcover'};
 window.openHubDetails=function(id){
@@ -1710,7 +1764,7 @@ window.hubSubmitFamilyEvent=function(e){
   });
  });
 };
-function refresh(done){if(!refreshToken){done(false);return}request('/auth/v1/token?grant_type=refresh_token','POST',{refresh_token:refreshToken},null,function(code,data){if(code===200&&data&&data.access_token){setSession(data);done(true)}else{done(false)}})}
+
 
 window.hubSignIn=function(){if(HUB_PUBLISHABLE_KEY.indexOf('PASTE_')===0){status('Add your Supabase publishable key to the HTML first.');return}var email=el('hubEmail').value,password=el('hubPassword').value;if(!email||!password){status('Enter email and password.');return}authGeneration++;var signInGeneration=authGeneration;calendarLoading=false;if(calendarTimer)clearTimeout(calendarTimer);status('');var loginWatch=setTimeout(function(){if(signInGeneration===authGeneration&&!accessToken)status('Sign-in is taking too long. Check connection, then try again.');},18000);request('/auth/v1/token?grant_type=password','POST',{email:email,password:password},null,function(code,data){clearTimeout(loginWatch);if(signInGeneration!==authGeneration)return;el('hubPassword').value='';if(code===200&&data&&data.access_token){setSession(data);status('Signed in');calendarStatus('Calendar connecting...');loadEvents()}else{status(code===0?'Sign-in could not reach the server. Check internet connection and try again.':'Sign-in failed (HTTP '+code+'). Check account and email confirmation.')}})};
 
@@ -1718,7 +1772,7 @@ window.hubSignOut=function(){authGeneration++;calendarLoading=false;if(calendarT
 
 try{var saved=JSON.parse(localStorage.getItem('familyHubSession')||'null');if(saved){accessToken=saved.accessToken;refreshToken=saved.refreshToken;expiry=saved.expiry}}catch(e){}
 
-function tick(){if(!accessToken)return;if(Date.now()>expiry-120000){refresh(function(ok){if(ok)loadEvents();else window.hubSignOut()})}else loadEvents()}
+function tick(){if(syncStoredSession())return;if(!accessToken)return;if(Date.now()>expiry-120000){refresh(function(ok){if(ok)loadEvents();else window.hubSignOut()})}else loadEvents()}
 
 if(accessToken){status('Signed in');tick()}else{status('Signed out');calendarStatus('Calendar not loaded')}setInterval(tick,300000);setInterval(function(){var c=el('hubCalendarStatus');if(!c||!accessToken)return;if(/Loading calendar|Calendar connecting/i.test(c.textContent)&&!calendarLoading){var ev=window.familyHubCloudEvents||[];calendarStatus('Calendar ready · '+ev.length+' events loaded')}},4000)
 
