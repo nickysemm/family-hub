@@ -1094,6 +1094,8 @@ body.hub220-display .wrap { padding: 16px 24px 10px; }
 }
 </style><style>
 .hub225-reminders { margin-top: 13px; background: #f3f8ef; }
+.hub225-bottom { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-gap: 13px; margin-top: 13px; }
+.hub225-bottom > .hub220-card { margin-top: 0; }
 .hub225-reminder { display: flex; align-items: center; justify-content: space-between; margin: 11px 0; padding: 12px 14px; border-radius: 9px; background: #fffdf8; gap: 12px; }
 .hub225-reminder div { min-width: 0; }
 .hub225-reminder strong { display: block; word-wrap: break-word; overflow-wrap: anywhere; }
@@ -1103,6 +1105,8 @@ body.hub220-display .wrap { padding: 16px 24px 10px; }
 .hub225-reminder button { flex-shrink: 0; }
 .hub225-reminders button { min-height: 42px; }
 @media (max-width: 500px) {
+  .hub225-bottom { display: block; }
+  .hub225-bottom > .hub220-card + .hub220-card { margin-top: 13px; }
   .hub225-reminder { padding: 10px 12px; flex-wrap: wrap; }
 }
 </style></head><body><header><div><h1>Our Family Hub</h1><div class="sub" id="dateTitle"></div></div><div class="right"><div class="pill" id="familyTimeGreeting" aria-label="Time of day greeting">☀ Family time</div><div id="clock"></div></div></header><main class="wrap"><div id="cloudLogin"><div class="authrow"><input id="hubEmail" type="email" placeholder="Family Hub email" autocomplete="username"><input id="hubPassword" type="password" placeholder="Password" autocomplete="current-password"><button type="button" id="hubSignInButton" onclick="hubSignIn()">Sign in</button></div><div id="hubStatus" class="status" role="status" aria-live="polite"></div><div id="hubCalendarStatus" class="status" role="status" aria-live="polite"></div></div><div class="nav"><button class="active" data-tab="home">Home</button><button data-tab="todayDisplay">Today</button><button data-tab="weekAhead">Week Ahead</button><button data-tab="calendar">Calendar</button><button data-tab="chores">Chores</button><button data-tab="routines">Routines</button><button data-tab="rewards">Rewards ⭐</button><button data-tab="shopping">Shopping</button><button data-tab="meals">Meals</button><button data-tab="recipes">Recipes</button><button data-tab="messages">Messages</button><button data-tab="reminders">Reminders</button><button data-tab="settings">Settings</button></div>
@@ -1162,6 +1166,7 @@ body.hub220-display .wrap { padding: 16px 24px 10px; }
         </article>
       </div>
     </div>
+    <div class="hub225-bottom">
     <article class="hub220-card hub225-reminders" id="hub225Reminders" aria-labelledby="hub225RemindersTitle" hidden>
       <div class="hub224-heading">
         <h3 id="hub225RemindersTitle">Due reminders</h3>
@@ -1186,6 +1191,7 @@ body.hub220-display .wrap { padding: 16px 24px 10px; }
         <button class="add" id="hub224RetryNotes" type="button" hidden>Retry messages</button>
       </div>
     </article>
+    </div>
     <label class="hub220-start">
       <input type="checkbox" id="hub220Start"> Start on Today on this device
     </label>
