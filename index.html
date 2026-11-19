@@ -1239,7 +1239,7 @@ body.hub300-app #calendar .hub310-open { background: #6b4f80 !important; color: 
 .hub310-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); grid-gap: 12px; }
 .hub310-actions { display: flex; flex-wrap: wrap; margin-top: 12px; }
 .hub310-actions button { margin: 0 8px 8px 0; }
-#hub310Status, #hub310ListStatus { color: #6a4c7d; font-size: 14px; white-space: pre-wrap; }
+#hub310Status, #hub310ReviewStatus, #hub310ListStatus { color: #6a4c7d; font-size: 14px; white-space: pre-wrap; }
 .hub310-card { margin: 14px 0; padding: 15px; border: 1px solid #e0d6e8; border-radius: 12px; background: #faf7fc; }
 .hub310-card legend { font-weight: 700; color: #503860; padding: 0 5px; }
 .hub310-evidence { margin: 10px 0; color: #766783; white-space: pre-wrap; overflow-wrap: anywhere; }
@@ -4699,6 +4699,7 @@ render();window.hub217Refresh(true);
       <h3>Review the suggestions</h3><p class="muted">Check each date and time. Use Save draft to keep edits for later.</p>
       <div id="hub310Cards"></div>
       <div class="hub310-actions"><button type="button" class="primary" id="hub310Apply">Add selected</button><button type="button" class="add" id="hub310Save">Save draft</button><button type="button" class="add" id="hub310Reload">Reload saved version</button><button type="button" class="add" id="hub310Archive">Archive message</button></div>
+      <p id="hub310ReviewStatus"></p>
     </div>
     <div class="hub310-history">
       <div class="line"><h3>Saved messages</h3><label><input type="checkbox" id="hub310Archived"> Show archived</label></div>
@@ -4802,7 +4803,7 @@ render();window.hub217Refresh(true);
   function esc(value){return String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
   function token(){try{var s=JSON.parse(localStorage.getItem('familyHubSession')||'null');return s&&s.accessToken||'';}catch(error){return '';}}
   function identity(){var t=token();if(!t)return '';try{return JSON.parse(atob(t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).sub||t;}catch(error){return t;}}
-  function status(text){el('Status').textContent=text;}
+  function status(text){el('Status').textContent=text;el('ReviewStatus').textContent=text;}
   function lock(value){busy=value;['Analyze','New','Apply','Save','Reload','Archive','CheckDraft'].forEach(function(id){el(id).disabled=value;});
     Array.prototype.forEach.call(el('Cards').querySelectorAll('input,select'),function(field){field.disabled=value||field.getAttribute('data-locked')==='true';});}
   function call(path,data,done,edge){
