@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub 3.0</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub 3.1</title>
 
 <style>
 
@@ -1227,6 +1227,30 @@ body.hub300-app.hub300-kitchen #todayDisplay p.hub220-large { font-size: 30px; }
 }
 @media (prefers-reduced-motion: reduce) { .hub300-app * { scroll-behavior: auto !important; } }
 
+</style><style>
+body.hub300-app #calendar .hub310-open { background: #6b4f80 !important; color: #fff !important; }
+#hub310Modal .modal { max-width: 820px; }
+#hub310Modal label { display: block; margin: 9px 0; color: #584464; font-size: 14px; }
+#hub310Modal input:not([type="checkbox"]), #hub310Modal select, #hub310Modal textarea { width: 100%; min-height: 42px; padding: 10px; margin-top: 4px; border: 1px solid #d8cedf; border-radius: 8px; font: inherit; background: white; color: #342d40; }
+#hub310Modal textarea { min-height: 110px; resize: vertical; }
+#hub310Modal button { min-height: 42px; }
+#hub310Modal [hidden] { display: none !important; }
+.hub310-intake, .hub310-history { margin-top: 18px; padding-top: 14px; border-top: 1px solid #e5ddee; }
+.hub310-fields { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); grid-gap: 12px; }
+.hub310-actions { display: flex; flex-wrap: wrap; margin-top: 12px; }
+.hub310-actions button { margin: 0 8px 8px 0; }
+#hub310Status, #hub310ListStatus { color: #6a4c7d; font-size: 14px; white-space: pre-wrap; }
+.hub310-card { margin: 14px 0; padding: 15px; border: 1px solid #e0d6e8; border-radius: 12px; background: #faf7fc; }
+.hub310-card legend { font-weight: 700; color: #503860; padding: 0 5px; }
+.hub310-evidence { margin: 10px 0; color: #766783; white-space: pre-wrap; overflow-wrap: anywhere; }
+.hub310-note { color: #8a633d; font-size: 13px; }
+.hub310-receipt { font-weight: 650; color: #4d7155; }
+.hub310-history label { display: inline-flex !important; align-items: center; }
+.hub310-history input { margin-right: 7px; }
+.hub310-history-item { width: 100%; display: block; text-align: left; margin: 7px 0; padding: 12px; background: #f1edf7; color: #503860; border-radius: 9px; }
+.hub310-history-item small { display: block; margin-top: 4px; color: #766783; }
+@media(max-width:500px) { .hub310-fields { display: block; } #hub310Modal .modal { padding: 15px !important; } }
+
 </style></head><body class="hub300-app"><a class="hub300-skip" href="#hub300Main">Skip to content</a>
 <header class="hub300-header" id="hub300Header">
   <button type="button" class="hub300-brand" id="hub300Home" aria-label="Family Hub Today">Family Hub<span aria-hidden="true">✦</span></button>
@@ -1263,7 +1287,7 @@ body.hub300-app.hub300-kitchen #todayDisplay p.hub220-large { font-size: 30px; }
 </div>
 <div class="hub27-hero"><div class="hub27-hero-orb"></div><div class="hub27-hero-inner"><div class="hub27-kicker">✦ THE FAMILY SPACE</div><h2>Good to have you home.</h2><p>Everything your family needs, beautifully together.</p><div class="hub27-hero-actions"><button onclick="hub27OpenNote()">✎ Leave a note</button><button onclick="hub27OpenReminder()">＋ Reminder</button></div></div><button class="hub27-weather" onclick="hub27WeatherDetails()" title="Weather forecast"><span id="hub27WeatherIcon">☀</span><strong id="hub27WeatherHigh">--°</strong><small id="hub27WeatherDesc">Today's high</small></button></div><div class="hub27-feature-grid"><div class="hub27-feature-card hub27-purple"><div class="hub27-feature-symbol">▦</div><strong>Today's schedule</strong><span>See your calendar below</span><button onclick="switchTab('calendar')">Open calendar ↗</button><button type="button" onclick="switchTab('weekAhead')">Week Ahead ↗</button></div><div class="hub27-feature-card hub27-teal"><div class="hub27-feature-symbol">✓</div><strong>Family chores</strong><span>Stay on top of the day</span><button onclick="switchTab('chores')">See chores ↗</button></div><div class="hub27-feature-card hub27-coral"><div class="hub27-feature-symbol">◉</div><strong>What's for dinner?</strong><span id="hub27DinnerSummary">Check the meal plan</span><button onclick="switchTab('meals')">Meal planner ↗</button></div></div><div class="hub27-home-grid"><div class="hub27-home-panel"><div class="hub27-heading"><div><span class="hub27-eyebrow">STAY CONNECTED</span><h2>Family message board</h2></div><button class="hub27-round" onclick="hub27OpenNote()">＋</button></div><div id="hub27HomeNotes" class="hub27-list">Loading messages…</div><button class="hub27-text-button" onclick="switchTab('messages')">All family messages →</button></div><div class="hub27-home-panel"><div class="hub27-heading"><div><span class="hub27-eyebrow">DON'T FORGET</span><h2>Upcoming reminders</h2></div><button class="hub27-round" onclick="hub27OpenReminder()">＋</button></div><div id="hub27HomeReminders" class="hub27-list">Loading reminders…</div><button class="hub27-text-button" onclick="switchTab('reminders')">All reminders →</button></div></div><div class="hub27-home-panel"><div class="hub27-heading"><div><h2>School morning</h2></div><button class="add" type="button" onclick="switchTab('routines')">Open routines ↗</button></div><div class="muted" id="hub218HomeSummary">Open the checklist for your morning.</div></div><div class="hub27-home-panel hub217-home"><div class="hub27-heading"><div><span class="hub27-eyebrow">SMALL EFFORTS, HAPPY MOMENTS</span><h2>Stars worth celebrating</h2></div><button class="add" type="button" onclick="switchTab('rewards')">Family rewards ↗</button></div><div id="hub217HomeStars" class="hub217-home-stars"></div></div><div class="hub27-home-panel hub27-celebrations"><div class="hub27-heading"><div><span class="hub27-eyebrow">WORTH CELEBRATING</span><h2>Birthdays & anniversaries</h2></div><span class="hub27-confetti">✦ ✳</span></div><div id="hub27Birthdays" class="hub27-list">Checking connected calendar…</div></div><div class="layout"><div class="stack"><div class="panel"><div class="line"><h2>This Week</h2><button class="add" style="background:linear-gradient(112deg,#bfe7ff,#bdf2df,#ffe98d)!important" onclick="showEvent()">+ Add event</button></div><div class="week" id="week"></div><div class="muted" style="margin-bottom:7px">Tap a day to see its events below.</div><div id="events"></div><div id="eventRequestsStatus" class="muted" aria-live="polite"></div></div></div><div class="stack"><div class="panel"><div class="line"><h2>Family Chores</h2><div style="display:flex;gap:7px;flex-wrap:wrap"><button class="add" style="background:linear-gradient(112deg,#ffd0e9,#e4d7fa,#bfe7ff)!important" onclick="hubShowAddChore()">+ Add chore</button><button class="add" style="background:linear-gradient(112deg,#bdf2df,#ffe98d)!important" onclick="switchTab('chores')">See all</button></div></div><div id="choreHomeSummary" class="chore-home-summary"></div><div id="choresHome"></div></div><div class="panel"><div class="line"><h2>Tonight's Dinner</h2><button class="add" style="background:linear-gradient(112deg,#e4d7fa,#ffd0e9,#ffe98d)!important" onclick="switchTab('meals')">Edit</button></div><div class="meal" id="dinnerHome" style="display:none"></div><div class="meal" id="sharedDinnerHome">Loading shared meals...</div></div></div></div></section>
 
-<section class="tabs" id="calendar"><div class="panel"><div class="line"><h2>Family Calendar</h2><button class="add" style="background:linear-gradient(112deg,#bfe7ff,#bdf2df,#ffe98d)!important" onclick="showEvent()">+ Add event</button></div><div class="hub-month-toolbar"><button type="button" onclick="hubMonthMove(-1)" aria-label="Previous month">&#8592; Previous</button><strong id="hubMonthTitle"></strong><button type="button" onclick="hubMonthToday()">Today</button><button type="button" onclick="hubMonthMove(1)" aria-label="Next month">Next &#8594;</button></div><div class="hub-month-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calgrid hub-month-grid" id="fullCalendar"></div><div id="hubMonthDetails" class="hub-month-details"><p class="muted">Select a date to view its events.</p></div><p class="muted">Months outside the synced Google Calendar range may not have all events.</p></div></section>
+<section class="tabs" id="calendar"><div class="panel"><div class="line"><h2>Family Calendar</h2><button type="button" class="add hub310-open" data-hub310="open">Add from message</button><button class="add" style="background:linear-gradient(112deg,#bfe7ff,#bdf2df,#ffe98d)!important" onclick="showEvent()">+ Add event</button></div><div class="hub-month-toolbar"><button type="button" onclick="hubMonthMove(-1)" aria-label="Previous month">&#8592; Previous</button><strong id="hubMonthTitle"></strong><button type="button" onclick="hubMonthToday()">Today</button><button type="button" onclick="hubMonthMove(1)" aria-label="Next month">Next &#8594;</button></div><div class="hub-month-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div><div class="calgrid hub-month-grid" id="fullCalendar"></div><div id="hubMonthDetails" class="hub-month-details"><p class="muted">Select a date to view its events.</p></div><p class="muted">Months outside the synced Google Calendar range may not have all events.</p></div></section>
 
 <section class="tabs" id="chores"><div class="panel"><div class="line"><h2>Chores &amp; To-Dos</h2><button class="add" type="button" onclick="hubShowAddChore()">+ Add chore</button></div><div id="choreMessage" class="muted" role="status">Sign in to load shared chores.</div><div id="choreProgress" class="muted"></div><div class="chore-overview"><h3>Upcoming chores</h3><div id="choreUpcoming" aria-live="polite"></div></div><div class="chore-filters"><label>Status <select id="choreStatusFilter" onchange="hubFilterChores()"><option value="all">All chores</option><option value="today">Today</option><option value="upcoming">Upcoming</option><option value="overdue">Overdue</option><option value="completed">Completed</option></select></label><label>Family member <select id="chorePersonFilter" onchange="hubFilterChores()"><option value="all">Everyone</option></select></label></div><div id="choreFilterCount" class="muted" aria-live="polite"></div><p class="tiny">Use the Completed filter to review completed chores. Family members can check off chores from the shared iPad without changing accounts.</p><div id="choresAll"></div></div></section>
 
@@ -1430,7 +1454,7 @@ body.hub300-app.hub300-kitchen #todayDisplay p.hub220-large { font-size: 30px; }
   <label><input id="hub300DisplayStart" type="checkbox"> Open in display mode on this device</label>
   <p class="muted">Use display mode for the kitchen screen. Exit display to return to the navigation.</p>
 </div>
-<div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub 3.0 | iPad Air (iOS 12) | Shared family organizer</div></main>
+<div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub 3.1 | iPad Air (iOS 12) | Shared family organizer</div></main>
 
 <div class="modalcover" id="hub29ImportOverlay" style="display:none"><div class="modal hub29-import-modal" role="dialog" aria-modal="true" aria-labelledby="hub29ImportTitle">
 <div class="hub29-import-head"><div><span class="hub29-kicker">✦ SOCIAL RECIPE BOX</span><h2 id="hub29ImportTitle">Bring a recipe home</h2><p class="muted">Choose a source, then check the details before saving.</p></div><button type="button" class="hub29-close" onclick="hub29ImportClose()" aria-label="Close">×</button></div>
@@ -4655,6 +4679,250 @@ render();window.hub217Refresh(true);
   var route = readView(true);
   display = route.display;
   show(route.name, 'replace');
+}());
+
+</script><div class="modalcover" id="hub310Modal">
+  <div class="modal hub310-panel" role="dialog" aria-modal="true" aria-labelledby="hub310Title">
+    <div class="line"><h2 id="hub310Title">Calendar inbox</h2><button type="button" class="add" id="hub310Close">Close</button></div>
+    <div class="hub310-intake">
+      <label for="hub310Source">Paste a school message or event details</label>
+      <textarea id="hub310Source" rows="5" maxlength="12000" placeholder="Paste the message here. You’ll review the dates and times before adding anything."></textarea>
+      <p class="muted">Suggestions use Groq. Paste only the details needed for your calendar.</p>
+      <div class="hub310-fields">
+        <label>Message date<input type="date" id="hub310Reference"></label>
+        <label>Time zone<input id="hub310Timezone" maxlength="80" aria-label="Message time zone"></label>
+      </div>
+      <div class="hub310-actions"><button type="button" class="primary" id="hub310Analyze">Find events</button><button type="button" class="add" id="hub310New">New message</button><button type="button" class="add" id="hub310CheckDraft" hidden>Check saved draft</button></div>
+    </div>
+    <p id="hub310Status" role="status"></p>
+    <div id="hub310Review" hidden>
+      <h3>Review the suggestions</h3><p class="muted">Check each date and time. Use Save draft to keep edits for later.</p>
+      <div id="hub310Cards"></div>
+      <div class="hub310-actions"><button type="button" class="primary" id="hub310Apply">Add selected</button><button type="button" class="add" id="hub310Save">Save draft</button><button type="button" class="add" id="hub310Reload">Reload saved version</button><button type="button" class="add" id="hub310Archive">Archive message</button></div>
+    </div>
+    <div class="hub310-history">
+      <div class="line"><h3>Saved messages</h3><label><input type="checkbox" id="hub310Archived"> Show archived</label></div>
+      <div id="hub310List"></div><p id="hub310ListStatus" role="status"></p>
+      <div class="hub310-actions"><button type="button" class="add" id="hub310RefreshList">Refresh messages</button><button type="button" class="add" id="hub310More" hidden>Older messages</button></div>
+    </div>
+  </div>
+</div>
+<script>
+/* Review values for calendar message imports. ES5 for the kitchen iPad. */
+(function () {
+  'use strict';
+  function zone() {
+    try { return Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC'; } catch (error) { return 'UTC'; }
+  }
+  function validDate(value) {
+    if (!/^\d{4}-\d{2}-\d{2}$/.test(value || '')) return false;
+    var date = new Date(value + 'T12:00:00Z');
+    return !isNaN(date.getTime()) && date.toISOString().slice(0,10) === value;
+  }
+  function partsAt(timestamp, timezone) {
+    var formatter = new Intl.DateTimeFormat('en-US', { timeZone: timezone, year: 'numeric', month: '2-digit',
+      day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+    if (!formatter.formatToParts) throw Error('Review this time zone on a browser that supports time-zone conversion.');
+    var result = {};
+    formatter.formatToParts(new Date(timestamp)).forEach(function (part) { if (part.type !== 'literal') result[part.type] = Number(part.value); });
+    return [result.year,result.month,result.day,result.hour % 24,result.minute,result.second];
+  }
+  function instant(date, time, timezone) {
+    if (!validDate(date) || !/^([01]\d|2[0-3]):[0-5]\d$/.test(time || '')) return null;
+    var wanted = date.split('-').concat(time.split(':')).map(Number);
+    var value, actual;
+    if (timezone === zone()) {
+      value = new Date(wanted[0],wanted[1]-1,wanted[2],wanted[3],wanted[4],0,0);
+      actual = [value.getFullYear(),value.getMonth()+1,value.getDate(),value.getHours(),value.getMinutes()];
+    } else {
+      var target = Date.UTC(wanted[0],wanted[1]-1,wanted[2],wanted[3],wanted[4]);
+      var guess = target;
+      for (var i=0;i<4;i++) {
+        actual = partsAt(guess,timezone);
+        var rendered = Date.UTC(actual[0],actual[1]-1,actual[2],actual[3],actual[4],actual[5]);
+        var next = target - (rendered-guess);
+        if (next === guess) break;
+        guess = next;
+      }
+      value = new Date(guess);
+      actual = partsAt(guess,timezone).slice(0,5);
+    }
+    if (actual.join(',') !== wanted.join(',')) return null;
+    return value.toISOString();
+  }
+  function canonical(item, timezone) {
+    var result = {
+      kind: item.kind === 'reminder' ? 'reminder' : 'event', title: String(item.title || '').replace(/^\s+|\s+$/g,''),
+      date: item.date || null, end_date: item.end_date || item.date || null,
+      start_time: item.start_time || null, end_time: item.end_time || null,
+      timezone: item.timezone || timezone || zone(), member: item.member || 'Family',
+      evidence: item.evidence || '', note: item.note || '', starts_at: null, ends_at: null
+    };
+    if (result.kind === 'event') {
+      result.starts_at = instant(result.date,result.start_time,result.timezone);
+      result.ends_at = instant(result.end_date,result.end_time,result.timezone);
+    }
+    return result;
+  }
+  function validate(items,indexes) {
+    if (!indexes.length) throw Error('Select at least one item to add.');
+    indexes.forEach(function (index) {
+      var item = items[index];
+      if (!item || !item.title || item.title.length>180 || !validDate(item.date)) throw Error('Check the title and date of every selected item.');
+      if (item.kind === 'event' && (!item.starts_at || !item.ends_at || item.ends_at<=item.starts_at)) {
+        throw Error('Check the start, end and time zone of every selected event.');
+      }
+    });
+  }
+  function uuid() {
+    var bytes = new Uint8Array(16);
+    window.crypto.getRandomValues(bytes);
+    bytes[6] = bytes[6] & 15 | 64;
+    bytes[8] = bytes[8] & 63 | 128;
+    var hex = Array.prototype.map.call(bytes,function (byte) { return ('0'+byte.toString(16)).slice(-2); }).join('');
+    return hex.slice(0,8)+'-'+hex.slice(8,12)+'-'+hex.slice(12,16)+'-'+hex.slice(16,20)+'-'+hex.slice(20);
+  }
+  function receipt(value) {
+    if (!value) return '';
+    if (value.kind === 'reminder' && value.status === 'completed') return 'Reminder added';
+    if (value.status === 'completed') return 'Added to calendar';
+    if (value.status === 'pending' || value.status === 'processing') return 'Waiting for Google Calendar';
+    if (value.status === 'failed') return 'Google Calendar could not add this event. Check the calendar before trying again.';
+    return 'This item was removed. Check the calendar or reminders.';
+  }
+  window.hub310 = { zone: zone, canonical: canonical, validate: validate, uuid: uuid, receipt: receipt };
+}());
+
+</script><script>
+(function () {
+  'use strict';
+  var M=window.hub310, batch=null, people=[], pendingCreate=null, busy=false, dirty=false;
+  var generation=0, listGeneration=0, cursor=null, opened=false, owner='', previousFocus=null, oldOverflow='';
+  function el(id){return document.getElementById('hub310'+id);}
+  function esc(value){return String(value||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');}
+  function token(){try{var s=JSON.parse(localStorage.getItem('familyHubSession')||'null');return s&&s.accessToken||'';}catch(error){return '';}}
+  function identity(){var t=token();if(!t)return '';try{return JSON.parse(atob(t.split('.')[1].replace(/-/g,'+').replace(/_/g,'/'))).sub||t;}catch(error){return t;}}
+  function status(text){el('Status').textContent=text;}
+  function lock(value){busy=value;['Analyze','New','Apply','Save','Reload','Archive','CheckDraft'].forEach(function(id){el(id).disabled=value;});
+    Array.prototype.forEach.call(el('Cards').querySelectorAll('input,select'),function(field){field.disabled=value||field.getAttribute('data-locked')==='true';});}
+  function call(path,data,done,edge){
+    var t=token(), stamp=generation, who=identity(), finished=false;
+    if(!t){done(Error('Sign in with your family account first.'));return;}
+    var x=new XMLHttpRequest();
+    function finish(code,value){if(finished)return;finished=true;if(stamp!==generation||who!==identity()||!opened)return;
+      if(code>=200&&code<300&&value&&value.ok===true)done(null,value);
+      else done(Error(value&&(value.message||value.error)|| (code===401?'Your session needs to reconnect. Open Settings to sign in again.':code===0?'The connection stopped. Your last save may have reached the server. Check the saved version before starting again.':'Could not complete the request. Please try again.')));
+    }
+    x.open('POST',HUB_SUPABASE_URL+(edge?'/functions/v1/':'/rest/v1/rpc/family_calendar_inbox_')+path,true);
+    x.timeout=edge?55000:20000;x.setRequestHeader('apikey',HUB_PUBLISHABLE_KEY);x.setRequestHeader('Authorization','Bearer '+t);x.setRequestHeader('Content-Type','application/json');
+    x.onreadystatechange=function(){if(x.readyState===4&&x.status!==0){var data=null;try{data=JSON.parse(x.responseText);}catch(error){}finish(x.status,data);}};
+    x.onerror=function(){finish(0,null);};x.ontimeout=function(){finish(0,null);};x.send(JSON.stringify(data));
+  }
+  function adopt(result){batch=result.batch;people=result.people||people;dirty=false;pendingCreate=null;el('CheckDraft').hidden=true;
+    if(batch){el('Source').value=batch.source;el('Timezone').value=batch.items[0].timezone;}
+    render();}
+  function field(index,name,label,type,value,locked){return '<label>'+label+'<input data-index="'+index+'" data-field="'+name+'" type="'+type+'" value="'+esc(value)+'"'+(name==='title'?' maxlength="180"':'')+(locked?' disabled data-locked="true"':'')+'></label>';}
+  function render(){
+    el('Review').hidden=!batch;if(!batch){el('Cards').innerHTML='';return;}
+    el('Archive').textContent=batch.archived?'Restore message':'Archive message';
+    var html='';batch.items.forEach(function(item,i){
+      var receipt=batch.approvals[String(i)], locked=!!receipt||batch.archived, disabled=locked?' disabled data-locked="true"':'';
+      var options=['Family'].concat(people).filter(function(name,index,list){return list.indexOf(name)===index;});
+      if(options.indexOf(item.member)<0)options.push(item.member);
+      html+='<fieldset class="hub310-card" data-card="'+i+'"><legend>Suggestion '+(i+1)+'</legend>';
+      html+='<label><input type="checkbox" data-index="'+i+'" data-field="selected"'+disabled+'> Add this item</label>';
+      html+=field(i,'title','Title','text',item.title,locked);
+      html+='<div class="hub310-fields"><label>Save as<select data-index="'+i+'" data-field="kind"'+disabled+'><option value="event"'+(item.kind==='event'?' selected':'')+'>Calendar event</option><option value="reminder"'+(item.kind==='reminder'?' selected':'')+'>Reminder</option></select></label>';
+      html+=field(i,'date','Date','date',item.date,locked)+'</div>';
+      html+='<div data-times="'+i+'"'+(item.kind==='reminder'?' hidden':'')+'><div class="hub310-fields">'+field(i,'start_time','Start time','time',item.start_time,locked)+field(i,'end_time','End time','time',item.end_time,locked)+'</div>'+field(i,'end_date','End date','date',item.end_date,locked)+'<p class="muted">Time zone: '+esc(item.timezone)+'</p></div>';
+      html+='<label data-person="'+i+'"'+(item.kind==='reminder'?' hidden':'')+'>Family member<select data-index="'+i+'" data-field="member"'+disabled+'>'+options.map(function(name){return '<option'+(name===item.member?' selected':'')+'>'+esc(name)+'</option>';}).join('')+'</select></label>';
+      if(item.note)html+='<p class="hub310-note">'+esc(item.note)+'</p>';
+      html+='<blockquote class="hub310-evidence">'+esc(item.evidence)+'</blockquote>';
+      if(receipt)html+='<p class="hub310-receipt">'+esc(M.receipt(receipt))+'</p>';
+      html+='</fieldset>';
+    });el('Cards').innerHTML=html;
+    el('Apply').hidden=batch.archived;el('Save').hidden=batch.archived;
+  }
+  function collect(){return batch.items.map(function(item,i){
+    if(batch.approvals[String(i)])return item;
+    var copy={};Object.keys(item).forEach(function(key){copy[key]=item[key];});
+    Array.prototype.forEach.call(el('Cards').querySelectorAll('[data-index="'+i+'"][data-field]'),function(input){if(input.getAttribute('data-field')!=='selected')copy[input.getAttribute('data-field')]=input.value;});
+    return M.canonical(copy,item.timezone);
+  });}
+  function load(id){if(busy)return;if(pendingCreate){status('Use Check saved draft to recover your suggestions first.');return;}lock(true);status('Loading saved message…');call('state',{p_id:id},function(error,result){lock(false);if(error){status(error.message);return;}
+    adopt(result);status(batch?(batch.archived?'Archived message. Restore it to keep reviewing.':'Saved message loaded. Review before adding anything.'):'This message is no longer available.');});}
+  function list(more){
+    if(!opened)return;var stamp=++listGeneration, archived=el('Archived').checked;
+    if(!more){cursor=null;el('List').innerHTML='';}el('More').hidden=true;el('ListStatus').textContent='Loading messages…';
+    call('list',{p_archived:archived,p_cursor:more?cursor:null},function(error,result){if(stamp!==listGeneration)return;
+      if(error){el('ListStatus').textContent=error.message;return;}
+      var rows=result.batches||[];rows.forEach(function(row){var button=document.createElement('button');button.type='button';button.className='hub310-history-item';button.setAttribute('data-batch',row.id);
+        button.innerHTML=esc(row.title)+'<small>'+esc(new Date(row.created_at).toLocaleDateString())+' · '+row.total+' suggestions · '+row.submitted+' submitted</small>';el('List').appendChild(button);});
+      if(rows.length)cursor=rows[rows.length-1].id;el('More').hidden=rows.length<30;el('ListStatus').textContent=el('List').children.length?'':'No '+(archived?'archived ':'')+'messages yet.';
+    });
+  }
+  function createDraft(){if(!pendingCreate||busy)return;lock(true);status('Saving suggestions for review…');call('create',pendingCreate,function(error,result){lock(false);if(error){el('CheckDraft').hidden=false;status(error.message+' Use Check saved draft to recover these suggestions.');return;}
+    adopt(result);status('Suggestions saved. Select only the items you want to add. Nothing has been added yet.');list(false);});}
+  function analyze(){
+    if(busy)return;if(pendingCreate){status('Use Check saved draft to finish saving the previous suggestions first.');return;}if(dirty){status('Save your draft or reload it before finding new suggestions.');return;}
+    var text=el('Source').value.replace(/^\s+|\s+$/g,''), today=el('Reference').value, timezone=el('Timezone').value.replace(/^\s+|\s+$/g,'');
+    if(!text||text.length>12000||!today||!timezone){status('Paste a message and check its date and time zone.');return;}
+    lock(true);status('Finding dates and events…');
+    call('calendar-import',{text:text,today:today,timezone:timezone},function(error,result){lock(false);if(error){status(error.message);return;}
+      if(!result.items||!result.items.length){status('No events found. Try including the dates and the surrounding message.');return;}
+      try{pendingCreate={p_id:M.uuid(),p_source:text,p_items:result.items.map(function(item){return M.canonical(item,timezone);})};}catch(problem){status(problem.message);return;}
+      createDraft();
+    },true);
+  }
+  function save(apply){
+    if(busy||!batch||batch.archived)return;var items,indexes=[];
+    try{items=collect();if(apply){Array.prototype.forEach.call(el('Cards').querySelectorAll('[data-field="selected"]:checked'),function(input){indexes.push(Number(input.getAttribute('data-index')));});M.validate(items,indexes);}
+      items.forEach(function(item){if(!item.title||item.title.length>180)throw Error('Give every suggestion a title before saving.');});
+    }catch(error){status(error.message);return;}
+    lock(true);status(apply?'Submitting selected items…':'Saving draft…');
+    call('save',{p_id:batch.id,p_items:items,p_indexes:indexes,p_revision:batch.revision},function(error,result){lock(false);if(error){status(error.message);return;}
+      adopt(result);status(apply?'Selected items submitted. Calendar events wait for Google confirmation; reminders are available now.':'Draft saved.');list(false);
+      if(apply&&window.hub222CheckEventRequests)window.hub222CheckEventRequests();
+      if(apply&&window.hub225RefreshReminders)window.hub225RefreshReminders();
+    });
+  }
+  function archive(){if(busy||!batch)return;if(dirty){status('Save your draft or reload the saved version before archiving.');return;}
+    lock(true);call('archive',{p_id:batch.id,p_revision:batch.revision,p_archived:!batch.archived},function(error,result){lock(false);if(error){status(error.message);return;}
+      adopt(result);status(batch.archived?'Message archived. Find it with Show archived to restore it.':'Message restored.');list(false);});}
+  function newMessage(){if(busy)return;if(pendingCreate){status('Use Check saved draft before starting another message.');return;}
+    if(dirty){status('Save your draft or reload the saved version before starting another message.');return;}batch=null;render();el('Source').value='';status('Paste a message to get started.');el('Source').focus();}
+  function close(){opened=false;generation++;listGeneration++;lock(false);el('Modal').classList.remove('show');document.body.style.overflow=oldOverflow;if(previousFocus&&previousFocus.focus)previousFocus.focus();}
+  function reset(){batch=null;pendingCreate=null;people=[];dirty=false;el('Source').value='';el('List').innerHTML='';el('CheckDraft').hidden=true;render();status('');}
+  function open(){
+    var who=identity();if(who!==owner){reset();owner=who;}if(opened)return;
+    opened=true;generation++;previousFocus=document.activeElement;oldOverflow=document.body.style.overflow;document.body.style.overflow='hidden';el('Modal').classList.add('show');
+    if(!el('Reference').value){var d=new Date();el('Reference').value=d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+    if(!el('Timezone').value)el('Timezone').value=M.zone();el('Source').focus();
+    if(!who){status('Sign in with your family account first.');return;}list(false);
+    if(pendingCreate)status('Use Check saved draft to recover your suggestions.');else if(batch&&!dirty)load(batch.id);
+  }
+  document.addEventListener('click',function(event){var button=event.target;while(button&&button!==document){if(button.getAttribute&&button.getAttribute('data-hub310')==='open'){open();return;}button=button.parentNode;}});
+  el('Close').onclick=close;el('Analyze').onclick=analyze;el('New').onclick=newMessage;el('CheckDraft').onclick=createDraft;
+  el('Apply').onclick=function(){save(true);};el('Save').onclick=function(){save(false);};el('Reload').onclick=function(){if(batch)load(batch.id);};el('Archive').onclick=archive;
+  el('RefreshList').onclick=function(){list(false);};el('More').onclick=function(){list(true);};el('Archived').onchange=function(){list(false);};
+  el('List').onclick=function(event){var button=event.target;while(button&&button!==el('List')){if(button.getAttribute('data-batch')){if(dirty){status('Save your draft or reload it before opening another message.');return;}load(button.getAttribute('data-batch'));return;}button=button.parentNode;}};
+  el('Cards').addEventListener('input',function(){dirty=true;});
+  el('Cards').addEventListener('change',function(event){dirty=true;var input=event.target;if(input.getAttribute('data-field')==='kind'){
+    var i=input.getAttribute('data-index');el('Cards').querySelector('[data-times="'+i+'"]').hidden=input.value==='reminder';el('Cards').querySelector('[data-person="'+i+'"]').hidden=input.value==='reminder';
+  }});
+  el('Modal').addEventListener('keydown',function(event){if(event.keyCode===27){event.preventDefault();close();return;}if(event.keyCode!==9)return;
+    var fields=Array.prototype.filter.call(el('Modal').querySelectorAll('button,input,select,textarea'),function(field){return !field.disabled&&field.offsetParent!==null;}),first=fields[0],last=fields[fields.length-1];
+    if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();}
+  });
+  function authChanged(){if(identity()===owner)return;owner=identity();generation++;listGeneration++;lock(false);reset();if(opened){status(owner?'Family account changed.':'Signed out. Sign in to see saved messages.');if(owner)list(false);}}
+  window.addEventListener('storage',function(event){if(event.key==='familyHubSession')authChanged();});
+  var signOut=window.hubSignOut;
+  window.hubSignOut=function(){generation++;listGeneration++;lock(false);reset();owner='';if(opened)close();if(signOut)signOut.apply(this,arguments);};
+  setInterval(function(){authChanged();if(!opened||busy||dirty||!batch||batch.archived)return;
+    var waiting=Object.keys(batch.approvals).some(function(key){return /^(pending|processing)$/.test(batch.approvals[key].status);});
+    if(!waiting||el('Cards').contains(document.activeElement))return;
+    var id=batch.id,revision=batch.revision;call('state',{p_id:id},function(error,result){if(!error&&batch&&batch.id===id&&batch.revision===revision&&!dirty&&!busy)adopt(result);});
+  },10000);
 }());
 
 </script></body></html>
