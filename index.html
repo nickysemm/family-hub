@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub 3.2</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><title>Family Hub 3.2.1</title>
 
 <style>
 
@@ -1123,101 +1123,96 @@ body.hub220-display .wrap { padding: 16px 24px 10px; }
 #choresAll .chore-entry:focus { outline: 3px solid #9374b5; outline-offset: 3px; }
 @media (max-width: 500px) { .hub226-chore { flex-wrap: wrap; } }
 </style><style>
-body.hub300-app { background: #f8f6f3 !important; color: #342d40; }
+body.hub300-app { }
 body.hub300-app [hidden] { display: none !important; }
-.hub300-skip { position: fixed; top: -80px; left: 16px; padding: 12px 16px; background: white; color: #493762; z-index: 30000; }
+.hub300-skip { position: fixed; top: -80px; left: 16px; padding: 12px 16px; z-index: 30000; }
 .hub300-skip:focus { top: 8px; }
 body.hub300-app > header.hub300-header {
-  display: flex !important; position: relative; min-height: 72px; padding: 14px 24px;
-  background: #fffdf9 !important; border-bottom: 1px solid #e8e1db; box-shadow: none !important;
+  display: flex !important; position: relative; min-height: 72px; padding: 14px 24px; border-bottom: 1px solid #e7edf1;
 }
-.hub300-brand { display: flex; align-items: center; background: transparent !important; color: #40324e !important; font: inherit; font-size: 22px; font-weight: 750; padding: 6px 0; }
-.hub300-brand span { font-size: 20px; color: #9e7cb0; margin-left: 9px; }
+.hub300-brand { display: flex; align-items: center; padding: 6px 0; }
+.hub300-brand span { margin-left: 9px; }
 .hub300-header-tools { margin-left: auto; }
-.hub300-display-button { min-height: 42px; padding: 9px 14px; border: 1px solid #d9cedf; border-radius: 11px; color: #5d456e; background: #f6f0fa; font-weight: 650; }
+.hub300-display-button { min-height: 42px; padding: 9px 14px; border: 1px solid #e7edf1; border-radius: 11px; }
 body.hub300-app .wrap { width: auto; max-width: 1440px; margin: 0 0 0 204px; padding: 24px 28px 32px; }
 body.hub300-app .wrap > .hub300-nav {
   display: flex !important; position: absolute; top: 72px; bottom: 0; left: 0; width: 204px; min-height: 680px;
-  flex-direction: column; flex-wrap: nowrap; padding: 18px 14px; margin: 0; border-radius: 0;
-  background: #fffdf9 !important; border-right: 1px solid #e8e1db; box-shadow: none !important; z-index: 4; gap: 3px;
+  flex-direction: column; flex-wrap: nowrap; padding: 18px 14px; margin: 0; border-radius: 0; border-right: 1px solid #e7edf1; z-index: 4; gap: 3px;
 }
 body.hub300-app #hub300Nav button {
   flex: 0 0 auto !important; width: 100%; min-height: 43px; margin: 0; padding: 10px 14px;
-  border: 0 !important; border-radius: 10px; text-align: left; font-size: 14px; font-weight: 600;
-  color: #6d6374 !important; background: transparent !important; background-image: none !important; box-shadow: none !important;
+  border: 0 !important; border-radius: 10px; text-align: left;
 }
-body.hub300-app #hub300Nav button.active { color: #523765 !important; background: #eee5f5 !important; font-weight: 750; }
+body.hub300-app #hub300Nav button.active { }
 body.hub300-app #hub300Nav [data-tab="weekAhead"] { margin-top: 15px; }
 body.hub300-app #hub300Nav #hub300MoreButton { display: none; }
 body.hub300-app .footer { display: none; }
-body.hub300-app .hub26-profile-strip { margin-bottom: 18px; box-shadow: none !important; }
-body.hub300-app #todayDisplay .hub220-header h2 { font-size: 34px; letter-spacing: -.6px; }
-body.hub300-app #hub220Date { font-size: 16px; color: #75697e; margin-top: 7px; }
-body.hub300-app #hub220Clock { font-size: 29px; font-weight: 650; color: #4a3958; }
-body.hub300-app #todayDisplay .hub220-sync { margin: 10px 0 18px; font-size: 12px; color: #807586; }
+body.hub300-app .hub26-profile-strip { margin-bottom: 18px; }
+body.hub300-app #todayDisplay .hub220-header h2 { }
+body.hub300-app #hub220Date { margin-top: 7px; }
+body.hub300-app #hub220Clock { }
+body.hub300-app #todayDisplay .hub220-sync { margin: 10px 0 18px; }
 body.hub300-app #todayDisplay .add {
-  min-height: 42px; border: 1px solid #ddd3e5 !important; border-radius: 10px; padding: 9px 12px;
-  color: #584464 !important; background: #fffdf9 !important; background-image: none !important;
-  box-shadow: none !important; font-size: 13px; font-weight: 600;
+  min-height: 42px; border: 1px solid #e7edf1 !important; border-radius: 10px; padding: 9px 12px;
 }
-body.hub300-app #todayDisplay [data-hub222] { background: #6b4f80 !important; border-color: #6b4f80 !important; color: white !important; }
-body.hub300-app #hub221Filters button[aria-pressed="true"] { background: #eee5f5 !important; border-color: #cab8d6 !important; color: #523765 !important; }
-body.hub300-app #todayDisplay .hub220-card { border-radius: 18px; border-color: #e1d8e7; padding: 18px; }
-body.hub300-app #todayDisplay .hub220-card h3 { font-size: 15px; font-weight: 650; color: #685375; }
-body.hub300-app #todayDisplay .hub220-schedule { background: #eeeaf7 !important; }
-body.hub300-app #todayDisplay .hub220-routine { background: #f7f0fa; }
-body.hub300-app #todayDisplay .hub220-dinner { background: #fbf1df; }
-body.hub300-app #todayDisplay .hub225-reminders { background: #f0f5ec; }
-body.hub300-app #todayDisplay .hub224-notices { background: #fff7ec; }
-body.hub300-app #todayDisplay p.hub220-large { font-size: 27px; font-weight: 700; letter-spacing: -.4px; line-height: 1.2; }
-body.hub300-app #todayDisplay p.hub220-event-time { font-size: 21px; font-weight: 650; margin-bottom: 8px; }
+body.hub300-app #todayDisplay [data-hub222] { border-color: #e7edf1 !important; }
+body.hub300-app #hub221Filters button[aria-pressed="true"] { border-color: #e7edf1 !important; }
+body.hub300-app #todayDisplay .hub220-card { border-radius: 18px; border-color: #e7edf1; padding: 18px; }
+body.hub300-app #todayDisplay .hub220-card h3 { }
+body.hub300-app #todayDisplay .hub220-schedule { }
+body.hub300-app #todayDisplay .hub220-routine { }
+body.hub300-app #todayDisplay .hub220-dinner { }
+body.hub300-app #todayDisplay .hub225-reminders { }
+body.hub300-app #todayDisplay .hub224-notices { }
+body.hub300-app #todayDisplay p.hub220-large { line-height: 1.2; }
+body.hub300-app #todayDisplay p.hub220-event-time { margin-bottom: 8px; }
 body.hub300-app .hub220-start { display: none; }
 .hub300-device-settings { margin-bottom: 16px; }
 .hub300-device-settings label { display: flex; align-items: center; min-height: 44px; }
 .hub300-device-settings input { width: 20px; height: 20px; margin-right: 10px; }
-.hub300-more { position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: flex-end; justify-content: center; padding: 20px; background: rgba(37, 27, 46, .32); z-index: 20000; overflow-y: auto; }
-.hub300-more-panel { width: 100%; max-width: 520px; max-height: 90vh; padding: 22px; overflow-y: auto; background: #fffdf9; border-radius: 22px; box-shadow: 0 16px 60px rgba(50, 35, 65, .16); }
+.hub300-more { position: fixed; top: 0; right: 0; bottom: 0; left: 0; display: flex; align-items: flex-end; justify-content: center; padding: 20px; z-index: 20000; overflow-y: auto; }
+.hub300-more-panel { width: 100%; max-width: 520px; max-height: 90vh; padding: 22px; overflow-y: auto; border-radius: 22px; }
 .hub300-more-heading { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-.hub300-more-heading h2 { margin: 0; color: #40324e; font: inherit; font-size: 24px; font-weight: 700; }
-.hub300-more-heading button { background: #f2edf5; color: #5d456e; border-radius: 9px; min-height: 42px; padding: 9px 14px; }
+.hub300-more-heading h2 { margin: 0; }
+.hub300-more-heading button { border-radius: 9px; min-height: 42px; padding: 9px 14px; }
 .hub300-more-links { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-gap: 10px; }
-.hub300-more-links button { min-height: 62px; padding: 14px; text-align: left; border: 1px solid #e4dce9; border-radius: 12px; background: #f8f4fa; color: #584464; font: inherit; font-weight: 600; }
-.hub300-more-links button[aria-current="page"] { background: #eee5f5; border-color: #b7a1c5; }
-.hub300-exit-display { position: fixed; right: 18px; bottom: 18px; z-index: 90; min-height: 44px; padding: 11px 16px; border-radius: 11px; border: 1px solid #cdbbd8; background: #fffdf9; color: #523765; box-shadow: 0 4px 18px rgba(50, 35, 65, .09); }
+.hub300-more-links button { min-height: 62px; padding: 14px; text-align: left; border: 1px solid #e7edf1; border-radius: 12px; }
+.hub300-more-links button[aria-current="page"] { border-color: #e7edf1; }
+.hub300-exit-display { position: fixed; right: 18px; bottom: 18px; z-index: 90; min-height: 44px; padding: 11px 16px; border-radius: 11px; border: 1px solid #e7edf1; }
 body.hub300-app.hub300-kitchen > header.hub300-header,
 body.hub300-app.hub300-kitchen .wrap > .hub300-nav { display: none !important; }
 body.hub300-app.hub300-kitchen .wrap { max-width: 1440px; margin: auto; padding: 20px 24px 76px; }
-body.hub300-app.hub300-kitchen #hub220Clock { font-size: 37px; font-weight: 750; }
-body.hub300-app.hub300-kitchen #todayDisplay .hub220-header h2 { font-size: 42px; }
-body.hub300-app.hub300-kitchen #todayDisplay p.hub220-large { font-size: 30px; }
+body.hub300-app.hub300-kitchen #hub220Clock { }
+body.hub300-app.hub300-kitchen #todayDisplay .hub220-header h2 { }
+body.hub300-app.hub300-kitchen #todayDisplay p.hub220-large { }
 @media (min-width: 1101px) {
   body.hub300-app .wrap > .hub300-nav { position: fixed; overflow-y: auto; min-height: 0; }
 }
 @media (max-width: 1100px) {
   body.hub300-app .wrap { margin: auto; padding: 20px 22px 104px; }
-  body.hub300-app .wrap > .hub300-nav { position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: 100%; min-height: 0; height: 76px; flex-direction: row; align-items: center; justify-content: space-around; padding: 8px 10px; border: 0; border-top: 1px solid #e8e1db; z-index: 90; }
-  body.hub300-app #hub300Nav button { flex: 1 1 0 !important; width: auto; padding: 10px 4px; text-align: center; font-size: 13px; min-height: 48px; }
+  body.hub300-app .wrap > .hub300-nav { position: fixed; top: auto; left: 0; right: 0; bottom: 0; width: 100%; min-height: 0; height: 76px; flex-direction: row; align-items: center; justify-content: space-around; padding: 8px 10px; border: 0; border-top: 1px solid #e7edf1; z-index: 90; }
+  body.hub300-app #hub300Nav button { flex: 1 1 0 !important; width: auto; padding: 10px 4px; text-align: center; min-height: 48px; }
   body.hub300-app #hub300Nav [data-secondary] { display: none; }
   body.hub300-app #hub300Nav #hub300MoreButton { display: block; }
-  body.hub300-app #hub300Nav #hub300MoreButton[data-current="true"] { color: #523765 !important; background: #eee5f5 !important; }
+  body.hub300-app #hub300Nav #hub300MoreButton[data-current="true"] { }
 }
 @media (max-width: 700px) {
   body.hub300-app > header.hub300-header { min-height: 64px; padding: 10px 16px; }
   body.hub300-app .wrap { padding: 18px 14px 100px; }
-  body.hub300-app #todayDisplay .hub220-header h2 { font-size: 30px; }
+  body.hub300-app #todayDisplay .hub220-header h2 { }
   body.hub300-app .hub220-header > div:first-child { flex: 1 1 100%; }
   body.hub300-app .hub220-header-tools { width: 100%; justify-content: space-between; margin-top: 12px; }
   body.hub300-app .hub220-header-tools > * { margin-left: 0; }
-  body.hub300-app #hub220Date { font-size: 15px; }
-  body.hub300-app #hub220Clock { font-size: 26px; }
+  body.hub300-app #hub220Date { }
+  body.hub300-app #hub220Clock { }
   body.hub300-app #todayDisplay .hub220-card { padding: 16px; }
-  body.hub300-app #todayDisplay p.hub220-large { font-size: 24px; }
+  body.hub300-app #todayDisplay p.hub220-large { }
   .hub300-more { padding: 10px; }
 }
 @media (max-width: 420px) {
-  body.hub300-app #hub300Nav button { font-size: 11px; padding: 10px 2px; }
-  .hub300-brand { font-size: 20px; }
-  .hub300-display-button { font-size: 12px; padding: 8px 10px; }
+  body.hub300-app #hub300Nav button { padding: 10px 2px; }
+  .hub300-brand { }
+  .hub300-display-button { padding: 8px 10px; }
 }
 @supports (padding-bottom: env(safe-area-inset-bottom)) {
   @media (max-width: 1100px) {
@@ -1226,9 +1221,25 @@ body.hub300-app.hub300-kitchen #todayDisplay p.hub220-large { font-size: 30px; }
   }
 }
 @media (prefers-reduced-motion: reduce) { .hub300-app * { scroll-behavior: auto !important; } }
+/* Restore the pre-3.0 pastel appearance; keep current navigation and features. */
+body.hub300-app .hub300-brand { background:transparent!important; color:#303846!important; font:inherit; font-size:30px; font-weight:800; line-height:1; letter-spacing:-1.2px; }
+.hub300-brand span { display:none; }
+.hub300-skip,.hub300-more-panel { background:#fff!important; color:#303846; }
+.hub300-more { background:rgba(32,40,35,.4); }
+.hub300-more-heading h2 { color:#303846; }
+.hub300-more-links button { background:#fff!important; color:#667684; }
+.hub300-more-links button[aria-current="page"] { background:linear-gradient(115deg,#fff3c9,#ffe6f2)!important; border-color:#f3e5d7; }
+.hub300-display-button,.hub300-exit-display,.hub300-more-heading button { background:linear-gradient(115deg,#ffd0e9,#ffe98d)!important; color:#4e5562!important; border-radius:999px; font:inherit; font-weight:700; }
+body.hub300-app #hub300Nav button.active { background:linear-gradient(115deg,#fff3c9,#ffe6f2)!important; color:#4e5562!important; border-color:#f3e5d7!important; }
+body.hub300-app #hub300Nav button.active[data-tab="calendar"] { background:linear-gradient(110deg,#e3f5ff,#fff0f7)!important; color:#326b8b!important; }
+body.hub300-app #hub300Nav button.active[data-tab="chores"] { background:linear-gradient(110deg,#e5fbf3,#fff4cf)!important; color:#357663!important; }
+body.hub300-app #hub300Nav button.active[data-tab="shopping"] { background:linear-gradient(110deg,#e7f6ff,#e9fbf4)!important; color:#316e8b!important; }
+body.hub300-app #hub300Nav button.active[data-tab="meals"],body.hub300-app #hub300Nav button.active[data-tab="recipes"] { background:linear-gradient(110deg,#fff0f8,#fff4d3)!important; color:#965378!important; }
+body.hub300-app #hub300Nav #hub300MoreButton[data-current="true"] { background:linear-gradient(115deg,#fff3c9,#ffe6f2)!important; color:#4e5562!important; }
+
 
 </style><style>
-body.hub300-app #calendar .hub310-open { background: #6b4f80 !important; color: #fff !important; }
+/* Calendar actions inherit the existing pastel button style. */
 #hub310Modal .modal { max-width: 820px; }
 #hub310Modal label { display: block; margin: 9px 0; color: #584464; font-size: 14px; }
 #hub310Modal input:not([type="checkbox"]), #hub310Modal select, #hub310Modal textarea { width: 100%; min-height: 42px; padding: 10px; margin-top: 4px; border: 1px solid #d8cedf; border-radius: 8px; font: inherit; background: white; color: #342d40; }
@@ -1469,7 +1480,7 @@ body.hub300-app #calendar .hub310-open { background: #6b4f80 !important; color: 
   <label><input id="hub300DisplayStart" type="checkbox"> Open in display mode on this device</label>
   <p class="muted">Use display mode for the kitchen screen. Exit display to return to the navigation.</p>
 </div>
-<div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub 3.2 | iPad Air (iOS 12) | Shared family organizer</div></main>
+<div class="panel hub-account-panel"><h2>Account</h2><p class="muted">Manage your Family Hub sign-in on this device.</p><button type="button" class="hub-settings-signout" id="hubSignOutButton" onclick="hubSignOut()">Sign out</button></div><div class="panel"><h2>Shared iPad &amp; Family Profile</h2><p class="muted">This setting changes the name displayed on this device. It does not sign you out or change your account permissions.</p><div class="field"><label>Device profile</label><select id="hub26DeviceProfile" ><option value="Family">Family (shared iPad)</option><option value="Nicolette">Nicolette</option><option value="Mike">Mike</option><option value="Ava">Ava</option><option value="Mason">Mason</option></select></div><button class="primary" style="background:linear-gradient(112deg,#bfe7ff 0%,#bdf2df 52%,#ffe98d 100%)!important" onclick="hub26SaveProfile(document.getElementById('hub26DeviceProfile').value);document.getElementById('hub27ProfileSaved').textContent='✓ Profile saved on this device'">Save profile</button><p id="hub27ProfileSaved" class="muted" role="status"></p><p class="tiny">For shared iPad use, choose Family. Chore completion still asks who completed the task. The signed-in account retains its existing Supabase permissions.</p></div><div class="panel"><h2>Weather location</h2><p class="muted">Set your home location once. Weather uses Open-Meteo and does not request precise device location.</p><div class="row"><input id="hub27WeatherCity" placeholder="City label, e.g. Martinez"><input id="hub27WeatherLat" placeholder="Latitude" inputmode="decimal"><input id="hub27WeatherLon" placeholder="Longitude" inputmode="decimal"></div><button class="primary" style="background:linear-gradient(112deg,#ffd0e9 0%,#ffe98d 47%,#bfe7ff 100%)!important" onclick="hub27SaveWeatherLocation()">Save weather location</button><p id="hub27WeatherSettingStatus" class="muted"></p></div><div class="panel"><h2>Calendar Connections</h2><div class="banner">Personal and Family Google calendars are connected for viewing. New events are submitted to Google Family Calendar. They appear after processing and calendar synchronization.</div><div class="sources"><div class="source"><b>Google Calendar</b><p class="muted">Personal and Family calendars sync through Supabase. New event requests are submitted securely to Google Family Calendar.</p><span class="tiny">Read and request creation</span></div><div class="source"><b>Apple iCloud Calendar</b><p class="muted">Planned: private server-side CalDAV integration or a safe calendar feed.</p><span class="tiny">Not connected</span></div></div><h2 style="margin-top:24px">Device &amp; Data</h2><p class="muted">Calendar events, family chores, shopping items, and meals are shared through Supabase. Previous local-only shopping and meals are not used by the shared planner.</p><button class="add" style="background:linear-gradient(112deg,#e4d7fa 0%,#ffd0e9 49%,#bdf2df 100%)!important" onclick="exportData()">Export backup (JSON)</button><p class="tiny">If downloads do not work in iOS 12 standalone mode, open the dashboard in Safari to export.</p></div></section><div class="footer">Family Hub 3.2.1 | iPad Air (iOS 12) | Shared family organizer</div></main>
 
 <div class="modalcover" id="hub29ImportOverlay" style="display:none"><div class="modal hub29-import-modal" role="dialog" aria-modal="true" aria-labelledby="hub29ImportTitle">
 <div class="hub29-import-head"><div><span class="hub29-kicker">✦ SOCIAL RECIPE BOX</span><h2 id="hub29ImportTitle">Bring a recipe home</h2><p class="muted">Choose a source, then check the details before saving.</p></div><button type="button" class="hub29-close" onclick="hub29ImportClose()" aria-label="Close">×</button></div>
